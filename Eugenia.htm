@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Cidades — Vidas Eugenia</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f1117;color:#e2e8f0;font-family:'Segoe UI',sans-serif;padding:22px;min-height:100vh}
+h1{font-size:20px;font-weight:700;color:#fff;margin-bottom:3px}
+.sub{font-size:12px;color:#64748b;margin-bottom:20px}
+
+.kpis{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.kpi{background:#1e2230;border-radius:10px;padding:12px 18px;border:1px solid #2d3348;min-width:140px}
+.kpi-l{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.kpi-v{font-size:22px;font-weight:700}
+
+.filters{display:flex;gap:12px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.filter-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
+.btn-group{display:flex;gap:6px;flex-wrap:wrap}
+.btn{padding:6px 13px;border-radius:8px;border:1px solid #2d3348;background:#1e2230;color:#94a3b8;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s}
+.btn:hover{border-color:#3b82f6;color:#e2e8f0}
+.btn.active{background:#3b82f6;color:#fff;border-color:#3b82f6}
+
+.search-wrap{position:relative;margin-left:auto}
+.search{background:#1e2230;border:1px solid #2d3348;border-radius:8px;padding:7px 12px 7px 32px;color:#e2e8f0;font-size:13px;width:200px;outline:none}
+.search:focus{border-color:#3b82f6}
+.search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#64748b;font-size:14px}
+
+.sort-bar{display:flex;gap:8px;align-items:center;margin-bottom:12px}
+.sort-label{font-size:11px;color:#64748b}
+.sort-btn{padding:4px 11px;border-radius:6px;border:1px solid #2d3348;background:#1e2230;color:#94a3b8;font-size:11px;font-weight:600;cursor:pointer;transition:all .15s}
+.sort-btn.active{background:#1e3a5f;color:#60a5fa;border-color:#3b82f6}
+
+.table-wrap{background:#1e2230;border-radius:12px;border:1px solid #2d3348;overflow:hidden}
+table{width:100%;border-collapse:collapse}
+thead th{padding:11px 14px;font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;text-align:left;border-bottom:1px solid #2d3348;background:#171c28;white-space:nowrap}
+thead th.num{text-align:right}
+tbody tr{border-bottom:1px solid #171c28;transition:background .1s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#252a3a}
+td{padding:10px 14px;font-size:13px}
+td.num{text-align:right}
+.rank-cell{color:#475569;font-size:11px;width:32px}
+.city-cell{font-weight:600;color:#fff}
+.uf-badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700;background:#1e3a5f;color:#60a5fa;margin-left:8px}
+.vidas-cell{font-weight:700;color:#60a5fa}
+.bar-cell{width:160px}
+.bar-track{background:#0f1117;border-radius:3px;height:8px;overflow:hidden}
+.bar-fill{height:8px;border-radius:3px;transition:width .4s}
+.receita-cell{color:#4ade80;font-weight:600}
+.tm-cell{color:#a78bfa}
+.badge-tm{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700}
+.tm-high{background:#052e16;color:#4ade80}
+.tm-mid{background:#1e3a5f;color:#60a5fa}
+.tm-low{background:#1f1f2e;color:#94a3b8}
+
+.no-results{text-align:center;padding:40px;color:#475569;font-size:14px}
+.count-info{font-size:12px;color:#64748b;margin-bottom:8px}
+</style>
+</head>
+<body>
+
+<h1>🏙 Ranking de Cidades por Volume de Vidas</h1>
+<p class="sub">Competência Abr–Mai 2026 · Use os filtros para explorar por estado</p>
+
+<div class="kpis">
+  <div class="kpi"><div class="kpi-l">Total Cidades</div><div class="kpi-v" style="color:#60a5fa" id="kpi-cidades">94</div></div>
+  <div class="kpi"><div class="kpi-l">Total Vidas</div><div class="kpi-v" style="color:#4ade80" id="kpi-vidas">312</div></div>
+  <div class="kpi"><div class="kpi-l">Receita</div><div class="kpi-v" style="color:#a78bfa" id="kpi-receita">R$ 100.850</div></div>
+  <div class="kpi"><div class="kpi-l">Ticket Médio</div><div class="kpi-v" style="color:#fbbf24" id="kpi-tm">R$ 323</div></div>
+</div>
+
+<div class="filters">
+  <div>
+    <div class="filter-label" style="margin-bottom:6px">Filtrar por Estado</div>
+    <div class="btn-group" id="uf-filters">
+      <button class="btn active" onclick="filterUF('TODOS')">Todos</button>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search" type="text" id="search" placeholder="Buscar cidade..." oninput="render()">
+  </div>
+</div>
+
+<div class="sort-bar">
+  <span class="sort-label">Ordenar por:</span>
+  <button class="sort-btn active" onclick="setSort('vidas')">Vidas ↓</button>
+  <button class="sort-btn" onclick="setSort('receita')">Receita ↓</button>
+  <button class="sort-btn" onclick="setSort('tm')">Ticket Médio ↓</button>
+  <span class="count-info" id="count-info" style="margin-left:auto"></span>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Cidade</th>
+        <th class="num">Vidas</th>
+        <th>Volume</th>
+        <th class="num">Receita</th>
+        <th class="num">Ticket Médio</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <div class="no-results" id="no-results" style="display:none">Nenhuma cidade encontrada para este filtro.</div>
+</div>
+
+<script>
+const ALL = [{"CIDADE": "SAO PAULO", "UF": "SP", "vidas": 32, "receita": 12588.91, "tm": 393}, {"CIDADE": "BELO HORIZONTE", "UF": "MG", "vidas": 21, "receita": 7337.72, "tm": 349}, {"CIDADE": "SALVADOR", "UF": "BA", "vidas": 16, "receita": 5207.79, "tm": 325}, {"CIDADE": "FORTALEZA", "UF": "CE", "vidas": 10, "receita": 2540.78, "tm": 254}, {"CIDADE": "GOIANIA", "UF": "GO", "vidas": 9, "receita": 2225.03, "tm": 247}, {"CIDADE": "BRASILIA", "UF": "DF", "vidas": 9, "receita": 2774.92, "tm": 308}, {"CIDADE": "SAO LUIS", "UF": "MA", "vidas": 8, "receita": 2228.34, "tm": 279}, {"CIDADE": "CURITIBA", "UF": "PR", "vidas": 7, "receita": 2726.23, "tm": 389}, {"CIDADE": "SOROCABA", "UF": "SP", "vidas": 7, "receita": 1997.86, "tm": 285}, {"CIDADE": "JABOATAO DOS GUARARAPES", "UF": "PE", "vidas": 7, "receita": 1967.19, "tm": 281}, {"CIDADE": "BELEM", "UF": "PA", "vidas": 7, "receita": 1817.07, "tm": 260}, {"CIDADE": "FEIRA DE SANTANA", "UF": "BA", "vidas": 6, "receita": 1897.57, "tm": 316}, {"CIDADE": "ANANINDEUA", "UF": "PA", "vidas": 6, "receita": 1805.75, "tm": 301}, {"CIDADE": "BETIM", "UF": "MG", "vidas": 6, "receita": 1538.84, "tm": 256}, {"CIDADE": "RIO DE JANEIRO", "UF": "RJ", "vidas": 6, "receita": 3467.67, "tm": 578}, {"CIDADE": "NATAL", "UF": "RN", "vidas": 5, "receita": 1961.63, "tm": 392}, {"CIDADE": "MACEIO", "UF": "AL", "vidas": 5, "receita": 1845.76, "tm": 369}, {"CIDADE": "UBERLANDIA", "UF": "MG", "vidas": 5, "receita": 1239.5, "tm": 248}, {"CIDADE": "PIRACICABA", "UF": "SP", "vidas": 5, "receita": 1220.58, "tm": 244}, {"CIDADE": "RECIFE", "UF": "PE", "vidas": 5, "receita": 1962.29, "tm": 392}, {"CIDADE": "MANAUS", "UF": "AM", "vidas": 5, "receita": 1541.56, "tm": 308}, {"CIDADE": "ITAQUAQUECETUBA", "UF": "SP", "vidas": 4, "receita": 763.16, "tm": 191}, {"CIDADE": "PORTO ALEGRE", "UF": "RS", "vidas": 4, "receita": 1106.2, "tm": 277}, {"CIDADE": "SANTO ANDRE", "UF": "SP", "vidas": 4, "receita": 962.8, "tm": 241}, {"CIDADE": "SAO GONCALO", "UF": "RJ", "vidas": 4, "receita": 461.39, "tm": 115}, {"CIDADE": "BAURU", "UF": "SP", "vidas": 3, "receita": 682.96, "tm": 228}, {"CIDADE": "SAO BERNARDO DO CAMPO", "UF": "SP", "vidas": 3, "receita": 886.74, "tm": 296}, {"CIDADE": "ARACAJU", "UF": "SE", "vidas": 3, "receita": 1018.47, "tm": 339}, {"CIDADE": "APARECIDA DE GOIANIA", "UF": "GO", "vidas": 3, "receita": 1038.74, "tm": 346}, {"CIDADE": "PIEDADE", "UF": "SP", "vidas": 3, "receita": 1566.8, "tm": 522}, {"CIDADE": "JANDIRA", "UF": "SP", "vidas": 3, "receita": 672.78, "tm": 224}, {"CIDADE": "MESQUITA", "UF": "RJ", "vidas": 3, "receita": 1629.19, "tm": 543}, {"CIDADE": "SAO CARLOS", "UF": "SP", "vidas": 3, "receita": 795.56, "tm": 265}, {"CIDADE": "TERESINA", "UF": "PI", "vidas": 3, "receita": 434.72, "tm": 145}, {"CIDADE": "SERTAOZINHO", "UF": "SP", "vidas": 3, "receita": 935.88, "tm": 312}, {"CIDADE": "SAO GONCALO DO AMARANTE", "UF": "RN", "vidas": 3, "receita": 566.55, "tm": 189}, {"CIDADE": "GUARULHOS", "UF": "SP", "vidas": 3, "receita": 747.77, "tm": 249}, {"CIDADE": "OLINDA", "UF": "PE", "vidas": 2, "receita": 450.9, "tm": 225}, {"CIDADE": "MOSSORO", "UF": "RN", "vidas": 2, "receita": 470.05, "tm": 235}, {"CIDADE": "FAZENDA RIO GRANDE", "UF": "PR", "vidas": 2, "receita": 452.19, "tm": 226}, {"CIDADE": "RIBEIRAO DAS NEVES", "UF": "MG", "vidas": 2, "receita": 619.99, "tm": 310}, {"CIDADE": "SENADOR CANEDO", "UF": "GO", "vidas": 2, "receita": 1379.63, "tm": 690}, {"CIDADE": "JOINVILLE", "UF": "SC", "vidas": 2, "receita": 1041.5, "tm": 521}, {"CIDADE": "GUATAPARA", "UF": "SP", "vidas": 2, "receita": 394.07, "tm": 197}, {"CIDADE": "JUNDIAI", "UF": "SP", "vidas": 2, "receita": 526.91, "tm": 263}, {"CIDADE": "JOAO PESSOA", "UF": "PB", "vidas": 2, "receita": 490.0, "tm": 245}, {"CIDADE": "CARAPICUIBA", "UF": "SP", "vidas": 2, "receita": 345.66, "tm": 173}, {"CIDADE": "AMERICANA", "UF": "SP", "vidas": 2, "receita": 725.02, "tm": 363}, {"CIDADE": "ANTONINA", "UF": "PR", "vidas": 2, "receita": 356.46, "tm": 178}, {"CIDADE": "COLOMBO", "UF": "PR", "vidas": 2, "receita": 514.46, "tm": 257}, {"CIDADE": "ARARAQUARA", "UF": "SP", "vidas": 2, "receita": 509.13, "tm": 255}, {"CIDADE": "PAULISTA", "UF": "PE", "vidas": 2, "receita": 1352.84, "tm": 676}, {"CIDADE": "RIBEIRAO PRETO", "UF": "SP", "vidas": 2, "receita": 453.18, "tm": 227}, {"CIDADE": "CAMPINAS", "UF": "SP", "vidas": 1, "receita": 378.73, "tm": 379}, {"CIDADE": "CAJAMAR", "UF": "SP", "vidas": 1, "receita": 293.35, "tm": 293}, {"CIDADE": "CABO DE SANTO AGOSTINHO", "UF": "PE", "vidas": 1, "receita": 158.34, "tm": 158}, {"CIDADE": "CAMACARI", "UF": "BA", "vidas": 1, "receita": 472.16, "tm": 472}, {"CIDADE": "ALFENAS", "UF": "MG", "vidas": 1, "receita": 468.87, "tm": 469}, {"CIDADE": "ANAPOLIS", "UF": "GO", "vidas": 1, "receita": 235.6, "tm": 236}, {"CIDADE": "BALNEARIO CAMBORIU", "UF": "SC", "vidas": 1, "receita": 268.6, "tm": 269}, {"CIDADE": "BARRA DOS COQUEIROS", "UF": "SE", "vidas": 1, "receita": 227.0, "tm": 227}, {"CIDADE": "BARUERI", "UF": "SP", "vidas": 1, "receita": 114.94, "tm": 115}, {"CIDADE": "DIADEMA", "UF": "SP", "vidas": 1, "receita": 337.83, "tm": 338}, {"CIDADE": "COTIA", "UF": "SP", "vidas": 1, "receita": 398.99, "tm": 399}, {"CIDADE": "CONTAGEM", "UF": "MG", "vidas": 1, "receita": 244.24, "tm": 244}, {"CIDADE": "CAMPO LIMPO PAULISTA", "UF": "SP", "vidas": 1, "receita": 266.83, "tm": 267}, {"CIDADE": "CANOAS", "UF": "RS", "vidas": 1, "receita": 298.29, "tm": 298}, {"CIDADE": "CAMBORIU", "UF": "SC", "vidas": 1, "receita": 498.12, "tm": 498}, {"CIDADE": "CAMPINA GRANDE", "UF": "PB", "vidas": 1, "receita": 225.66, "tm": 226}, {"CIDADE": "EMBU DAS ARTES", "UF": "SP", "vidas": 1, "receita": 205.42, "tm": 205}, {"CIDADE": "GARANHUNS", "UF": "PE", "vidas": 1, "receita": 1140.17, "tm": 1140}, {"CIDADE": "FRANCISCO MORATO", "UF": "SP", "vidas": 1, "receita": 252.04, "tm": 252}, {"CIDADE": "FERRAZ DE VASCONCELOS", "UF": "SP", "vidas": 1, "receita": 266.83, "tm": 267}, {"CIDADE": "DIVINOPOLIS", "UF": "MG", "vidas": 1, "receita": 199.66, "tm": 200}, {"CIDADE": "IGARAPE", "UF": "MG", "vidas": 1, "receita": 202.6, "tm": 203}, {"CIDADE": "INDAIATUBA", "UF": "SP", "vidas": 1, "receita": 344.46, "tm": 344}, {"CIDADE": "IRACEMAPOLIS", "UF": "SP", "vidas": 1, "receita": 834.37, "tm": 834}, {"CIDADE": "ITABORAI", "UF": "RJ", "vidas": 1, "receita": 287.52, "tm": 288}, {"CIDADE": "MARILIA", "UF": "SP", "vidas": 1, "receita": 375.06, "tm": 375}, {"CIDADE": "MARINGA", "UF": "PR", "vidas": 1, "receita": 202.52, "tm": 203}, {"CIDADE": "LINS", "UF": "SP", "vidas": 1, "receita": 193.47, "tm": 193}, {"CIDADE": "LIMEIRA", "UF": "SP", "vidas": 1, "receita": 331.56, "tm": 332}, {"CIDADE": "JUAZEIRO DO NORTE", "UF": "CE", "vidas": 1, "receita": 242.15, "tm": 242}, {"CIDADE": "JACAREI", "UF": "SP", "vidas": 1, "receita": 475.55, "tm": 476}, {"CIDADE": "LAURO DE FREITAS", "UF": "BA", "vidas": 1, "receita": 450.6, "tm": 451}, {"CIDADE": "NOVO REMANSO (ITACOATIARA)", "UF": "AM", "vidas": 1, "receita": 576.26, "tm": 576}, {"CIDADE": "SANTA IZABEL DO PARA", "UF": "PA", "vidas": 1, "receita": 323.07, "tm": 323}, {"CIDADE": "NOVO HAMBURGO", "UF": "RS", "vidas": 1, "receita": 455.84, "tm": 456}, {"CIDADE": "SAO JOSE DOS CAMPOS", "UF": "SP", "vidas": 1, "receita": 381.73, "tm": 382}, {"CIDADE": "SIMOES FILHO", "UF": "BA", "vidas": 1, "receita": 312.93, "tm": 313}, {"CIDADE": "TABOAO DA SERRA", "UF": "SP", "vidas": 1, "receita": 264.29, "tm": 264}, {"CIDADE": "SUMARE", "UF": "SP", "vidas": 1, "receita": 136.03, "tm": 136}, {"CIDADE": "TRINDADE", "UF": "GO", "vidas": 1, "receita": 919.57, "tm": 920}, {"CIDADE": "VALPARAISO DE GOIAS", "UF": "GO", "vidas": 1, "receita": 343.98, "tm": 344}];
+const UFS = ["AL", "AM", "BA", "CE", "DF", "GO", "MA", "MG", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RS", "SC", "SE", "SP"];
+let currentUF = 'TODOS';
+let currentSort = 'vidas';
+
+// Build UF buttons
+const btnGroup = document.getElementById('uf-filters');
+UFS.forEach(uf => {
+  const b = document.createElement('button');
+  b.className = 'btn';
+  b.textContent = uf;
+  b.onclick = () => filterUF(uf);
+  btnGroup.appendChild(b);
+});
+
+function filterUF(uf) {
+  currentUF = uf;
+  document.querySelectorAll('#uf-filters .btn').forEach(b => b.classList.remove('active'));
+  const active = [...document.querySelectorAll('#uf-filters .btn')].find(b => b.textContent === uf);
+  if (active) active.classList.add('active');
+  render();
+}
+
+function setSort(s) {
+  currentSort = s;
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  render();
+}
+
+function getColor(v) {
+  if (v <= 2)  return '#1e3a6e';
+  if (v <= 5)  return '#1d4ed8';
+  if (v <= 10) return '#3b82f6';
+  if (v <= 20) return '#60a5fa';
+  return '#a855f7';
+}
+
+function tmBadge(tm) {
+  if (tm >= 450) return `<span class="badge-tm tm-high">R$ ${tm}</span>`;
+  if (tm >= 300) return `<span class="badge-tm tm-mid">R$ ${tm}</span>`;
+  return `<span class="badge-tm tm-low">R$ ${tm}</span>`;
+}
+
+function render() {
+  const q = document.getElementById('search').value.trim().toUpperCase();
+  let data = ALL.filter(r => {
+    const ufOk = currentUF === 'TODOS' || r.UF === currentUF;
+    const qOk  = !q || r.CIDADE.includes(q) || r.UF.includes(q);
+    return ufOk && qOk;
+  });
+  data = data.sort((a,b) => b[currentSort] - a[currentSort]);
+
+  const maxV = data.length ? data[0].vidas : 1;
+  const totalVidas = data.reduce((s,r) => s+r.vidas, 0);
+  const totalReceita = data.reduce((s,r) => s+r.receita, 0);
+  const tmGeral = totalVidas ? Math.round(totalReceita/totalVidas) : 0;
+
+  document.getElementById('kpi-cidades').textContent = data.length;
+  document.getElementById('kpi-vidas').textContent = totalVidas;
+  document.getElementById('kpi-receita').textContent = 'R$ ' + totalReceita.toLocaleString('pt-BR', {maximumFractionDigits:0});
+  document.getElementById('kpi-tm').textContent = 'R$ ' + tmGeral.toLocaleString('pt-BR');
+  document.getElementById('count-info').textContent = data.length + ' cidade(s) encontrada(s)';
+
+  const tbody = document.getElementById('tbody');
+  const noRes = document.getElementById('no-results');
+
+  if (!data.length) {
+    tbody.innerHTML = '';
+    noRes.style.display = 'block';
+    return;
+  }
+  noRes.style.display = 'none';
+
+  tbody.innerHTML = data.map((r,i) => {
+    const pct = Math.round(r.vidas / maxV * 100);
+    const col = getColor(r.vidas);
+    return `<tr>
+      <td class="rank-cell">${i+1}</td>
+      <td class="city-cell">${r.CIDADE}<span class="uf-badge">${r.UF}</span></td>
+      <td class="num vidas-cell">${r.vidas}</td>
+      <td class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${col}"></div></div></td>
+      <td class="num receita-cell">R$ ${r.receita.toLocaleString('pt-BR',{maximumFractionDigits:0})}</td>
+      <td class="num">${tmBadge(r.tm)}</td>
+    </tr>`;
+  }).join('');
+}
+
+render();
+</script>
+</body>
+</html>
