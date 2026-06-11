@@ -1,1 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EugenIA Full – Dashboard de Conversão</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1" integrity="sha384-jb8JQMbMoBUzgWatfe6COACi2ljcDdZQ2OxczGA3bGNeWe+6DChMTBJemed7ZnvJ" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --bg: #f0f4f8;
+            --bg-card: #ffffff;
+            --bg-header: linear-gradient(135deg, #1a237e 0%, #283593 60%, #3949ab 100%);
+            --text-primary: #1a1a2e;
+            --text-secondary: #6b7280;
+            --text-on-dark: #ffffff;
+            --accent: #3949ab;
+            --accent2: #e91e63;
+            --accent3: #00acc1;
+            --accent4: #43a047;
+            --accent5: #f57c00;
+            --positive: #16a34a;
+            --negative: #dc2626;
+            --warning: #d97706;
+            --radius: 12px;
+            --gap: 16px;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        /* HEADER */
+        .dashboard-header {
+            background: var(--bg-header);
+            color: var(--text-on-dark);
+            padding: 24px 28px;
+            border-radius: var(--radius);
+            margin-bottom: var(--gap);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(26,35,126,0.3);
+        }
+        .header-left h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+        .header-left p { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+        .header-badge {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* KPI CARDS */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--gap);
+            margin-bottom: var(--gap);
+        }
+        .kpi-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 22px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .kpi-card::after {
+            content: '';
+            position: absolute;
+            top: -20px; right: -20px;
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            opacity: 0.06;
+            background: currentColor;
+        }
+        .kpi-card.blue  { border-color: var(--accent); color: var(--accent); }
+        .kpi-card.pink  { border-color: var(--accent2); color: var(--accent2); }
+        .kpi-card.cyan  { border-color: var(--accent3); color: var(--accent3); }
+        .kpi-card.green { border-color: var(--accent4); color: var(--accent4); }
+        .kpi-card.orange{ border-color: var(--accent5); color: var(--accent5); }
+
+        .kpi-icon { font-size: 20px; margin-bottom: 8px; }
+        .kpi-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; font-weight: 600; }
+        .kpi-value { font-size: 30px; font-weight: 800; color: var(--text-primary); line-height: 1; }
+        .kpi-sub { font-size: 12px; color: var(--text-secondary); margin-top: 6px; }
+        .kpi-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin-top: 6px; }
+        .kpi-badge.good { background: #dcfce7; color: #15803d; }
+        .kpi-badge.warn { background: #fef3c7; color: #92400e; }
+        .kpi-badge.info { background: #eff6ff; color: #1d4ed8; }
+
+        /* CHART ROW */
+        .chart-row {
+            display: grid;
+            gap: var(--gap);
+            margin-bottom: var(--gap);
+        }
+        .chart-row.cols-2 { grid-template-columns: 1fr 1fr; }
+        .chart-row.cols-3 { grid-template-columns: 2fr 1fr 1fr; }
+
+        .chart-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+        }
+        .chart-card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        .chart-card .chart-sub {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+        .chart-card canvas { max-height: 280px; }
+
+        /* FUNNEL */
+        .funnel-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: var(--gap);
+        }
+        .funnel-card h3 { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+        .funnel-card .chart-sub { font-size: 12px; color: var(--text-secondary); margin-bottom: 20px; }
+
+        .funnel-steps { display: flex; flex-direction: column; gap: 10px; }
+        .funnel-step { display: flex; align-items: center; gap: 14px; }
+        .funnel-label { min-width: 150px; font-size: 13px; font-weight: 500; color: var(--text-primary); }
+        .funnel-bar-wrap { flex: 1; background: #f3f4f6; border-radius: 6px; height: 32px; overflow: hidden; position: relative; }
+        .funnel-bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 10px; transition: width 0.8s ease; }
+        .funnel-bar span { font-size: 12px; font-weight: 700; color: white; }
+        .funnel-meta { min-width: 100px; text-align: right; }
+        .funnel-meta .vol { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+        .funnel-meta .pct { font-size: 11px; color: var(--text-secondary); }
+        .funnel-drop {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; color: var(--negative); font-weight: 600;
+            padding-left: 164px;
+        }
+        .funnel-drop::before { content: '↓'; }
+
+        /* TABLE */
+        .table-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            box-shadow: var(--shadow);
+            margin-bottom: var(--gap);
+            overflow-x: auto;
+        }
+        .table-card h3 { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+        .table-card .chart-sub { font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        thead th {
+            text-align: left; padding: 10px 14px;
+            border-bottom: 2px solid #e5e7eb;
+            color: var(--text-secondary); font-size: 11px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px;
+        }
+        tbody td { padding: 11px 14px; border-bottom: 1px solid #f3f4f6; }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: #f9fafb; }
+        .td-right { text-align: right; }
+        .td-center { text-align: center; }
+        .pill {
+            display: inline-block; padding: 3px 10px; border-radius: 12px;
+            font-size: 11px; font-weight: 700;
+        }
+        .pill-blue   { background: #eff6ff; color: #1d4ed8; }
+        .pill-green  { background: #dcfce7; color: #15803d; }
+        .pill-orange { background: #fef3c7; color: #92400e; }
+        .pill-red    { background: #fef2f2; color: #dc2626; }
+
+        /* PROGRESS BAR inline */
+        .pbar-wrap { display: flex; align-items: center; gap: 8px; }
+        .pbar { flex:1; height: 6px; background: #e5e7eb; border-radius: 3px; overflow:hidden; }
+        .pbar-fill { height:100%; border-radius:3px; background: var(--accent); }
+
+        /* FOOTER */
+        .dashboard-footer {
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 16px 0 8px;
+        }
+
+        @media (max-width: 900px) {
+            .chart-row.cols-2, .chart-row.cols-3 { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .funnel-label { min-width: 110px; }
+        }
+        @media (max-width: 560px) {
+            .kpi-row { grid-template-columns: 1fr; }
+            .dashboard-container { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+<div class="dashboard-container">
+
+    <!-- HEADER -->
+    <header class="dashboard-header">
+        <div class="header-left">
+            <h1>🤖 EugenIA Full – Analytics de Conversão</h1>
+            <p>Funil completo · Distribuição de vidas · Tempo até conversão</p>
+        </div>
+        <div class="header-badge">Comercial Digital · 2026</div>
+    </header>
+
+    <!-- KPI CARDS -->
+    <section class="kpi-row">
+        <div class="kpi-card blue">
+            <div class="kpi-icon">📥</div>
+            <div class="kpi-label">Leads Totais</div>
+            <div class="kpi-value">137.985</div>
+            <div class="kpi-sub">Base do funil (100%)</div>
+        </div>
+        <div class="kpi-card pink">
+            <div class="kpi-icon">✅</div>
+            <div class="kpi-label">Leads Convertidos</div>
+            <div class="kpi-value">2.631</div>
+            <div class="kpi-sub">Taxa de conversão geral</div>
+            <span class="kpi-badge warn">1,91% do total</span>
+        </div>
+        <div class="kpi-card green">
+            <div class="kpi-icon">❤️</div>
+            <div class="kpi-label">Vidas Convertidas</div>
+            <div class="kpi-value">3.357</div>
+            <div class="kpi-sub">1,28 vidas / lead</div>
+        </div>
+        <div class="kpi-card cyan">
+            <div class="kpi-icon">🤝</div>
+            <div class="kpi-label">Handoff</div>
+            <div class="kpi-value">14.798</div>
+            <div class="kpi-sub">10,72% do total de leads</div>
+            <span class="kpi-badge info">Conv. handoff: 17,78%</span>
+        </div>
+        <div class="kpi-card orange">
+            <div class="kpi-icon">⏱️</div>
+            <div class="kpi-label">Tempo Médio</div>
+            <div class="kpi-value">3,9d</div>
+            <div class="kpi-sub">42,5% convertem no mesmo dia</div>
+            <span class="kpi-badge good">D+0 dominante</span>
+        </div>
+    </section>
+
+    <!-- FUNIL VISUAL -->
+    <div class="funnel-card">
+        <h3>1 · Funil de Conversão</h3>
+        <p class="chart-sub">Progressão etapa a etapa — volumes e taxa de retenção da etapa anterior</p>
+        <div class="funnel-steps" id="funnelSteps"></div>
+    </div>
+
+    <!-- ROW: Tempo de conversão -->
+    <div class="chart-row cols-2">
+        <div class="chart-card">
+            <h3>3 · Tempo até a Conversão</h3>
+            <p class="chart-sub">Conversões por faixa de dias — 55,8% em até 1 dia</p>
+            <canvas id="tempoChart"></canvas>
+        </div>
+        <div class="chart-card">
+            <h3>Conversão Acumulada por Dia</h3>
+            <p class="chart-sub">Curva de captura cumulativa de conversões (%)</p>
+            <canvas id="cumChart"></canvas>
+        </div>
+    </div>
+
+    <!-- TABELA: Tempo de Conversão -->
+    <div class="table-card">
+        <h3>Detalhe — Tempo até a Conversão</h3>
+        <p class="chart-sub">Distribuição das 2.631 conversões por janela temporal</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Janela</th>
+                    <th class="td-right">Conversões</th>
+                    <th class="td-right">% do Total</th>
+                    <th>Volume relativo</th>
+                    <th class="td-center">Velocidade</th>
+                </tr>
+            </thead>
+            <tbody id="tempoTable"></tbody>
+        </table>
+    </div>
+
+    <footer class="dashboard-footer">
+        EugenIA Full · Comercial Digital Hapvida NotreDame · Dados extraídos da análise de conversão 2026
+    </footer>
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+const FUNIL = [
+    { etapa: 'Leads totais',    vol: 137985, pctTotal: 100.00, pctAnterior: null },
+    { etapa: 'Engajou',         vol: 82474,  pctTotal: 59.77,  pctAnterior: 59.77 },
+    { etapa: 'Forneceu dados',  vol: 68656,  pctTotal: 49.76,  pctAnterior: 83.25 },
+    { etapa: 'Viu planos',      vol: 49608,  pctTotal: 35.95,  pctAnterior: 72.26 },
+    { etapa: 'Cotação',         vol: 43274,  pctTotal: 31.36,  pctAnterior: 87.23 },
+    { etapa: 'Handoff',         vol: 14798,  pctTotal: 10.72,  pctAnterior: 34.20 },
+    { etapa: 'Convertido lead', vol: 2631,   pctTotal: 1.91,   pctAnterior: 17.78 },
+];
+
+const VIDAS = [
+    { faixa: '1 vida',  leads: 2124, pct: 80.7, totalVidas: 2124 },
+    { faixa: '2 vidas', leads: 369,  pct: 14.0, totalVidas: 738  },
+    { faixa: '3 vidas', leads: 94,   pct: 3.6,  totalVidas: 282  },
+    { faixa: '4 vidas', leads: 31,   pct: 1.2,  totalVidas: 124  },
+    { faixa: '5+ vidas',leads: 13,   pct: 0.5,  totalVidas: 89   },
+];
+
+const TEMPO = [
+    { faixa: '0 dias (mesmo dia)', conv: 1119, pct: 42.5 },
+    { faixa: '1 dia',              conv: 350,  pct: 13.3 },
+    { faixa: '2 dias',             conv: 213,  pct: 8.1  },
+    { faixa: '3 dias',             conv: 152,  pct: 5.8  },
+    { faixa: '4 dias',             conv: 110,  pct: 4.2  },
+    { faixa: '+4 dias',            conv: 687,  pct: 26.1 },
+];
+
+// ─── COLORS ──────────────────────────────────────────────────────────────────
+const BLUE_PALETTE = ['#1a237e','#283593','#3949ab','#5c6bc0','#7986cb','#9fa8da'];
+const ACCENT_COLORS = ['#3949ab','#e91e63','#00acc1','#43a047','#f57c00'];
+
+// ─── FUNIL VISUAL ────────────────────────────────────────────────────────────
+function buildFunnelSteps() {
+    const container = document.getElementById('funnelSteps');
+    const maxVol = FUNIL[0].vol;
+
+    FUNIL.forEach((step, i) => {
+        const pct = (step.vol / maxVol) * 100;
+        const alpha = 1 - (i * 0.12);
+        const r = Math.round(57 + i * 15);
+        const g = Math.round(73 + i * 10);
+        const b = Math.round(171 - i * 8);
+        const color = `rgba(${r},${g},${b},${Math.max(alpha, 0.4)})`;
+
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'funnel-step';
+        stepDiv.innerHTML = `
+            <div class="funnel-label">${step.etapa}</div>
+            <div class="funnel-bar-wrap">
+                <div class="funnel-bar" style="width:${pct}%;background:${color}">
+                    <span>${step.pctTotal.toFixed(1)}%</span>
+                </div>
+            </div>
+            <div class="funnel-meta">
+                <div class="vol">${step.vol.toLocaleString('pt-BR')}</div>
+                <div class="pct">${step.pctTotal.toFixed(2)}% total</div>
+            </div>`;
+        container.appendChild(stepDiv);
+
+        // Drop indicator
+        if (i < FUNIL.length - 1) {
+            const next = FUNIL[i + 1];
+            const drop = (1 - next.vol / step.vol) * 100;
+            const dropDiv = document.createElement('div');
+            dropDiv.className = 'funnel-drop';
+            dropDiv.textContent = `Perda de ${drop.toFixed(1)}% → ${(next.pctAnterior).toFixed(2)}% retidos`;
+            container.appendChild(dropDiv);
+        }
+    });
+}
+
+// ─── PLUGIN: valores acima das barras / pontos ───────────────────────────
+const dataLabelPlugin = {
+    id: 'dataLabelPlugin',
+    afterDatasetsDraw(chart) {
+        const { ctx, data, chartArea } = chart;
+        const type = chart.config.type;
+        ctx.save();
+        chart.data.datasets.forEach((dataset, di) => {
+            const meta = chart.getDatasetMeta(di);
+            meta.data.forEach((el, i) => {
+                const val = dataset.data[i];
+                if (val == null) return;
+                let label = '';
+                if (type === 'bar') {
+                    label = val.toLocaleString('pt-BR');
+                    const { x, y } = el.tooltipPosition();
+                    ctx.fillStyle = '#374151';
+                    ctx.font = 'bold 11px system-ui';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    ctx.fillText(label, x, y - 4);
+                } else if (type === 'line') {
+                    if (val === 0) return;
+                    label = val + '%';
+                    const { x, y } = el.tooltipPosition();
+                    ctx.fillStyle = '#1a237e';
+                    ctx.font = 'bold 11px system-ui';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    ctx.fillText(label, x, y - 7);
+                }
+            });
+        });
+        ctx.restore();
+    }
+};
+Chart.register(dataLabelPlugin);
+
+// ─── CHART 3: Tempo Barras ────────────────────────────────────────────────
+function buildTempoChart() {
+    const ctx = document.getElementById('tempoChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: TEMPO.map(t => t.faixa),
+            datasets: [{
+                label: 'Conversões',
+                data: TEMPO.map(t => t.conv),
+                backgroundColor: ctx2 => {
+                    const idx = ctx2.dataIndex;
+                    return idx === 0 ? '#43a047' : idx === TEMPO.length-1 ? '#e91e63' : '#5c6bc0';
+                },
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            layout: { padding: { top: 20 } },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.parsed.y.toLocaleString('pt-BR')} conversões (${TEMPO[ctx.dataIndex].pct}%)`
+                    }
+                }
+            },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, ticks: { font: { size: 11 } } },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+}
+
+// ─── CHART 4: Cumulativo ─────────────────────────────────────────────────
+function buildCumChart() {
+    const ctx = document.getElementById('cumChart').getContext('2d');
+    let cum = 0;
+    const total = TEMPO.reduce((a,t)=>a+t.conv,0);
+    const labels = ['Início', ...TEMPO.map(t=>t.faixa)];
+    const vals = [0];
+    TEMPO.forEach(t => { cum += t.conv; vals.push(+(cum/total*100).toFixed(1)); });
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels,
+            datasets: [{
+                label: '% Acumulado',
+                data: vals,
+                borderColor: '#3949ab',
+                backgroundColor: 'rgba(57,73,171,0.08)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 5,
+                pointBackgroundColor: '#3949ab',
+                borderWidth: 2.5,
+            }]
+        },
+        options: {
+            responsive: true,
+            layout: { padding: { top: 22 } },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.parsed.y}% das conversões acumuladas`
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    min: 0, max: 100,
+                    ticks: { callback: v => v+'%', font: { size: 11 } },
+                    grid: { color: '#f3f4f6' }
+                },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+}
+
+// ─── TABLE: Tempo ─────────────────────────────────────────────────────────
+function buildTempoTable() {
+    const tbody = document.getElementById('tempoTable');
+    const maxConv = Math.max(...TEMPO.map(t=>t.conv));
+    const velocidades = ['🚀 Alta','🚀 Alta','✅ Boa','✅ Boa','⚠️ Média','⏳ Longa'];
+    const pillClasses = ['pill-green','pill-green','pill-blue','pill-blue','pill-orange','pill-red'];
+
+    TEMPO.forEach((t, i) => {
+        const barPct = (t.conv / maxConv * 100).toFixed(1);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${t.faixa}</strong></td>
+            <td class="td-right">${t.conv.toLocaleString('pt-BR')}</td>
+            <td class="td-right">${t.pct}%</td>
+            <td>
+                <div class="pbar-wrap">
+                    <div class="pbar"><div class="pbar-fill" style="width:${barPct}%;background:#3949ab"></div></div>
+                    <span style="font-size:11px;color:#6b7280">${barPct}%</span>
+                </div>
+            </td>
+            <td class="td-center"><span class="pill ${pillClasses[i]}">${velocidades[i]}</span></td>`;
+        tbody.appendChild(tr);
+    });
+
+    // Total + média
+    const tr = document.createElement('tr');
+    tr.style.fontWeight = '700';
+    tr.style.background = '#f9fafb';
+    tr.innerHTML = `<td><strong>Total / Média</strong></td><td class="td-right">2.631</td><td class="td-right">100%</td><td><em style="font-size:12px;color:#6b7280">Tempo médio: 3,9 dias</em></td><td></td>`;
+    tbody.appendChild(tr);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────
+buildFunnelSteps();
+buildTempoChart();
+buildCumChart();
+buildTempoTable();
+</script>
+</body>
+</html>
 
