@@ -331,6 +331,30 @@
         </table>
     </div>
 
+    <!-- ROW: Conversão por gestão (Insight 4 — de-para do vendedor) -->
+    <div class="chart-row cols-2">
+        <div class="chart-card">
+            <h3>4 · Conversão por Gestão</h3>
+            <p class="chart-sub">Vidas convertidas por estrutura comercial (de-para do vendedor)</p>
+            <canvas id="gestaoChart"></canvas>
+        </div>
+        <div class="table-card">
+            <h3>Detalhe — Gestão</h3>
+            <p class="chart-sub">Vidas, receita mensal e ticket médio por gestão</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Gestão</th>
+                        <th class="td-right">Vidas</th>
+                        <th class="td-right">Receita</th>
+                        <th class="td-right">Ticket</th>
+                    </tr>
+                </thead>
+                <tbody id="gestaoTable"></tbody>
+            </table>
+        </div>
+    </div>
+
     <footer class="dashboard-footer">
         EugenIA Full · Comercial Digital Hapvida NotreDame · Dados extraídos da análise de conversão 2026
     </footer>
@@ -365,6 +389,15 @@ const TEMPO = [
     { faixa: '3 dias',             conv: 189,  pct: 5.3  },
     { faixa: '4 dias',             conv: 138,  pct: 3.9  },
     { faixa: '+4 dias',            conv: 1106, pct: 31.2 },
+];
+
+// Conversão por gestão (de-para do vendedor já no BASE_DIGITAL)
+const GESTAO = [
+    { gestao: 'Fabio',          vidas: 1653, receita: 535255.13, ticket: 323.81 },
+    { gestao: 'Josy',           vidas: 1650, receita: 571786.02, ticket: 346.54 },
+    { gestao: 'Administrativo', vidas: 176,  receita: 62096.59,  ticket: 352.82 },
+    { gestao: 'Actionline',     vidas: 34,   receita: 10415.01,  ticket: 306.32 },
+    { gestao: 'Sem gestão',     vidas: 31,   receita: 13592.48,  ticket: 438.47 },
 ];
 
 // ─── COLORS ──────────────────────────────────────────────────────────────────
@@ -623,6 +656,63 @@ function buildTempoTable() {
     tbody.appendChild(tr);
 }
 
+// ─── HELPERS de formato ───────────────────────────────────────────────────
+const fmtInt = v => v.toLocaleString('pt-BR');
+const fmtBRL = v => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+// ─── SEÇÃO 4: Conversão por Gestão ────────────────────────────────────────
+function buildGestaoChart() {
+    const ctx = document.getElementById('gestaoChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: GESTAO.map(g => g.gestao),
+            datasets: [{
+                label: 'Vidas',
+                data: GESTAO.map(g => g.vidas),
+                backgroundColor: GESTAO.map((_, i) => ACCENT_COLORS[i % ACCENT_COLORS.length]),
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            layout: { padding: { top: 20 } },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${fmtInt(ctx.parsed.y)} vidas · ${fmtBRL(GESTAO[ctx.dataIndex].receita)} · ticket ${fmtBRL(GESTAO[ctx.dataIndex].ticket)}`
+                    }
+                }
+            },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, ticks: { font: { size: 11 } } },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+}
+
+function buildGestaoTable() {
+    const tbody = document.getElementById('gestaoTable');
+    const totV = GESTAO.reduce((a, g) => a + g.vidas, 0);
+    const totR = GESTAO.reduce((a, g) => a + g.receita, 0);
+    GESTAO.forEach(g => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${g.gestao}</strong></td>
+            <td class="td-right">${fmtInt(g.vidas)}</td>
+            <td class="td-right">${fmtBRL(g.receita)}</td>
+            <td class="td-right">${fmtBRL(g.ticket)}</td>`;
+        tbody.appendChild(tr);
+    });
+    const tr = document.createElement('tr');
+    tr.style.fontWeight = '700';
+    tr.style.background = '#f9fafb';
+    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">${fmtInt(totV)}</td><td class="td-right">${fmtBRL(totR)}</td><td class="td-right">${fmtBRL(totR / totV)}</td>`;
+    tbody.appendChild(tr);
+}
+
 // ─── INIT ─────────────────────────────────────────────────────────────────
 buildFunnelSteps();
 buildVidasChart();
@@ -630,6 +720,8 @@ buildVidasTable();
 buildTempoChart();
 buildCumChart();
 buildTempoTable();
+buildGestaoChart();
+buildGestaoTable();
 </script>
 </body>
 </html>
