@@ -235,34 +235,35 @@
         <div class="kpi-card blue">
             <div class="kpi-icon">📥</div>
             <div class="kpi-label">Leads Totais</div>
-            <div class="kpi-value">137.985</div>
+            <div class="kpi-value">155.450</div>
             <div class="kpi-sub">Base do funil (100%)</div>
         </div>
         <div class="kpi-card pink">
-            <div class="kpi-icon">✅</div>
-            <div class="kpi-label">Leads Convertidos</div>
-            <div class="kpi-value">2.631</div>
-            <div class="kpi-sub">Taxa de conversão geral</div>
-            <span class="kpi-badge warn">1,91% do total</span>
-        </div>
-        <div class="kpi-card green">
             <div class="kpi-icon">❤️</div>
             <div class="kpi-label">Vidas Convertidas</div>
-            <div class="kpi-value">3.357</div>
-            <div class="kpi-sub">1,28 vidas / lead</div>
+            <div class="kpi-value">3.544</div>
+            <div class="kpi-sub">Conversão por vida (abr–jun)</div>
+            <span class="kpi-badge warn">2,28% dos leads</span>
+        </div>
+        <div class="kpi-card green">
+            <div class="kpi-icon">⚡</div>
+            <div class="kpi-label">Vidas em ≤ 1 dia</div>
+            <div class="kpi-value">51,3%</div>
+            <div class="kpi-sub">1.817 vidas (D+0 e D+1)</div>
+            <span class="kpi-badge good">Conversão rápida</span>
         </div>
         <div class="kpi-card cyan">
             <div class="kpi-icon">🤝</div>
             <div class="kpi-label">Handoff</div>
-            <div class="kpi-value">14.798</div>
-            <div class="kpi-sub">10,72% do total de leads</div>
-            <span class="kpi-badge info">Conv. handoff: 17,78%</span>
+            <div class="kpi-value">16.985</div>
+            <div class="kpi-sub">10,93% do total de leads</div>
+            <span class="kpi-badge info">Conv.→vidas: 20,9%</span>
         </div>
         <div class="kpi-card orange">
             <div class="kpi-icon">⏱️</div>
             <div class="kpi-label">Tempo Médio</div>
-            <div class="kpi-value">3,9d</div>
-            <div class="kpi-sub">42,5% convertem no mesmo dia</div>
+            <div class="kpi-value">4,6d</div>
+            <div class="kpi-sub">38,7% convertem no mesmo dia</div>
             <span class="kpi-badge good">D+0 dominante</span>
         </div>
     </section>
@@ -274,11 +275,35 @@
         <div class="funnel-steps" id="funnelSteps"></div>
     </div>
 
+    <!-- ROW: Distribuição de vidas (Insight 2 — por vida) -->
+    <div class="chart-row cols-2">
+        <div class="chart-card">
+            <h3>2 · Distribuição de Vidas</h3>
+            <p class="chart-sub">Vidas convertidas por tamanho de contrato — total 3.544</p>
+            <canvas id="vidasChart"></canvas>
+        </div>
+        <div class="table-card">
+            <h3>Detalhe — Vidas por Contrato</h3>
+            <p class="chart-sub">Distribuição das 3.544 vidas convertidas</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Faixa</th>
+                        <th class="td-right">Vidas</th>
+                        <th class="td-right">% das vidas</th>
+                        <th>Volume relativo</th>
+                    </tr>
+                </thead>
+                <tbody id="vidasTable"></tbody>
+            </table>
+        </div>
+    </div>
+
     <!-- ROW: Tempo de conversão -->
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>3 · Tempo até a Conversão</h3>
-            <p class="chart-sub">Conversões por faixa de dias — 55,8% em até 1 dia</p>
+            <p class="chart-sub">Vidas convertidas por faixa de dias — 51,3% em até 1 dia</p>
             <canvas id="tempoChart"></canvas>
         </div>
         <div class="chart-card">
@@ -291,7 +316,7 @@
     <!-- TABELA: Tempo de Conversão -->
     <div class="table-card">
         <h3>Detalhe — Tempo até a Conversão</h3>
-        <p class="chart-sub">Distribuição das 2.631 conversões por janela temporal</p>
+        <p class="chart-sub">Distribuição das 3.544 vidas convertidas por janela temporal</p>
         <table>
             <thead>
                 <tr>
@@ -314,30 +339,32 @@
 <script>
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const FUNIL = [
-    { etapa: 'Leads totais',    vol: 137985, pctTotal: 100.00, pctAnterior: null },
-    { etapa: 'Engajou',         vol: 82474,  pctTotal: 59.77,  pctAnterior: 59.77 },
-    { etapa: 'Forneceu dados',  vol: 68656,  pctTotal: 49.76,  pctAnterior: 83.25 },
-    { etapa: 'Viu planos',      vol: 49608,  pctTotal: 35.95,  pctAnterior: 72.26 },
-    { etapa: 'Cotação',         vol: 43274,  pctTotal: 31.36,  pctAnterior: 87.23 },
-    { etapa: 'Handoff',         vol: 14798,  pctTotal: 10.72,  pctAnterior: 34.20 },
-    { etapa: 'Convertido lead', vol: 2631,   pctTotal: 1.91,   pctAnterior: 17.78 },
+    { etapa: 'Leads totais',    vol: 155450, pctTotal: 100.00, pctAnterior: null },
+    { etapa: 'Engajou',         vol: 92214,  pctTotal: 59.32,  pctAnterior: 59.32 },
+    { etapa: 'Forneceu dados',  vol: 77628,  pctTotal: 49.94,  pctAnterior: 84.18 },
+    { etapa: 'Viu planos',      vol: 55079,  pctTotal: 35.43,  pctAnterior: 70.95 },
+    { etapa: 'Cotação',         vol: 48322,  pctTotal: 31.09,  pctAnterior: 87.73 },
+    { etapa: 'Handoff',          vol: 16985,  pctTotal: 10.93,  pctAnterior: 35.15 },
+    { etapa: 'Vidas convertidas',vol: 3544,   pctTotal: 2.28,   pctAnterior: 20.87 },
 ];
 
+// Distribuição por VIDA (total 3.544) — não por lead
 const VIDAS = [
-    { faixa: '1 vida',  leads: 2124, pct: 80.7, totalVidas: 2124 },
-    { faixa: '2 vidas', leads: 369,  pct: 14.0, totalVidas: 738  },
-    { faixa: '3 vidas', leads: 94,   pct: 3.6,  totalVidas: 282  },
-    { faixa: '4 vidas', leads: 31,   pct: 1.2,  totalVidas: 124  },
-    { faixa: '5+ vidas',leads: 13,   pct: 0.5,  totalVidas: 89   },
+    { faixa: '1 vida',  vidas: 2491, pct: 70.3 },
+    { faixa: '2 vidas', vidas: 666,  pct: 18.8 },
+    { faixa: '3 vidas', vidas: 234,  pct: 6.6  },
+    { faixa: '4 vidas', vidas: 108,  pct: 3.0  },
+    { faixa: '5+ vidas',vidas: 45,   pct: 1.3  },
 ];
 
+// Tempo até conversão por VIDA (total 3.544)
 const TEMPO = [
-    { faixa: '0 dias (mesmo dia)', conv: 1119, pct: 42.5 },
-    { faixa: '1 dia',              conv: 350,  pct: 13.3 },
-    { faixa: '2 dias',             conv: 213,  pct: 8.1  },
-    { faixa: '3 dias',             conv: 152,  pct: 5.8  },
-    { faixa: '4 dias',             conv: 110,  pct: 4.2  },
-    { faixa: '+4 dias',            conv: 687,  pct: 26.1 },
+    { faixa: '0 dias (mesmo dia)', conv: 1373, pct: 38.7 },
+    { faixa: '1 dia',              conv: 444,  pct: 12.5 },
+    { faixa: '2 dias',             conv: 294,  pct: 8.3  },
+    { faixa: '3 dias',             conv: 189,  pct: 5.3  },
+    { faixa: '4 dias',             conv: 138,  pct: 3.9  },
+    { faixa: '+4 dias',            conv: 1106, pct: 31.2 },
 ];
 
 // ─── COLORS ──────────────────────────────────────────────────────────────────
@@ -421,6 +448,64 @@ const dataLabelPlugin = {
     }
 };
 Chart.register(dataLabelPlugin);
+
+// ─── SEÇÃO 2: Distribuição de Vidas (por vida) ────────────────────────────
+function buildVidasChart() {
+    const ctx = document.getElementById('vidasChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: VIDAS.map(v => v.faixa),
+            datasets: [{
+                label: 'Vidas',
+                data: VIDAS.map(v => v.vidas),
+                backgroundColor: VIDAS.map((_, i) => ACCENT_COLORS[i % ACCENT_COLORS.length]),
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            layout: { padding: { top: 20 } },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${ctx.parsed.y.toLocaleString('pt-BR')} vidas (${VIDAS[ctx.dataIndex].pct}%)`
+                    }
+                }
+            },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, ticks: { font: { size: 11 } } },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+}
+
+function buildVidasTable() {
+    const tbody = document.getElementById('vidasTable');
+    const maxV = Math.max(...VIDAS.map(v => v.vidas));
+    VIDAS.forEach(v => {
+        const barPct = (v.vidas / maxV * 100).toFixed(1);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${v.faixa}</strong></td>
+            <td class="td-right">${v.vidas.toLocaleString('pt-BR')}</td>
+            <td class="td-right">${v.pct}%</td>
+            <td>
+                <div class="pbar-wrap">
+                    <div class="pbar"><div class="pbar-fill" style="width:${barPct}%;background:#43a047"></div></div>
+                    <span style="font-size:11px;color:#6b7280">${barPct}%</span>
+                </div>
+            </td>`;
+        tbody.appendChild(tr);
+    });
+    const tr = document.createElement('tr');
+    tr.style.fontWeight = '700';
+    tr.style.background = '#f9fafb';
+    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">3.544</td><td class="td-right">100%</td><td></td>`;
+    tbody.appendChild(tr);
+}
 
 // ─── CHART 3: Tempo Barras ────────────────────────────────────────────────
 function buildTempoChart() {
@@ -534,12 +619,14 @@ function buildTempoTable() {
     const tr = document.createElement('tr');
     tr.style.fontWeight = '700';
     tr.style.background = '#f9fafb';
-    tr.innerHTML = `<td><strong>Total / Média</strong></td><td class="td-right">2.631</td><td class="td-right">100%</td><td><em style="font-size:12px;color:#6b7280">Tempo médio: 3,9 dias</em></td><td></td>`;
+    tr.innerHTML = `<td><strong>Total / Média</strong></td><td class="td-right">3.544</td><td class="td-right">100%</td><td><em style="font-size:12px;color:#6b7280">Tempo médio: 4,6 dias</em></td><td></td>`;
     tbody.appendChild(tr);
 }
 
 // ─── INIT ─────────────────────────────────────────────────────────────────
 buildFunnelSteps();
+buildVidasChart();
+buildVidasTable();
 buildTempoChart();
 buildCumChart();
 buildTempoTable();
