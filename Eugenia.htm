@@ -199,6 +199,50 @@
         .pbar { flex:1; height: 6px; background: #e5e7eb; border-radius: 3px; overflow:hidden; }
         .pbar-fill { height:100%; border-radius:3px; background: var(--accent); }
 
+        /* TAB NAV */
+        .tab-nav {
+            display: flex;
+            gap: 6px;
+            margin-bottom: var(--gap);
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 6px;
+            box-shadow: var(--shadow);
+            flex-wrap: wrap;
+        }
+        .tab-btn {
+            flex: 1;
+            min-width: 180px;
+            padding: 12px 18px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-secondary);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+        .tab-btn:hover { background: #f3f4f6; color: var(--text-primary); }
+        .tab-btn.active {
+            background: var(--bg-header);
+            color: var(--text-on-dark);
+            box-shadow: 0 2px 8px rgba(26,35,126,0.25);
+        }
+        .tab-pane { display: none; }
+        .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+        .section-note {
+            background: #eff6ff;
+            border-left: 4px solid var(--accent);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 12px;
+            color: #1e3a8a;
+            margin-bottom: var(--gap);
+        }
+
         /* FOOTER */
         .dashboard-footer {
             text-align: center;
@@ -225,45 +269,54 @@
     <header class="dashboard-header">
         <div class="header-left">
             <h1>🤖 EugenIA Full – Analytics de Conversão</h1>
-            <p>Funil completo · Distribuição de vidas · Tempo até conversão</p>
+            <p>Funil de conversão · Vendas realizadas detalhadas · 4.206 vidas convertidas</p>
         </div>
         <div class="header-badge">Comercial Digital · 2026</div>
     </header>
+
+    <!-- TAB NAV -->
+    <nav class="tab-nav">
+        <button class="tab-btn active" data-tab="tab-geral">📊 Visão Geral · Conversão</button>
+        <button class="tab-btn" data-tab="tab-vendas">💰 Vendas Realizadas</button>
+    </nav>
+
+    <!-- ============================ ABA 1: VISÃO GERAL ============================ -->
+    <div class="tab-pane active" id="tab-geral">
 
     <!-- KPI CARDS -->
     <section class="kpi-row">
         <div class="kpi-card blue">
             <div class="kpi-icon">📥</div>
             <div class="kpi-label">Leads Totais</div>
-            <div class="kpi-value">155.450</div>
+            <div class="kpi-value">159.910</div>
             <div class="kpi-sub">Base do funil (100%)</div>
         </div>
         <div class="kpi-card pink">
             <div class="kpi-icon">❤️</div>
             <div class="kpi-label">Vidas Convertidas</div>
-            <div class="kpi-value">3.544</div>
+            <div class="kpi-value">4.206</div>
             <div class="kpi-sub">Conversão por vida (abr–jun)</div>
-            <span class="kpi-badge warn">2,28% dos leads</span>
+            <span class="kpi-badge warn">2,63% dos leads</span>
         </div>
         <div class="kpi-card green">
             <div class="kpi-icon">⚡</div>
             <div class="kpi-label">Vidas em ≤ 1 dia</div>
-            <div class="kpi-value">51,3%</div>
-            <div class="kpi-sub">1.817 vidas (D+0 e D+1)</div>
+            <div class="kpi-value">50,8%</div>
+            <div class="kpi-sub">2.135 vidas (D+0 e D+1)</div>
             <span class="kpi-badge good">Conversão rápida</span>
         </div>
         <div class="kpi-card cyan">
             <div class="kpi-icon">🤝</div>
             <div class="kpi-label">Handoff</div>
-            <div class="kpi-value">16.985</div>
-            <div class="kpi-sub">10,93% do total de leads</div>
-            <span class="kpi-badge info">Conv.→vidas: 20,9%</span>
+            <div class="kpi-value">17.655</div>
+            <div class="kpi-sub">11,04% do total de leads</div>
+            <span class="kpi-badge info">Conv.→vidas: 23,8%</span>
         </div>
         <div class="kpi-card orange">
             <div class="kpi-icon">⏱️</div>
             <div class="kpi-label">Tempo Médio</div>
-            <div class="kpi-value">4,6d</div>
-            <div class="kpi-sub">38,7% convertem no mesmo dia</div>
+            <div class="kpi-value">5,1d</div>
+            <div class="kpi-sub">38,3% convertem no mesmo dia</div>
             <span class="kpi-badge good">D+0 dominante</span>
         </div>
     </section>
@@ -279,12 +332,12 @@
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>2 · Distribuição de Vidas</h3>
-            <p class="chart-sub">Vidas convertidas por tamanho de contrato — total 3.544</p>
+            <p class="chart-sub">Vidas convertidas por tamanho de contrato — total 4.206</p>
             <canvas id="vidasChart"></canvas>
         </div>
         <div class="table-card">
             <h3>Detalhe — Vidas por Contrato</h3>
-            <p class="chart-sub">Distribuição das 3.544 vidas convertidas</p>
+            <p class="chart-sub">Distribuição das 4.206 vidas convertidas</p>
             <table>
                 <thead>
                     <tr>
@@ -303,7 +356,7 @@
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>3 · Tempo até a Conversão</h3>
-            <p class="chart-sub">Vidas convertidas por faixa de dias — 51,3% em até 1 dia</p>
+            <p class="chart-sub">Vidas convertidas por faixa de dias — 50,8% em até 1 dia</p>
             <canvas id="tempoChart"></canvas>
         </div>
         <div class="chart-card">
@@ -316,7 +369,7 @@
     <!-- TABELA: Tempo de Conversão -->
     <div class="table-card">
         <h3>Detalhe — Tempo até a Conversão</h3>
-        <p class="chart-sub">Distribuição das 3.544 vidas convertidas por janela temporal</p>
+        <p class="chart-sub">Distribuição das 4.206 vidas convertidas por janela temporal</p>
         <table>
             <thead>
                 <tr>
@@ -355,6 +408,178 @@
         </div>
     </div>
 
+    </div><!-- /tab-geral -->
+
+    <!-- ============================ ABA 2: VENDAS REALIZADAS ============================ -->
+    <div class="tab-pane" id="tab-vendas">
+
+        <div class="section-note">
+            💰 <strong>Vendas realizadas</strong> — detalhamento das <strong>4.206 vidas convertidas</strong>
+            via Eugenia (cadastro abr–jun/2026). Base: cada linha = 1 vida (beneficiário). Receita = soma das
+            mensalidades contratadas. <em>Churn ainda imaturo (base recente de ~3 meses).</em>
+        </div>
+
+        <!-- KPIs VENDAS -->
+        <section class="kpi-row">
+            <div class="kpi-card pink">
+                <div class="kpi-icon">❤️</div>
+                <div class="kpi-label">Vidas Convertidas</div>
+                <div class="kpi-value">4.206</div>
+                <div class="kpi-sub" id="vrKpiTel">3.468 telefones distintos</div>
+            </div>
+            <div class="kpi-card green">
+                <div class="kpi-icon">💵</div>
+                <div class="kpi-label">Receita Mensal</div>
+                <div class="kpi-value" id="vrKpiRec">—</div>
+                <div class="kpi-sub" id="vrKpiArr">ARR —</div>
+            </div>
+            <div class="kpi-card blue">
+                <div class="kpi-icon">🎟️</div>
+                <div class="kpi-label">Ticket Médio / vida</div>
+                <div class="kpi-value" id="vrKpiTicket">—</div>
+                <div class="kpi-sub">Mensalidade média contratada</div>
+            </div>
+            <div class="kpi-card orange">
+                <div class="kpi-icon">⚠️</div>
+                <div class="kpi-label">Cancelamentos</div>
+                <div class="kpi-value" id="vrKpiChurn">49</div>
+                <div class="kpi-sub" id="vrKpiChurnPct">1,2% (base imatura)</div>
+            </div>
+        </section>
+
+        <!-- MIX DE PLANOS (tabela) -->
+        <div class="table-card">
+            <h3>5 · Mix de Planos (GRUPO_PLANO)</h3>
+            <p class="chart-sub">Vidas, receita mensal e ticket médio por grupo de plano — 96% em Nosso Plano, Smart e Nosso Médico</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Grupo de Plano</th>
+                        <th class="td-right">Vidas</th>
+                        <th class="td-right">%</th>
+                        <th class="td-right">Receita</th>
+                        <th class="td-right">Ticket</th>
+                        <th>Volume relativo</th>
+                    </tr>
+                </thead>
+                <tbody id="vrPlanoTable"></tbody>
+            </table>
+        </div>
+
+        <!-- DISTRIBUIÇÃO DE TICKET -->
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>6 · Distribuição de Mensalidade</h3>
+                <p class="chart-sub">Vidas por faixa de valor mensal — ticket médio R$ 335,72</p>
+                <canvas id="vrTicketChart"></canvas>
+            </div>
+            <div class="table-card">
+                <h3>Detalhe — Faixas de Valor</h3>
+                <p class="chart-sub">Concentração em R$ 150–400 (75% das vidas)</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Faixa</th>
+                            <th class="td-right">Vidas</th>
+                            <th class="td-right">%</th>
+                            <th>Volume relativo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vrTicketTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- GEOGRAFIA -->
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>7 · Distribuição por UF</h3>
+                <p class="chart-sub">Vidas convertidas por estado — SP concentra 36%</p>
+                <canvas id="vrUfChart"></canvas>
+            </div>
+            <div class="table-card">
+                <h3>Top 10 Cidades</h3>
+                <p class="chart-sub">Maiores praças por vidas convertidas</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cidade</th>
+                            <th class="td-right">Vidas</th>
+                            <th class="td-right">%</th>
+                            <th>Volume relativo</th>
+                        </tr>
+                    </thead>
+                    <tbody id="vrCidadeTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- RANKING: VENDEDORES -->
+        <div class="table-card">
+            <h3>8 · Top 15 Vendedores</h3>
+            <p class="chart-sub">Ranking por vidas convertidas — receita mensal e ticket médio</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Vendedor</th>
+                        <th class="td-right">Vidas</th>
+                        <th class="td-right">Receita</th>
+                        <th class="td-right">Ticket</th>
+                        <th>Volume relativo</th>
+                    </tr>
+                </thead>
+                <tbody id="vrVendedorTable"></tbody>
+            </table>
+        </div>
+
+        <!-- RANKING: UNIDADE + ÁREA -->
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>9 · Vidas por Unidade</h3>
+                <p class="chart-sub">Ribeirão Preto + Fortaleza = 67% do volume</p>
+                <canvas id="vrUnidadeChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>10 · Vidas por Área</h3>
+                <p class="chart-sub">Inside Sales é o core (72%)</p>
+                <canvas id="vrAreaChart"></canvas>
+            </div>
+        </div>
+
+        <!-- SUPERVISORES -->
+        <div class="table-card">
+            <h3>11 · Supervisor Direto</h3>
+            <p class="chart-sub">Vidas convertidas por supervisor</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Supervisor</th>
+                        <th class="td-right">Vidas</th>
+                        <th class="td-right">%</th>
+                        <th>Volume relativo</th>
+                    </tr>
+                </thead>
+                <tbody id="vrSupervisorTable"></tbody>
+            </table>
+        </div>
+
+        <!-- EVOLUÇÃO MENSAL + CANAL -->
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>12 · Evolução Mensal</h3>
+                <p class="chart-sub">Contatos Eugenia (1º contato) × cadastros realizados, por mês</p>
+                <canvas id="vrMensalChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>13 · Vidas por Canal</h3>
+                <p class="chart-sub">Individual domina (86%) — PIM responde por 14%</p>
+                <canvas id="vrCanalChart"></canvas>
+            </div>
+        </div>
+
+    </div><!-- /tab-vendas -->
+
     <footer class="dashboard-footer">
         EugenIA Full · Comercial Digital Hapvida NotreDame · Dados extraídos da análise de conversão 2026
     </footer>
@@ -363,41 +588,169 @@
 <script>
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const FUNIL = [
-    { etapa: 'Leads totais',    vol: 155450, pctTotal: 100.00, pctAnterior: null },
-    { etapa: 'Engajou',         vol: 92214,  pctTotal: 59.32,  pctAnterior: 59.32 },
-    { etapa: 'Forneceu dados',  vol: 77628,  pctTotal: 49.94,  pctAnterior: 84.18 },
-    { etapa: 'Viu planos',      vol: 55079,  pctTotal: 35.43,  pctAnterior: 70.95 },
-    { etapa: 'Cotação',         vol: 48322,  pctTotal: 31.09,  pctAnterior: 87.73 },
-    { etapa: 'Handoff',          vol: 16985,  pctTotal: 10.93,  pctAnterior: 35.15 },
-    { etapa: 'Vidas convertidas',vol: 3544,   pctTotal: 2.28,   pctAnterior: 20.87 },
+    { etapa: 'Leads totais',    vol: 159910, pctTotal: 100.00, pctAnterior: null },
+    { etapa: 'Engajou',         vol: 95475,  pctTotal: 59.71,  pctAnterior: 59.71 },
+    { etapa: 'Forneceu dados',  vol: 80485,  pctTotal: 50.33,  pctAnterior: 84.30 },
+    { etapa: 'Viu planos',      vol: 56775,  pctTotal: 35.50,  pctAnterior: 70.54 },
+    { etapa: 'Cotação',         vol: 49931,  pctTotal: 31.22,  pctAnterior: 87.95 },
+    { etapa: 'Handoff',          vol: 17655,  pctTotal: 11.04,  pctAnterior: 35.36 },
+    { etapa: 'Vidas convertidas',vol: 4206,   pctTotal: 2.63,   pctAnterior: 23.82 },
 ];
 
-// Distribuição por VIDA (total 3.544) — não por lead
+// Distribuição por VIDA (total 4.206) — não por lead
 const VIDAS = [
-    { faixa: '1 vida',  vidas: 2491, pct: 70.3 },
-    { faixa: '2 vidas', vidas: 666,  pct: 18.8 },
-    { faixa: '3 vidas', vidas: 234,  pct: 6.6  },
-    { faixa: '4 vidas', vidas: 108,  pct: 3.0  },
-    { faixa: '5+ vidas',vidas: 45,   pct: 1.3  },
+    { faixa: '1 vida',  vidas: 2944, pct: 70.0 },
+    { faixa: '2 vidas', vidas: 768,  pct: 18.3 },
+    { faixa: '3 vidas', vidas: 279,  pct: 6.6  },
+    { faixa: '4 vidas', vidas: 140,  pct: 3.3  },
+    { faixa: '5+ vidas',vidas: 75,   pct: 1.8  },
 ];
 
-// Tempo até conversão por VIDA (total 3.544)
+// Tempo até conversão por VIDA (total 4.206)
 const TEMPO = [
-    { faixa: '0 dias (mesmo dia)', conv: 1373, pct: 38.7 },
-    { faixa: '1 dia',              conv: 444,  pct: 12.5 },
-    { faixa: '2 dias',             conv: 294,  pct: 8.3  },
-    { faixa: '3 dias',             conv: 189,  pct: 5.3  },
-    { faixa: '4 dias',             conv: 138,  pct: 3.9  },
-    { faixa: '+4 dias',            conv: 1106, pct: 31.2 },
+    { faixa: '0 dias (mesmo dia)', conv: 1610, pct: 38.3 },
+    { faixa: '1 dia',              conv: 525,  pct: 12.5 },
+    { faixa: '2 dias',             conv: 328,  pct: 7.8  },
+    { faixa: '3 dias',             conv: 213,  pct: 5.1  },
+    { faixa: '4 dias',             conv: 158,  pct: 3.8  },
+    { faixa: '+4 dias',            conv: 1372, pct: 32.6 },
 ];
 
 // Conversão por gestão (de-para do vendedor já no BASE_DIGITAL)
 const GESTAO = [
-    { gestao: 'Fabio',          vidas: 1653, receita: 535255.13, ticket: 323.81 },
-    { gestao: 'Josy',           vidas: 1650, receita: 571786.02, ticket: 346.54 },
-    { gestao: 'Administrativo', vidas: 176,  receita: 62096.59,  ticket: 352.82 },
-    { gestao: 'Actionline',     vidas: 34,   receita: 10415.01,  ticket: 306.32 },
-    { gestao: 'Sem gestão',     vidas: 31,   receita: 13592.48,  ticket: 438.47 },
+    { gestao: 'Fabio',          vidas: 1992, receita: 643817.84, ticket: 323.20 },
+    { gestao: 'Josy',           vidas: 1965, receita: 681366.06, ticket: 346.75 },
+    { gestao: 'Administrativo', vidas: 210,  receita: 73458.45,  ticket: 349.80 },
+    { gestao: 'Actionline',     vidas: 39,   receita: 13398.23,  ticket: 343.54 },
+];
+
+// ─── ABA 2: VENDAS REALIZADAS (4.206 vidas convertidas) ───────────────────────
+const VR_KPIS = { vidas: 4206, telefones: 3468, receita: 1412040.58, arr: 16944486.94, ticket: 335.72, churn: 49, churnPct: 1.2 };
+
+const VR_PLANO = [
+    { grupo: 'NOSSO PLANO', vidas: 1953, pct: 46.4, receita: 643844.2, ticket: 329.67 },
+    { grupo: 'SMART', vidas: 1127, pct: 26.8, receita: 387693.76, ticket: 344.01 },
+    { grupo: 'NOSSO MEDICO', vidas: 1004, pct: 23.9, receita: 327731.75, ticket: 326.43 },
+    { grupo: 'INTEGRADO', vidas: 58, pct: 1.4, receita: 22900.74, ticket: 394.84 },
+    { grupo: 'ADVANCE', vidas: 29, pct: 0.7, receita: 18749.66, ticket: 646.54 },
+    { grupo: 'HAP DIGITAL', vidas: 16, pct: 0.4, receita: 6707.51, ticket: 419.22 },
+    { grupo: 'PERSONAL', vidas: 13, pct: 0.3, receita: 2519.39, ticket: 193.8 },
+    { grupo: 'CCG', vidas: 3, pct: 0.1, receita: 646.13, ticket: 215.38 },
+    { grupo: 'ADAPT', vidas: 2, pct: 0.0, receita: 636.4, ticket: 318.2 },
+    { grupo: 'PREMIUM', vidas: 1, pct: 0.0, receita: 611.04, ticket: 611.04 },
+];
+
+const VR_TICKET = [
+    { faixa: 'até R$150', vidas: 261, pct: 6.2 },
+    { faixa: 'R$150–250', vidas: 1466, pct: 34.9 },
+    { faixa: 'R$250–400', vidas: 1697, pct: 40.3 },
+    { faixa: 'R$400–600', vidas: 441, pct: 10.5 },
+    { faixa: 'R$600–1000', vidas: 197, pct: 4.7 },
+    { faixa: 'acima R$1000', vidas: 144, pct: 3.4 },
+];
+
+const VR_UF = [
+    { uf: 'SP', vidas: 1523, pct: 36.2, receita: 522522.57 },
+    { uf: 'BA', vidas: 364, pct: 8.7, receita: 147000.54 },
+    { uf: 'MG', vidas: 360, pct: 8.6, receita: 100757.54 },
+    { uf: 'GO', vidas: 274, pct: 6.5, receita: 93557.67 },
+    { uf: 'PE', vidas: 240, pct: 5.7, receita: 85009.98 },
+    { uf: 'CE', vidas: 206, pct: 4.9, receita: 68630.76 },
+    { uf: 'PR', vidas: 168, pct: 4.0, receita: 46151.44 },
+    { uf: 'RJ', vidas: 160, pct: 3.8, receita: 57484.43 },
+    { uf: 'PA', vidas: 147, pct: 3.5, receita: 49894.91 },
+    { uf: 'DF', vidas: 119, pct: 2.8, receita: 34439.88 },
+    { uf: 'RN', vidas: 110, pct: 2.6, receita: 32423.35 },
+    { uf: 'RS', vidas: 101, pct: 2.4, receita: 29574.01 },
+    { uf: 'AM', vidas: 87, pct: 2.1, receita: 33249.41 },
+    { uf: 'MA', vidas: 79, pct: 1.9, receita: 28258.65 },
+    { uf: 'AL', vidas: 68, pct: 1.6, receita: 24517.14 },
+    { uf: 'PI', vidas: 62, pct: 1.5, receita: 14852.74 },
+    { uf: 'Outros', vidas: 138, pct: 3.2, receita: 43715.56 },
+];
+
+const VR_CIDADE = [
+    { cidade: 'SAO PAULO', vidas: 573, pct: 13.6 },
+    { cidade: 'SALVADOR', vidas: 248, pct: 5.9 },
+    { cidade: 'GOIANIA', vidas: 182, pct: 4.3 },
+    { cidade: 'BELO HORIZONTE', vidas: 173, pct: 4.1 },
+    { cidade: 'FORTALEZA', vidas: 154, pct: 3.7 },
+    { cidade: 'BRASILIA', vidas: 119, pct: 2.8 },
+    { cidade: 'BELEM', vidas: 102, pct: 2.4 },
+    { cidade: 'CURITIBA', vidas: 94, pct: 2.2 },
+    { cidade: 'RECIFE', vidas: 93, pct: 2.2 },
+    { cidade: 'RIO DE JANEIRO', vidas: 93, pct: 2.2 },
+];
+
+const VR_VENDEDOR = [
+    { vendedor: 'ADMINISTRATIVO', vidas: 210, receita: 73458.45, ticket: 349.8 },
+    { vendedor: 'BRUNA CAMPASSI', vidas: 86, receita: 25869.69, ticket: 300.81 },
+    { vendedor: 'ANDREZZA MACCHINI', vidas: 82, receita: 24361.86, ticket: 297.1 },
+    { vendedor: 'JULIANA NUNES', vidas: 80, receita: 28406.91, ticket: 355.09 },
+    { vendedor: 'ANA CAROLINA ANTUNES', vidas: 74, receita: 31726.74, ticket: 428.74 },
+    { vendedor: 'JAQUELINE SILVA', vidas: 69, receita: 21658.47, ticket: 313.89 },
+    { vendedor: 'FELIPE SOARES', vidas: 64, receita: 19478.17, ticket: 304.35 },
+    { vendedor: 'GUSTAVO BARROS', vidas: 57, receita: 23220.41, ticket: 407.38 },
+    { vendedor: 'MARIANA FELIX', vidas: 56, receita: 20311.43, ticket: 362.7 },
+    { vendedor: 'JULIA SILVA', vidas: 56, receita: 26185.27, ticket: 467.59 },
+    { vendedor: 'GIOVANNA FERREIRA', vidas: 49, receita: 14515.84, ticket: 296.24 },
+    { vendedor: 'ISABELLA SOUZA', vidas: 49, receita: 17027.93, ticket: 347.51 },
+    { vendedor: 'GIOVANNA BARBIERI', vidas: 48, receita: 20275.55, ticket: 422.41 },
+    { vendedor: 'ALINE GUNELLO', vidas: 47, receita: 15991.51, ticket: 340.24 },
+    { vendedor: 'ANA BEATRIZ MACHUCA', vidas: 45, receita: 14130.53, ticket: 314.01 },
+];
+
+const VR_SUPERVISOR = [
+    { sup: 'HUMBERTO BANQUERI', vidas: 733, pct: 17.4 },
+    { sup: 'LUIZ ROBERTO', vidas: 651, pct: 15.5 },
+    { sup: 'GONCALO MARTINS', vidas: 415, pct: 9.9 },
+    { sup: 'ERIKA PAULA', vidas: 402, pct: 9.6 },
+    { sup: 'REBECA MOURA', vidas: 389, pct: 9.2 },
+    { sup: 'FERNANDA VIZZONI', vidas: 273, pct: 6.5 },
+    { sup: 'PRISCILLA REGIS', vidas: 261, pct: 6.2 },
+    { sup: 'NEFTALY LEONEL', vidas: 244, pct: 5.8 },
+    { sup: 'ADMINISTRATIVO', vidas: 210, pct: 5.0 },
+    { sup: 'BENVE', vidas: 184, pct: 4.4 },
+    { sup: 'MICHELE FERREIRA', vidas: 150, pct: 3.6 },
+    { sup: 'CAROLINE GUERKE', vidas: 127, pct: 3.0 },
+    { sup: 'REBECA ALVINO', vidas: 127, pct: 3.0 },
+    { sup: 'ACTIONLINE', vidas: 39, pct: 0.9 },
+    { sup: 'JOSY BOMFIM', vidas: 1, pct: 0.0 },
+];
+
+const VR_UNIDADE = [
+    { unidade: 'RIBEIRÃO PRETO', vidas: 1771, pct: 42.1 },
+    { unidade: 'FORTALEZA', vidas: 1061, pct: 25.2 },
+    { unidade: 'NACIONAL', vidas: 277, pct: 6.6 },
+    { unidade: 'NOVA SEG', vidas: 266, pct: 6.3 },
+    { unidade: 'SÃO PAULO', vidas: 264, pct: 6.3 },
+    { unidade: 'ADMINISTRATIVO', vidas: 210, pct: 5.0 },
+    { unidade: 'BENVE', vidas: 191, pct: 4.5 },
+    { unidade: 'PIRASSUNUNGA', vidas: 123, pct: 2.9 },
+    { unidade: 'ACTIONLINE', vidas: 39, pct: 0.9 },
+    { unidade: 'BAURU', vidas: 4, pct: 0.1 },
+];
+
+const VR_AREA = [
+    { area: 'INSIDE SALES', vidas: 3021, pct: 71.8 },
+    { area: 'NACIONAL', vidas: 277, pct: 6.6 },
+    { area: 'NOVA SEG', vidas: 266, pct: 6.3 },
+    { area: 'ADMINISTRATIVO', vidas: 210, pct: 5.0 },
+    { area: 'PROMOTORES', vidas: 202, pct: 4.8 },
+    { area: 'BENVE', vidas: 191, pct: 4.5 },
+    { area: 'ACTIONLINE', vidas: 39, pct: 0.9 },
+];
+
+const VR_MENSAL = [
+    { mes: 'Abr/26', contatos: 644, cadastros: 382 },
+    { mes: 'Mai/26', contatos: 2284, cadastros: 2066 },
+    { mes: 'Jun/26', contatos: 1278, cadastros: 1758 },
+];
+
+const VR_CANAL = [
+    { canal: 'Individual', vidas: 3628, pct: 86.3, receita: 1270934.16 },
+    { canal: 'PIM (3–29 vidas)', vidas: 574, pct: 13.6, receita: 140050.19 },
+    { canal: 'Middle (30–99)', vidas: 4, pct: 0.1, receita: 1056.23 },
 ];
 
 // ─── COLORS ──────────────────────────────────────────────────────────────────
@@ -462,9 +815,16 @@ const dataLabelPlugin = {
                     const { x, y } = el.tooltipPosition();
                     ctx.fillStyle = '#374151';
                     ctx.font = 'bold 11px system-ui';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'bottom';
-                    ctx.fillText(label, x, y - 4);
+                    if (chart.options.indexAxis === 'y') {
+                        // barra horizontal: rótulo à direita da ponta da barra
+                        ctx.textAlign = 'left';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(label, el.x + 5, el.y);
+                    } else {
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillText(label, x, y - 4);
+                    }
                 } else if (type === 'line') {
                     if (val === 0) return;
                     label = val + '%';
@@ -536,7 +896,7 @@ function buildVidasTable() {
     const tr = document.createElement('tr');
     tr.style.fontWeight = '700';
     tr.style.background = '#f9fafb';
-    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">3.544</td><td class="td-right">100%</td><td></td>`;
+    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">4.206</td><td class="td-right">100%</td><td></td>`;
     tbody.appendChild(tr);
 }
 
@@ -652,7 +1012,7 @@ function buildTempoTable() {
     const tr = document.createElement('tr');
     tr.style.fontWeight = '700';
     tr.style.background = '#f9fafb';
-    tr.innerHTML = `<td><strong>Total / Média</strong></td><td class="td-right">3.544</td><td class="td-right">100%</td><td><em style="font-size:12px;color:#6b7280">Tempo médio: 4,6 dias</em></td><td></td>`;
+    tr.innerHTML = `<td><strong>Total / Média</strong></td><td class="td-right">4.206</td><td class="td-right">100%</td><td><em style="font-size:12px;color:#6b7280">Tempo médio: 5,1 dias</em></td><td></td>`;
     tbody.appendChild(tr);
 }
 
@@ -713,6 +1073,189 @@ function buildGestaoTable() {
     tbody.appendChild(tr);
 }
 
+// ─── ABA 2: VENDAS REALIZADAS — helpers ───────────────────────────────────
+const vrCharts = [];   // guarda instâncias p/ resize ao trocar de aba
+
+// Barra simples (vertical). vals: array de números; cols: cor por barra
+function vrBarChart(canvasId, labels, vals, opts) {
+    opts = opts || {};
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    const c = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{
+                label: opts.label || 'Vidas',
+                data: vals,
+                backgroundColor: opts.colors || labels.map((_, i) => ACCENT_COLORS[i % ACCENT_COLORS.length]),
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            indexAxis: opts.horizontal ? 'y' : 'x',
+            responsive: true,
+            maintainAspectRatio: true,
+            layout: { padding: opts.horizontal ? { right: 28 } : { top: 20 } },
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: opts.tooltip || (c => ' ' + c.parsed[opts.horizontal ? 'x' : 'y'].toLocaleString('pt-BR') + ' vidas') } }
+            },
+            scales: {
+                x: { grid: { display: !opts.horizontal ? false : true, color: '#f3f4f6' }, ticks: { font: { size: 11 } } },
+                y: { grid: { color: '#f3f4f6' }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+    vrCharts.push(c);
+    return c;
+}
+
+// Linha de barras numa tabela com progress bar
+function vrTableRows(tbodyId, items, getCols, maxKey, barColor) {
+    const tbody = document.getElementById(tbodyId);
+    const maxV = Math.max(...items.map(i => i[maxKey]));
+    items.forEach((it, idx) => {
+        const barPct = (it[maxKey] / maxV * 100).toFixed(1);
+        const tr = document.createElement('tr');
+        tr.innerHTML = getCols(it, idx, barPct, barColor);
+        tbody.appendChild(tr);
+    });
+}
+
+function buildVRKpis() {
+    document.getElementById('vrKpiTel').textContent = fmtInt(VR_KPIS.telefones) + ' telefones distintos';
+    document.getElementById('vrKpiRec').textContent = fmtBRL(VR_KPIS.receita);
+    document.getElementById('vrKpiArr').textContent = 'ARR ' + fmtBRL(VR_KPIS.arr);
+    document.getElementById('vrKpiTicket').textContent = fmtBRL(VR_KPIS.ticket);
+    document.getElementById('vrKpiChurn').textContent = fmtInt(VR_KPIS.churn);
+    document.getElementById('vrKpiChurnPct').textContent = VR_KPIS.churnPct.toString().replace('.', ',') + '% (base imatura)';
+}
+
+function buildVRPlano() {
+    vrTableRows('vrPlanoTable', VR_PLANO, (p, i, barPct) => `
+        <td><strong>${p.grupo}</strong></td>
+        <td class="td-right">${fmtInt(p.vidas)}</td>
+        <td class="td-right">${p.pct.toString().replace('.', ',')}%</td>
+        <td class="td-right">${fmtBRL(p.receita)}</td>
+        <td class="td-right">${fmtBRL(p.ticket)}</td>
+        <td><div class="pbar-wrap"><div class="pbar"><div class="pbar-fill" style="width:${barPct}%;background:#3949ab"></div></div><span style="font-size:11px;color:#6b7280">${barPct}%</span></div></td>`, 'vidas');
+    const tbody = document.getElementById('vrPlanoTable');
+    const tr = document.createElement('tr');
+    tr.style.fontWeight = '700'; tr.style.background = '#f9fafb';
+    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">${fmtInt(VR_KPIS.vidas)}</td><td class="td-right">100%</td><td class="td-right">${fmtBRL(VR_KPIS.receita)}</td><td class="td-right">${fmtBRL(VR_KPIS.ticket)}</td><td></td>`;
+    tbody.appendChild(tr);
+}
+
+function buildVRTicket() {
+    vrBarChart('vrTicketChart', VR_TICKET.map(t => t.faixa), VR_TICKET.map(t => t.vidas), {
+        colors: VR_TICKET.map(() => '#43a047'),
+        tooltip: c => ' ' + fmtInt(c.parsed.y) + ' vidas (' + VR_TICKET[c.dataIndex].pct + '%)'
+    });
+    vrTableRows('vrTicketTable', VR_TICKET, (t, i, barPct) => `
+        <td><strong>${t.faixa}</strong></td>
+        <td class="td-right">${fmtInt(t.vidas)}</td>
+        <td class="td-right">${t.pct.toString().replace('.', ',')}%</td>
+        <td><div class="pbar-wrap"><div class="pbar"><div class="pbar-fill" style="width:${barPct}%;background:#43a047"></div></div><span style="font-size:11px;color:#6b7280">${barPct}%</span></div></td>`, 'vidas');
+}
+
+function buildVRGeo() {
+    vrBarChart('vrUfChart', VR_UF.map(u => u.uf), VR_UF.map(u => u.vidas), {
+        colors: VR_UF.map((_, i) => i === 0 ? '#1a237e' : '#5c6bc0'),
+        tooltip: c => ' ' + fmtInt(c.parsed.y) + ' vidas (' + VR_UF[c.dataIndex].pct + '%) · ' + fmtBRL(VR_UF[c.dataIndex].receita)
+    });
+    vrTableRows('vrCidadeTable', VR_CIDADE, (c, i, barPct) => `
+        <td><strong>${c.cidade}</strong></td>
+        <td class="td-right">${fmtInt(c.vidas)}</td>
+        <td class="td-right">${c.pct.toString().replace('.', ',')}%</td>
+        <td><div class="pbar-wrap"><div class="pbar"><div class="pbar-fill" style="width:${barPct}%;background:#3949ab"></div></div><span style="font-size:11px;color:#6b7280">${barPct}%</span></div></td>`, 'vidas');
+}
+
+function buildVRVendedor() {
+    vrTableRows('vrVendedorTable', VR_VENDEDOR, (v, i, barPct) => `
+        <td style="color:#6b7280">${i + 1}</td>
+        <td><strong>${v.vendedor}</strong></td>
+        <td class="td-right">${fmtInt(v.vidas)}</td>
+        <td class="td-right">${fmtBRL(v.receita)}</td>
+        <td class="td-right">${fmtBRL(v.ticket)}</td>
+        <td><div class="pbar-wrap"><div class="pbar"><div class="pbar-fill" style="width:${barPct}%;background:#e91e63"></div></div><span style="font-size:11px;color:#6b7280">${barPct}%</span></div></td>`, 'vidas');
+}
+
+function buildVRUnidadeArea() {
+    vrBarChart('vrUnidadeChart', VR_UNIDADE.map(u => u.unidade), VR_UNIDADE.map(u => u.vidas), {
+        horizontal: true,
+        colors: VR_UNIDADE.map((_, i) => i < 2 ? '#1a237e' : '#7986cb'),
+        tooltip: c => ' ' + fmtInt(c.parsed.x) + ' vidas (' + VR_UNIDADE[c.dataIndex].pct + '%)'
+    });
+    vrBarChart('vrAreaChart', VR_AREA.map(a => a.area), VR_AREA.map(a => a.vidas), {
+        horizontal: true,
+        colors: VR_AREA.map((_, i) => i === 0 ? '#f57c00' : '#ffb74d'),
+        tooltip: c => ' ' + fmtInt(c.parsed.x) + ' vidas (' + VR_AREA[c.dataIndex].pct + '%)'
+    });
+}
+
+function buildVRSupervisor() {
+    vrTableRows('vrSupervisorTable', VR_SUPERVISOR, (s, i, barPct) => `
+        <td><strong>${s.sup}</strong></td>
+        <td class="td-right">${fmtInt(s.vidas)}</td>
+        <td class="td-right">${s.pct.toString().replace('.', ',')}%</td>
+        <td><div class="pbar-wrap"><div class="pbar"><div class="pbar-fill" style="width:${barPct}%;background:#00acc1"></div></div><span style="font-size:11px;color:#6b7280">${barPct}%</span></div></td>`, 'vidas');
+}
+
+function buildVRMensal() {
+    const ctx = document.getElementById('vrMensalChart').getContext('2d');
+    const c = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: VR_MENSAL.map(m => m.mes),
+            datasets: [
+                { label: 'Contatos Eugenia', data: VR_MENSAL.map(m => m.contatos), backgroundColor: '#9fa8da', borderRadius: 6 },
+                { label: 'Cadastros realizados', data: VR_MENSAL.map(m => m.cadastros), backgroundColor: '#3949ab', borderRadius: 6 },
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } } },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, ticks: { font: { size: 11 } } },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+    vrCharts.push(c);
+}
+
+function buildVRCanal() {
+    const ctx = document.getElementById('vrCanalChart').getContext('2d');
+    const c = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: VR_CANAL.map(c => c.canal),
+            datasets: [{ data: VR_CANAL.map(c => c.vidas), backgroundColor: ['#3949ab', '#f57c00', '#e91e63'], borderWidth: 2, borderColor: '#fff' }]
+        },
+        options: {
+            responsive: true,
+            cutout: '58%',
+            plugins: {
+                legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
+                tooltip: { callbacks: { label: c => ' ' + c.label + ': ' + fmtInt(c.parsed) + ' vidas (' + VR_CANAL[c.dataIndex].pct + '%)' } }
+            }
+        }
+    });
+    vrCharts.push(c);
+}
+
+// ─── TAB SWITCHING ─────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+        // Chart.js precisa recalcular tamanho ao sair de display:none
+        setTimeout(() => vrCharts.forEach(c => c.resize()), 50);
+    });
+});
+
 // ─── INIT ─────────────────────────────────────────────────────────────────
 buildFunnelSteps();
 buildVidasChart();
@@ -722,6 +1265,16 @@ buildCumChart();
 buildTempoTable();
 buildGestaoChart();
 buildGestaoTable();
+// Aba 2
+buildVRKpis();
+buildVRPlano();
+buildVRTicket();
+buildVRGeo();
+buildVRVendedor();
+buildVRUnidadeArea();
+buildVRSupervisor();
+buildVRMensal();
+buildVRCanal();
 </script>
 </body>
 </html>
