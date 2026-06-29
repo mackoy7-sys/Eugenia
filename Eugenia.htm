@@ -269,7 +269,7 @@
     <header class="dashboard-header">
         <div class="header-left">
             <h1>🤖 EugenIA Full – Analytics de Conversão</h1>
-            <p>Funil de conversão · Vendas realizadas detalhadas · 4.206 vidas convertidas</p>
+            <p>Funil de conversão · Vendas realizadas detalhadas · 4.843 vidas convertidas</p>
         </div>
         <div class="header-badge">Comercial Digital · 2026</div>
     </header>
@@ -288,35 +288,35 @@
         <div class="kpi-card blue">
             <div class="kpi-icon">📥</div>
             <div class="kpi-label">Leads Totais</div>
-            <div class="kpi-value">159.910</div>
+            <div class="kpi-value">166.503</div>
             <div class="kpi-sub">Base do funil (100%)</div>
         </div>
         <div class="kpi-card pink">
             <div class="kpi-icon">❤️</div>
             <div class="kpi-label">Vidas Convertidas</div>
-            <div class="kpi-value">4.206</div>
+            <div class="kpi-value">4.843</div>
             <div class="kpi-sub">Conversão por vida (abr–jun)</div>
-            <span class="kpi-badge warn">2,63% dos leads</span>
+            <span class="kpi-badge warn">2,91% dos leads</span>
         </div>
         <div class="kpi-card green">
             <div class="kpi-icon">⚡</div>
             <div class="kpi-label">Vidas em ≤ 1 dia</div>
-            <div class="kpi-value">50,8%</div>
-            <div class="kpi-sub">2.135 vidas (D+0 e D+1)</div>
+            <div class="kpi-value">50,1%</div>
+            <div class="kpi-sub">2.428 vidas (D+0 e D+1)</div>
             <span class="kpi-badge good">Conversão rápida</span>
         </div>
         <div class="kpi-card cyan">
             <div class="kpi-icon">🤝</div>
             <div class="kpi-label">Handoff</div>
-            <div class="kpi-value">17.655</div>
+            <div class="kpi-value">18.385</div>
             <div class="kpi-sub">11,04% do total de leads</div>
-            <span class="kpi-badge info">Conv.→vidas: 23,8%</span>
+            <span class="kpi-badge info">Conv.→vidas: 26,3%</span>
         </div>
         <div class="kpi-card orange">
             <div class="kpi-icon">⏱️</div>
             <div class="kpi-label">Tempo Médio</div>
-            <div class="kpi-value">5,1d</div>
-            <div class="kpi-sub">38,3% convertem no mesmo dia</div>
+            <div class="kpi-value">5,5d</div>
+            <div class="kpi-sub">37,0% convertem no mesmo dia</div>
             <span class="kpi-badge good">D+0 dominante</span>
         </div>
     </section>
@@ -332,12 +332,12 @@
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>2 · Distribuição de Vidas</h3>
-            <p class="chart-sub">Vidas convertidas por tamanho de contrato — total 4.206</p>
+            <p class="chart-sub">Vidas convertidas por tamanho de contrato — total 4.843</p>
             <canvas id="vidasChart"></canvas>
         </div>
         <div class="table-card">
             <h3>Detalhe — Vidas por Contrato</h3>
-            <p class="chart-sub">Distribuição das 4.206 vidas convertidas</p>
+            <p class="chart-sub">Distribuição das 4.843 vidas convertidas</p>
             <table>
                 <thead>
                     <tr>
@@ -356,7 +356,7 @@
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>3 · Tempo até a Conversão</h3>
-            <p class="chart-sub">Vidas convertidas por faixa de dias — 50,8% em até 1 dia</p>
+            <p class="chart-sub">Vidas convertidas por faixa de dias — 50,1% em até 1 dia</p>
             <canvas id="tempoChart"></canvas>
         </div>
         <div class="chart-card">
@@ -369,7 +369,7 @@
     <!-- TABELA: Tempo de Conversão -->
     <div class="table-card">
         <h3>Detalhe — Tempo até a Conversão</h3>
-        <p class="chart-sub">Distribuição das 4.206 vidas convertidas por janela temporal</p>
+        <p class="chart-sub">Distribuição das 4.843 vidas convertidas por janela temporal</p>
         <table>
             <thead>
                 <tr>
@@ -414,7 +414,7 @@
     <div class="tab-pane" id="tab-vendas">
 
         <div class="section-note">
-            💰 <strong>Vendas realizadas</strong> — detalhamento das <strong>4.206 vidas convertidas</strong>
+            💰 <strong>Vendas realizadas</strong> — detalhamento das <strong>4.843 vidas convertidas</strong>
             via Eugenia (cadastro abr–jun/2026). Base: cada linha = 1 vida (beneficiário). Receita = soma das
             mensalidades contratadas. <em>Churn ainda imaturo (base recente de ~3 meses).</em>
         </div>
@@ -424,8 +424,8 @@
             <div class="kpi-card pink">
                 <div class="kpi-icon">❤️</div>
                 <div class="kpi-label">Vidas Convertidas</div>
-                <div class="kpi-value">4.206</div>
-                <div class="kpi-sub" id="vrKpiTel">3.468 telefones distintos</div>
+                <div class="kpi-value">4.843</div>
+                <div class="kpi-sub" id="vrKpiTel">4.003 telefones distintos</div>
             </div>
             <div class="kpi-card green">
                 <div class="kpi-icon">💵</div>
@@ -588,52 +588,52 @@
 <script>
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const FUNIL = [
-    { etapa: 'Leads totais',    vol: 159910, pctTotal: 100.00, pctAnterior: null },
-    { etapa: 'Engajou',         vol: 95475,  pctTotal: 59.71,  pctAnterior: 59.71 },
-    { etapa: 'Forneceu dados',  vol: 80485,  pctTotal: 50.33,  pctAnterior: 84.30 },
-    { etapa: 'Viu planos',      vol: 56775,  pctTotal: 35.50,  pctAnterior: 70.54 },
-    { etapa: 'Cotação',         vol: 49931,  pctTotal: 31.22,  pctAnterior: 87.95 },
-    { etapa: 'Handoff',          vol: 17655,  pctTotal: 11.04,  pctAnterior: 35.36 },
-    { etapa: 'Vidas convertidas',vol: 4206,   pctTotal: 2.63,   pctAnterior: 23.82 },
+    { etapa: 'Leads totais',    vol: 166503, pctTotal: 100.00, pctAnterior: null },
+    { etapa: 'Engajou',         vol: 99653,  pctTotal: 59.85,  pctAnterior: 59.85 },
+    { etapa: 'Forneceu dados',  vol: 83923,  pctTotal: 50.40,  pctAnterior: 84.22 },
+    { etapa: 'Viu planos',      vol: 58988,  pctTotal: 35.43,  pctAnterior: 70.29 },
+    { etapa: 'Cotação',         vol: 51968,  pctTotal: 31.21,  pctAnterior: 88.10 },
+    { etapa: 'Handoff',          vol: 18385,  pctTotal: 11.04,  pctAnterior: 35.38 },
+    { etapa: 'Vidas convertidas',vol: 4843,   pctTotal: 2.91,   pctAnterior: 26.34 },
 ];
 
-// Distribuição por VIDA (total 4.206) — não por lead
+// Distribuição por VIDA (total 4.843) — não por lead
 const VIDAS = [
-    { faixa: '1 vida',  vidas: 2944, pct: 70.0 },
-    { faixa: '2 vidas', vidas: 768,  pct: 18.3 },
-    { faixa: '3 vidas', vidas: 279,  pct: 6.6  },
-    { faixa: '4 vidas', vidas: 140,  pct: 3.3  },
-    { faixa: '5+ vidas',vidas: 75,   pct: 1.8  },
+    { faixa: '1 vida',  vidas: 3406, pct: 70.3 },
+    { faixa: '2 vidas', vidas: 870,  pct: 18.0 },
+    { faixa: '3 vidas', vidas: 333,  pct: 6.9  },
+    { faixa: '4 vidas', vidas: 148,  pct: 3.1  },
+    { faixa: '5+ vidas',vidas: 86,   pct: 1.8  },
 ];
 
-// Tempo até conversão por VIDA (total 4.206)
+// Tempo até conversão por VIDA (total 4.843)
 const TEMPO = [
-    { faixa: '0 dias (mesmo dia)', conv: 1610, pct: 38.3 },
-    { faixa: '1 dia',              conv: 525,  pct: 12.5 },
-    { faixa: '2 dias',             conv: 328,  pct: 7.8  },
-    { faixa: '3 dias',             conv: 213,  pct: 5.1  },
-    { faixa: '4 dias',             conv: 158,  pct: 3.8  },
-    { faixa: '+4 dias',            conv: 1372, pct: 32.6 },
+    { faixa: '0 dias (mesmo dia)', conv: 1794, pct: 37.0 },
+    { faixa: '1 dia',              conv: 634,  pct: 13.1 },
+    { faixa: '2 dias',             conv: 380,  pct: 7.8  },
+    { faixa: '3 dias',             conv: 255,  pct: 5.3  },
+    { faixa: '4 dias',             conv: 184,  pct: 3.8  },
+    { faixa: '+4 dias',            conv: 1596, pct: 33.0 },
 ];
 
 // Conversão por gestão (de-para do vendedor já no BASE_DIGITAL)
 const GESTAO = [
-    { gestao: 'Fabio',          vidas: 1992, receita: 643817.84, ticket: 323.20 },
-    { gestao: 'Josy',           vidas: 1965, receita: 681366.06, ticket: 346.75 },
-    { gestao: 'Administrativo', vidas: 210,  receita: 73458.45,  ticket: 349.80 },
-    { gestao: 'Actionline',     vidas: 39,   receita: 13398.23,  ticket: 343.54 },
+    { gestao: 'Fabio',          vidas: 2302, receita: 752197.12, ticket: 326.76 },
+    { gestao: 'Josy',           vidas: 2244, receita: 769348.71, ticket: 342.85 },
+    { gestao: 'Administrativo', vidas: 249,  receita: 89175.87,  ticket: 358.14 },
+    { gestao: 'Actionline',     vidas: 48,   receita: 16046.15,  ticket: 334.29 },
 ];
 
-// ─── ABA 2: VENDAS REALIZADAS (4.206 vidas convertidas) ───────────────────────
-const VR_KPIS = { vidas: 4206, telefones: 3468, receita: 1412040.58, arr: 16944486.94, ticket: 335.72, churn: 49, churnPct: 1.2 };
+// ─── ABA 2: VENDAS REALIZADAS (4.843 vidas convertidas) ───────────────────────
+const VR_KPIS = { vidas: 4843, telefones: 4003, receita: 1626767.85, arr: 19521214.18, ticket: 335.90, churn: 67, churnPct: 1.4 };
 
 const VR_PLANO = [
-    { grupo: 'NOSSO PLANO', vidas: 1953, pct: 46.4, receita: 643844.2, ticket: 329.67 },
-    { grupo: 'SMART', vidas: 1127, pct: 26.8, receita: 387693.76, ticket: 344.01 },
-    { grupo: 'NOSSO MEDICO', vidas: 1004, pct: 23.9, receita: 327731.75, ticket: 326.43 },
-    { grupo: 'INTEGRADO', vidas: 58, pct: 1.4, receita: 22900.74, ticket: 394.84 },
-    { grupo: 'ADVANCE', vidas: 29, pct: 0.7, receita: 18749.66, ticket: 646.54 },
-    { grupo: 'HAP DIGITAL', vidas: 16, pct: 0.4, receita: 6707.51, ticket: 419.22 },
+    { grupo: 'NOSSO PLANO', vidas: 2226, pct: 46.0, receita: 735136.01, ticket: 330.25 },
+    { grupo: 'SMART', vidas: 1257, pct: 26.0, receita: 433818.71, ticket: 345.12 },
+    { grupo: 'NOSSO MEDICO', vidas: 1217, pct: 25.1, receita: 398305.1, ticket: 327.28 },
+    { grupo: 'INTEGRADO', vidas: 67, pct: 1.4, receita: 25723.18, ticket: 383.93 },
+    { grupo: 'ADVANCE', vidas: 34, pct: 0.7, receita: 21257.85, ticket: 625.23 },
+    { grupo: 'HAP DIGITAL', vidas: 23, pct: 0.5, receita: 8114.04, ticket: 352.78 },
     { grupo: 'PERSONAL', vidas: 13, pct: 0.3, receita: 2519.39, ticket: 193.8 },
     { grupo: 'CCG', vidas: 3, pct: 0.1, receita: 646.13, ticket: 215.38 },
     { grupo: 'ADAPT', vidas: 2, pct: 0.0, receita: 636.4, ticket: 318.2 },
@@ -641,115 +641,115 @@ const VR_PLANO = [
 ];
 
 const VR_TICKET = [
-    { faixa: 'até R$150', vidas: 261, pct: 6.2 },
-    { faixa: 'R$150–250', vidas: 1466, pct: 34.9 },
-    { faixa: 'R$250–400', vidas: 1697, pct: 40.3 },
-    { faixa: 'R$400–600', vidas: 441, pct: 10.5 },
-    { faixa: 'R$600–1000', vidas: 197, pct: 4.7 },
-    { faixa: 'acima R$1000', vidas: 144, pct: 3.4 },
+    { faixa: 'até R$150', vidas: 293, pct: 6.0 },
+    { faixa: 'R$150–250', vidas: 1695, pct: 35.0 },
+    { faixa: 'R$250–400', vidas: 1959, pct: 40.5 },
+    { faixa: 'R$400–600', vidas: 509, pct: 10.5 },
+    { faixa: 'R$600–1000', vidas: 223, pct: 4.6 },
+    { faixa: 'acima R$1000', vidas: 164, pct: 3.4 },
 ];
 
 const VR_UF = [
-    { uf: 'SP', vidas: 1523, pct: 36.2, receita: 522522.57 },
-    { uf: 'BA', vidas: 364, pct: 8.7, receita: 147000.54 },
-    { uf: 'MG', vidas: 360, pct: 8.6, receita: 100757.54 },
-    { uf: 'GO', vidas: 274, pct: 6.5, receita: 93557.67 },
-    { uf: 'PE', vidas: 240, pct: 5.7, receita: 85009.98 },
-    { uf: 'CE', vidas: 206, pct: 4.9, receita: 68630.76 },
-    { uf: 'PR', vidas: 168, pct: 4.0, receita: 46151.44 },
-    { uf: 'RJ', vidas: 160, pct: 3.8, receita: 57484.43 },
-    { uf: 'PA', vidas: 147, pct: 3.5, receita: 49894.91 },
-    { uf: 'DF', vidas: 119, pct: 2.8, receita: 34439.88 },
-    { uf: 'RN', vidas: 110, pct: 2.6, receita: 32423.35 },
-    { uf: 'RS', vidas: 101, pct: 2.4, receita: 29574.01 },
-    { uf: 'AM', vidas: 87, pct: 2.1, receita: 33249.41 },
-    { uf: 'MA', vidas: 79, pct: 1.9, receita: 28258.65 },
-    { uf: 'AL', vidas: 68, pct: 1.6, receita: 24517.14 },
-    { uf: 'PI', vidas: 62, pct: 1.5, receita: 14852.74 },
-    { uf: 'Outros', vidas: 138, pct: 3.2, receita: 43715.56 },
+    { uf: 'SP', vidas: 1748, pct: 36.1, receita: 604065.79 },
+    { uf: 'BA', vidas: 406, pct: 8.4, receita: 162749.43 },
+    { uf: 'MG', vidas: 404, pct: 8.3, receita: 116692.56 },
+    { uf: 'GO', vidas: 310, pct: 6.4, receita: 103312.87 },
+    { uf: 'PE', vidas: 266, pct: 5.5, receita: 94868.25 },
+    { uf: 'CE', vidas: 233, pct: 4.8, receita: 77876.91 },
+    { uf: 'PR', vidas: 202, pct: 4.2, receita: 54777.12 },
+    { uf: 'RJ', vidas: 197, pct: 4.1, receita: 67608.24 },
+    { uf: 'PA', vidas: 175, pct: 3.6, receita: 59800.28 },
+    { uf: 'RN', vidas: 141, pct: 2.9, receita: 40033.11 },
+    { uf: 'DF', vidas: 139, pct: 2.9, receita: 40885.07 },
+    { uf: 'RS', vidas: 129, pct: 2.7, receita: 38722.43 },
+    { uf: 'AM', vidas: 97, pct: 2.0, receita: 38515.52 },
+    { uf: 'MA', vidas: 97, pct: 2.0, receita: 33645.24 },
+    { uf: 'AL', vidas: 77, pct: 1.6, receita: 27069.23 },
+    { uf: 'Outros', vidas: 222, pct: 4.5, receita: 66145.8 },
 ];
 
 const VR_CIDADE = [
-    { cidade: 'SAO PAULO', vidas: 573, pct: 13.6 },
-    { cidade: 'SALVADOR', vidas: 248, pct: 5.9 },
-    { cidade: 'GOIANIA', vidas: 182, pct: 4.3 },
-    { cidade: 'BELO HORIZONTE', vidas: 173, pct: 4.1 },
-    { cidade: 'FORTALEZA', vidas: 154, pct: 3.7 },
-    { cidade: 'BRASILIA', vidas: 119, pct: 2.8 },
-    { cidade: 'BELEM', vidas: 102, pct: 2.4 },
-    { cidade: 'CURITIBA', vidas: 94, pct: 2.2 },
-    { cidade: 'RECIFE', vidas: 93, pct: 2.2 },
-    { cidade: 'RIO DE JANEIRO', vidas: 93, pct: 2.2 },
+    { cidade: 'SAO PAULO', vidas: 651, pct: 13.4 },
+    { cidade: 'SALVADOR', vidas: 276, pct: 5.7 },
+    { cidade: 'GOIANIA', vidas: 202, pct: 4.2 },
+    { cidade: 'BELO HORIZONTE', vidas: 193, pct: 4.0 },
+    { cidade: 'FORTALEZA', vidas: 169, pct: 3.5 },
+    { cidade: 'BRASILIA', vidas: 139, pct: 2.9 },
+    { cidade: 'BELEM', vidas: 119, pct: 2.5 },
+    { cidade: 'CURITIBA', vidas: 117, pct: 2.4 },
+    { cidade: 'RIO DE JANEIRO', vidas: 115, pct: 2.4 },
+    { cidade: 'RECIFE', vidas: 101, pct: 2.1 },
 ];
 
 const VR_VENDEDOR = [
-    { vendedor: 'ADMINISTRATIVO', vidas: 210, receita: 73458.45, ticket: 349.8 },
-    { vendedor: 'BRUNA CAMPASSI', vidas: 86, receita: 25869.69, ticket: 300.81 },
-    { vendedor: 'ANDREZZA MACCHINI', vidas: 82, receita: 24361.86, ticket: 297.1 },
-    { vendedor: 'JULIANA NUNES', vidas: 80, receita: 28406.91, ticket: 355.09 },
-    { vendedor: 'ANA CAROLINA ANTUNES', vidas: 74, receita: 31726.74, ticket: 428.74 },
-    { vendedor: 'JAQUELINE SILVA', vidas: 69, receita: 21658.47, ticket: 313.89 },
-    { vendedor: 'FELIPE SOARES', vidas: 64, receita: 19478.17, ticket: 304.35 },
-    { vendedor: 'GUSTAVO BARROS', vidas: 57, receita: 23220.41, ticket: 407.38 },
-    { vendedor: 'MARIANA FELIX', vidas: 56, receita: 20311.43, ticket: 362.7 },
-    { vendedor: 'JULIA SILVA', vidas: 56, receita: 26185.27, ticket: 467.59 },
-    { vendedor: 'GIOVANNA FERREIRA', vidas: 49, receita: 14515.84, ticket: 296.24 },
-    { vendedor: 'ISABELLA SOUZA', vidas: 49, receita: 17027.93, ticket: 347.51 },
-    { vendedor: 'GIOVANNA BARBIERI', vidas: 48, receita: 20275.55, ticket: 422.41 },
-    { vendedor: 'ALINE GUNELLO', vidas: 47, receita: 15991.51, ticket: 340.24 },
-    { vendedor: 'ANA BEATRIZ MACHUCA', vidas: 45, receita: 14130.53, ticket: 314.01 },
+    { vendedor: 'ADMINISTRATIVO', vidas: 249, receita: 89175.87, ticket: 358.14 },
+    { vendedor: 'JULIANA NUNES', vidas: 102, receita: 38945.58, ticket: 381.82 },
+    { vendedor: 'BRUNA CAMPASSI', vidas: 96, receita: 30157.81, ticket: 314.14 },
+    { vendedor: 'ANDREZZA MACCHINI', vidas: 87, receita: 25529.24, ticket: 293.44 },
+    { vendedor: 'JAQUELINE SILVA', vidas: 85, receita: 25721.5, ticket: 302.61 },
+    { vendedor: 'ANA CAROLINA ANTUNES', vidas: 82, receita: 33689.11, ticket: 410.84 },
+    { vendedor: 'FELIPE SOARES', vidas: 73, receita: 22175.46, ticket: 303.77 },
+    { vendedor: 'MARIANA FELIX', vidas: 67, receita: 23964.05, ticket: 357.67 },
+    { vendedor: 'GUSTAVO BARROS', vidas: 62, receita: 24888.88, ticket: 401.43 },
+    { vendedor: 'JULIA SILVA', vidas: 58, receita: 26465.17, ticket: 456.3 },
+    { vendedor: 'ALINE GUNELLO', vidas: 56, receita: 19220.72, ticket: 343.23 },
+    { vendedor: 'GIOVANNA FERREIRA', vidas: 54, receita: 15887.65, ticket: 294.22 },
+    { vendedor: 'VANIA SILVA', vidas: 53, receita: 16269.89, ticket: 306.98 },
+    { vendedor: 'ISABELLA SOUZA', vidas: 53, receita: 18664.14, ticket: 352.15 },
+    { vendedor: 'GIOVANNA BARBIERI', vidas: 51, receita: 21050.2, ticket: 412.75 },
 ];
 
 const VR_SUPERVISOR = [
-    { sup: 'HUMBERTO BANQUERI', vidas: 733, pct: 17.4 },
-    { sup: 'LUIZ ROBERTO', vidas: 651, pct: 15.5 },
-    { sup: 'GONCALO MARTINS', vidas: 415, pct: 9.9 },
-    { sup: 'ERIKA PAULA', vidas: 402, pct: 9.6 },
-    { sup: 'REBECA MOURA', vidas: 389, pct: 9.2 },
-    { sup: 'FERNANDA VIZZONI', vidas: 273, pct: 6.5 },
-    { sup: 'PRISCILLA REGIS', vidas: 261, pct: 6.2 },
-    { sup: 'NEFTALY LEONEL', vidas: 244, pct: 5.8 },
-    { sup: 'ADMINISTRATIVO', vidas: 210, pct: 5.0 },
-    { sup: 'BENVE', vidas: 184, pct: 4.4 },
-    { sup: 'MICHELE FERREIRA', vidas: 150, pct: 3.6 },
-    { sup: 'CAROLINE GUERKE', vidas: 127, pct: 3.0 },
-    { sup: 'REBECA ALVINO', vidas: 127, pct: 3.0 },
-    { sup: 'ACTIONLINE', vidas: 39, pct: 0.9 },
+    { sup: 'HUMBERTO BANQUERI', vidas: 851, pct: 17.6 },
+    { sup: 'LUIZ ROBERTO', vidas: 734, pct: 15.2 },
+    { sup: 'ERIKA PAULA', vidas: 462, pct: 9.5 },
+    { sup: 'GONCALO MARTINS', vidas: 460, pct: 9.5 },
+    { sup: 'REBECA MOURA', vidas: 438, pct: 9.0 },
+    { sup: 'FERNANDA VIZZONI', vidas: 313, pct: 6.5 },
+    { sup: 'PRISCILLA REGIS', vidas: 295, pct: 6.1 },
+    { sup: 'NEFTALY LEONEL', vidas: 285, pct: 5.9 },
+    { sup: 'ADMINISTRATIVO', vidas: 249, pct: 5.1 },
+    { sup: 'BENVE', vidas: 213, pct: 4.4 },
+    { sup: 'MICHELE FERREIRA', vidas: 173, pct: 3.6 },
+    { sup: 'REBECA ALVINO', vidas: 162, pct: 3.3 },
+    { sup: 'CAROLINE GUERKE', vidas: 159, pct: 3.3 },
+    { sup: 'ACTIONLINE', vidas: 48, pct: 1.0 },
     { sup: 'JOSY BOMFIM', vidas: 1, pct: 0.0 },
 ];
 
 const VR_UNIDADE = [
-    { unidade: 'RIBEIRÃO PRETO', vidas: 1771, pct: 42.1 },
-    { unidade: 'FORTALEZA', vidas: 1061, pct: 25.2 },
-    { unidade: 'NACIONAL', vidas: 277, pct: 6.6 },
-    { unidade: 'NOVA SEG', vidas: 266, pct: 6.3 },
-    { unidade: 'SÃO PAULO', vidas: 264, pct: 6.3 },
-    { unidade: 'ADMINISTRATIVO', vidas: 210, pct: 5.0 },
-    { unidade: 'BENVE', vidas: 191, pct: 4.5 },
-    { unidade: 'PIRASSUNUNGA', vidas: 123, pct: 2.9 },
-    { unidade: 'ACTIONLINE', vidas: 39, pct: 0.9 },
+    { unidade: 'RIBEIRÃO PRETO', vidas: 2021, pct: 41.7 },
+    { unidade: 'FORTALEZA', vidas: 1207, pct: 24.9 },
+    { unidade: 'NACIONAL', vidas: 332, pct: 6.9 },
+    { unidade: 'NOVA SEG', vidas: 306, pct: 6.3 },
+    { unidade: 'SÃO PAULO', vidas: 298, pct: 6.2 },
+    { unidade: 'ADMINISTRATIVO', vidas: 249, pct: 5.1 },
+    { unidade: 'BENVE', vidas: 220, pct: 4.5 },
+    { unidade: 'PIRASSUNUNGA', vidas: 158, pct: 3.3 },
+    { unidade: 'ACTIONLINE', vidas: 48, pct: 1.0 },
     { unidade: 'BAURU', vidas: 4, pct: 0.1 },
 ];
 
 const VR_AREA = [
-    { area: 'INSIDE SALES', vidas: 3021, pct: 71.8 },
-    { area: 'NACIONAL', vidas: 277, pct: 6.6 },
-    { area: 'NOVA SEG', vidas: 266, pct: 6.3 },
-    { area: 'ADMINISTRATIVO', vidas: 210, pct: 5.0 },
-    { area: 'PROMOTORES', vidas: 202, pct: 4.8 },
-    { area: 'BENVE', vidas: 191, pct: 4.5 },
-    { area: 'ACTIONLINE', vidas: 39, pct: 0.9 },
+    { area: 'INSIDE SALES', vidas: 3456, pct: 71.4 },
+    { area: 'NACIONAL', vidas: 332, pct: 6.9 },
+    { area: 'NOVA SEG', vidas: 306, pct: 6.3 },
+    { area: 'ADMINISTRATIVO', vidas: 249, pct: 5.1 },
+    { area: 'PROMOTORES', vidas: 232, pct: 4.8 },
+    { area: 'BENVE', vidas: 220, pct: 4.5 },
+    { area: 'ACTIONLINE', vidas: 48, pct: 1.0 },
 ];
 
 const VR_MENSAL = [
-    { mes: 'Abr/26', contatos: 644, cadastros: 382 },
-    { mes: 'Mai/26', contatos: 2284, cadastros: 2066 },
-    { mes: 'Jun/26', contatos: 1278, cadastros: 1758 },
+    { mes: 'Abr/26', contatos: 653, cadastros: 382 },
+    { mes: 'Mai/26', contatos: 2355, cadastros: 2062 },
+    { mes: 'Jun/26', contatos: 1835, cadastros: 2399 },
 ];
 
 const VR_CANAL = [
-    { canal: 'Individual', vidas: 3628, pct: 86.3, receita: 1270934.16 },
-    { canal: 'PIM (3–29 vidas)', vidas: 574, pct: 13.6, receita: 140050.19 },
+    { canal: 'Individual', vidas: 4197, pct: 86.7, receita: 1468556.75 },
+    { canal: 'PIM (3–29 vidas)', vidas: 637, pct: 13.2, receita: 155628.77 },
+    { canal: 'Adesão (Administradora)', vidas: 5, pct: 0.1, receita: 1526.1 },
     { canal: 'Middle (30–99)', vidas: 4, pct: 0.1, receita: 1056.23 },
 ];
 
@@ -896,7 +896,7 @@ function buildVidasTable() {
     const tr = document.createElement('tr');
     tr.style.fontWeight = '700';
     tr.style.background = '#f9fafb';
-    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">4.206</td><td class="td-right">100%</td><td></td>`;
+    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">4.843</td><td class="td-right">100%</td><td></td>`;
     tbody.appendChild(tr);
 }
 
@@ -1012,7 +1012,7 @@ function buildTempoTable() {
     const tr = document.createElement('tr');
     tr.style.fontWeight = '700';
     tr.style.background = '#f9fafb';
-    tr.innerHTML = `<td><strong>Total / Média</strong></td><td class="td-right">4.206</td><td class="td-right">100%</td><td><em style="font-size:12px;color:#6b7280">Tempo médio: 5,1 dias</em></td><td></td>`;
+    tr.innerHTML = `<td><strong>Total / Média</strong></td><td class="td-right">4.843</td><td class="td-right">100%</td><td><em style="font-size:12px;color:#6b7280">Tempo médio: 5,5 dias</em></td><td></td>`;
     tbody.appendChild(tr);
 }
 
