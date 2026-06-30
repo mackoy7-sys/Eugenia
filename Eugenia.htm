@@ -408,6 +408,30 @@
         </div>
     </div>
 
+    <div class="chart-row cols-2">
+        <div class="chart-card">
+            <h3>5 · Conversão por Motivo de Handoff</h3>
+            <p class="chart-sub">Taxa de conversão por razão do handoff da IA — base de handoffs qualificados (17/04–30/06) × VENDAS_DIGITAL</p>
+            <canvas id="motivoChart"></canvas>
+        </div>
+        <div class="table-card">
+            <h3>Detalhe — Motivo de Handoff</h3>
+            <p class="chart-sub">Leads, conversões (telefones), vidas e taxa de conversão por motivo</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Motivo</th>
+                        <th class="td-right">Leads</th>
+                        <th class="td-right">Conversões</th>
+                        <th class="td-right">Vidas</th>
+                        <th class="td-right">Taxa</th>
+                    </tr>
+                </thead>
+                <tbody id="motivoTable"></tbody>
+            </table>
+        </div>
+    </div>
+
     </div><!-- /tab-geral -->
 
     <!-- ============================ ABA 2: VENDAS REALIZADAS ============================ -->
@@ -622,6 +646,14 @@ const GESTAO = [
     { gestao: 'Josy',           vidas: 2244, receita: 769348.71, ticket: 342.85 },
     { gestao: 'Administrativo', vidas: 249,  receita: 89175.87,  ticket: 358.14 },
     { gestao: 'Actionline',     vidas: 48,   receita: 16046.15,  ticket: 334.29 },
+];
+
+// Conversão por Motivo de Handoff (qualificados-all 17/04–30/06 × VENDAS_DIGITAL, regra DT_CADASTRAMENTO ≥ data da conversa)
+const MOTIVO = [
+    { motivo: 'Qualificado', leads: 6349, conv: 742, vidas: 843, taxa: 11.69 },
+    { motivo: 'Bypass', leads: 3499, conv: 261, vidas: 310, taxa: 7.46 },
+    { motivo: 'Outros', leads: 2954, conv: 106, vidas: 121, taxa: 3.59 },
+    { motivo: 'Knowledge Gap', leads: 6260, conv: 150, vidas: 244, taxa: 2.4 },
 ];
 
 // ─── ABA 2: VENDAS REALIZADAS (4.843 vidas convertidas) ───────────────────────
@@ -1073,6 +1105,61 @@ function buildGestaoTable() {
     tbody.appendChild(tr);
 }
 
+function buildMotivoChart() {
+    const ctx = document.getElementById('motivoChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: MOTIVO.map(m => m.motivo),
+            datasets: [{
+                label: 'Taxa de conversão (%)',
+                data: MOTIVO.map(m => m.taxa),
+                backgroundColor: MOTIVO.map((_, i) => ACCENT_COLORS[i % ACCENT_COLORS.length]),
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            layout: { padding: { top: 20 } },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => ` ${MOTIVO[ctx.dataIndex].taxa}% · ${fmtInt(MOTIVO[ctx.dataIndex].conv)} conv. / ${fmtInt(MOTIVO[ctx.dataIndex].leads)} leads · ${fmtInt(MOTIVO[ctx.dataIndex].vidas)} vidas`
+                    }
+                }
+            },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, ticks: { font: { size: 11 }, callback: v => v + '%' } },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+}
+
+function buildMotivoTable() {
+    const tbody = document.getElementById('motivoTable');
+    const totL = MOTIVO.reduce((a, m) => a + m.leads, 0);
+    const totC = MOTIVO.reduce((a, m) => a + m.conv, 0);
+    const totV = MOTIVO.reduce((a, m) => a + m.vidas, 0);
+    MOTIVO.forEach(m => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${m.motivo}</strong></td>
+            <td class="td-right">${fmtInt(m.leads)}</td>
+            <td class="td-right">${fmtInt(m.conv)}</td>
+            <td class="td-right">${fmtInt(m.vidas)}</td>
+            <td class="td-right">${m.taxa.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%</td>`;
+        tbody.appendChild(tr);
+    });
+    const tr = document.createElement('tr');
+    tr.style.fontWeight = '700';
+    tr.style.background = '#f9fafb';
+    const taxaG = totL ? (totC / totL * 100) : 0;
+    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">${fmtInt(totL)}</td><td class="td-right">${fmtInt(totC)}</td><td class="td-right">${fmtInt(totV)}</td><td class="td-right">${taxaG.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%</td>`;
+    tbody.appendChild(tr);
+}
+
 // ─── ABA 2: VENDAS REALIZADAS — helpers ───────────────────────────────────
 const vrCharts = [];   // guarda instâncias p/ resize ao trocar de aba
 
@@ -1265,6 +1352,8 @@ buildCumChart();
 buildTempoTable();
 buildGestaoChart();
 buildGestaoTable();
+buildMotivoChart();
+buildMotivoTable();
 // Aba 2
 buildVRKpis();
 buildVRPlano();
