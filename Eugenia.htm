@@ -411,7 +411,7 @@
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>5 · Conversão por Motivo de Handoff</h3>
-            <p class="chart-sub">Taxa de conversão por razão do handoff da IA — base de handoffs qualificados (17/04–30/06) × VENDAS_DIGITAL</p>
+            <p class="chart-sub">Taxa de conversão por razão do handoff da IA — base de handoffs qualificados (17/04–30/06) × vendas Oracle atualizadas (jan–26/06)</p>
             <canvas id="motivoChart"></canvas>
         </div>
         <div class="table-card">
@@ -648,12 +648,12 @@ const GESTAO = [
     { gestao: 'Actionline',     vidas: 48,   receita: 16046.15,  ticket: 334.29 },
 ];
 
-// Conversão por Motivo de Handoff (qualificados-all 17/04–30/06 × VENDAS_DIGITAL, regra DT_CADASTRAMENTO ≥ data da conversa)
+// Conversão por Motivo de Handoff (qualificados-all 17/04–30/06 × BASE_DIGITAL Oracle ao vivo, regra DT_CADASTRAMENTO ≥ data da conversa)
 const MOTIVO = [
-    { motivo: 'Qualificado', leads: 6349, conv: 742, vidas: 843, taxa: 11.69 },
-    { motivo: 'Bypass', leads: 3499, conv: 261, vidas: 310, taxa: 7.46 },
-    { motivo: 'Outros', leads: 2954, conv: 106, vidas: 121, taxa: 3.59 },
-    { motivo: 'Knowledge Gap', leads: 6260, conv: 150, vidas: 244, taxa: 2.4 },
+    { motivo: 'Qualificado', leads: 6349, conv: 1163, vidas: 1311, taxa: 18.32 },
+    { motivo: 'Bypass', leads: 3499, conv: 384, vidas: 461, taxa: 10.97 },
+    { motivo: 'Outros', leads: 2954, conv: 225, vidas: 258, taxa: 7.62 },
+    { motivo: 'Knowledge Gap', leads: 6260, conv: 257, vidas: 429, taxa: 4.11 },
 ];
 
 // ─── ABA 2: VENDAS REALIZADAS (4.843 vidas convertidas) ───────────────────────
