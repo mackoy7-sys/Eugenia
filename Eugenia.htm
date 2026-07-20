@@ -321,9 +321,15 @@
         </div>
     </section>
 
+    <div class="chart-card" style="margin-bottom: var(--gap);">
+        <h3>1 · Volume de Leads por Mês</h3>
+        <p class="chart-sub">Total de leads recebidos por mês (base completa, 17/04–20/07) — barras mais claras (abril e julho) são meses parciais</p>
+        <canvas id="leadsMesChart"></canvas>
+    </div>
+
     <!-- FUNIL VISUAL -->
     <div class="funnel-card">
-        <h3>1 · Funil de Conversão</h3>
+        <h3>2 · Funil de Conversão</h3>
         <p class="chart-sub">Progressão etapa a etapa — volumes e taxa de retenção da etapa anterior</p>
         <div class="funnel-steps" id="funnelSteps"></div>
     </div>
@@ -331,7 +337,7 @@
     <!-- ROW: Distribuição de vidas (Insight 2 — por vida) -->
     <div class="chart-row cols-2">
         <div class="chart-card">
-            <h3>2 · Distribuição de Vidas</h3>
+            <h3>3 · Distribuição de Vidas</h3>
             <p class="chart-sub">Vidas convertidas por tamanho de contrato — total 6.968</p>
             <canvas id="vidasChart"></canvas>
         </div>
@@ -355,7 +361,7 @@
     <!-- ROW: Tempo de conversão -->
     <div class="chart-row cols-2">
         <div class="chart-card">
-            <h3>3 · Tempo até a Conversão</h3>
+            <h3>4 · Tempo até a Conversão</h3>
             <p class="chart-sub">Vidas convertidas por faixa de dias — 44,6% em até 1 dia</p>
             <canvas id="tempoChart"></canvas>
         </div>
@@ -387,7 +393,7 @@
     <!-- ROW: Conversão por gestão (Insight 4 — de-para do vendedor) -->
     <div class="chart-row cols-2">
         <div class="chart-card">
-            <h3>4 · Conversão por Gestão</h3>
+            <h3>5 · Conversão por Gestão</h3>
             <p class="chart-sub">Vidas convertidas por estrutura comercial (de-para do vendedor)</p>
             <canvas id="gestaoChart"></canvas>
         </div>
@@ -410,7 +416,7 @@
 
     <div class="chart-row cols-2">
         <div class="chart-card">
-            <h3>5 · Conversão por Motivo de Handoff</h3>
+            <h3>6 · Conversão por Motivo de Handoff</h3>
             <p class="chart-sub">Taxa de conversão por razão do handoff da IA — base de handoffs da Eugenia (col. Motivo_handoff, 17/04–20/07) × vendas Oracle atualizadas (jan–20/07)</p>
             <canvas id="motivoChart"></canvas>
         </div>
@@ -435,7 +441,7 @@
 
     <div class="chart-row cols-2">
         <div class="chart-card">
-            <h3>6 · Conversão por Etapa do Funil</h3>
+            <h3>7 · Conversão por Etapa do Funil</h3>
             <p class="chart-sub">Taxa de conversão pelo estágio mais avançado que o lead alcançou — base completa Eugenia × vendas Oracle atualizadas (reconcilia com os 191.969 leads e 6.968 vidas do topo)</p>
             <canvas id="funilConvChart"></canvas>
         </div>
@@ -697,6 +703,15 @@ const FUNILCONV = [
 // Leads com telefone estrangeiro/malformado (não normaliza p/ 11 díg. BR) — não cruzáveis com vendas.
 // Somados aos 191.828 telefones válidos do FUNILCONV, fecham nos 191.969 leads do topo.
 const FUNILCONV_INVALIDO = 141;
+
+// Volume de leads por mês (col. Data da base completa) — abril e julho são meses PARCIAIS
+// (base começa em 17/04; julho cortado em 20/07, data do extract) — sinalizado no gráfico.
+const LEADS_MES = [
+    { mes: 'Abril', leads: 16141, dias: 14, parcial: true },
+    { mes: 'Maio', leads: 104398, dias: 31, parcial: false },
+    { mes: 'Junho', leads: 52112, dias: 30, parcial: false },
+    { mes: 'Julho', leads: 19318, dias: 20, parcial: true },
+];
 
 // ─── ABA 2: VENDAS REALIZADAS (6.968 vidas convertidas) ───────────────────────
 const VR_KPIS = { vidas: 6968, telefones: 5321, receita: 2303873.48, arr: 27646481.82, ticket: 330.64, churn: 168, churnPct: 2.4 };
@@ -1280,6 +1295,42 @@ function buildFunilConvTable() {
     tbody.appendChild(tr);
 }
 
+function buildLeadsMesChart() {
+    const ctx = document.getElementById('leadsMesChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: LEADS_MES.map(m => m.mes),
+            datasets: [{
+                label: 'Leads',
+                data: LEADS_MES.map(m => m.leads),
+                backgroundColor: LEADS_MES.map(m => m.parcial ? 'rgba(57,73,171,0.35)' : ACCENT_COLORS[0]),
+                borderRadius: 6,
+            }]
+        },
+        options: {
+            responsive: true,
+            layout: { padding: { top: 20 } },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => {
+                            const m = LEADS_MES[ctx.dataIndex];
+                            const media = Math.round(m.leads / m.dias);
+                            return ` ${fmtInt(m.leads)} leads em ${m.dias} dias (média ${fmtInt(media)}/dia)${m.parcial ? ' · mês parcial' : ''}`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, ticks: { font: { size: 11 }, callback: v => fmtInt(v) } },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+}
+
 // ─── ABA 2: VENDAS REALIZADAS — helpers ───────────────────────────────────
 const vrCharts = [];   // guarda instâncias p/ resize ao trocar de aba
 
@@ -1476,6 +1527,7 @@ buildMotivoChart();
 buildMotivoTable();
 buildFunilConvChart();
 buildFunilConvTable();
+buildLeadsMesChart();
 // Aba 2
 buildVRKpis();
 buildVRPlano();
