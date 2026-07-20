@@ -230,6 +230,17 @@
             color: var(--text-on-dark);
             box-shadow: 0 2px 8px rgba(26,35,126,0.25);
         }
+        /* MINI TOGGLE (chart-level, ex: Leads/Vidas) */
+        .mini-toggle { display: flex; gap: 4px; background: #f3f4f6; border-radius: 8px; padding: 3px; flex-shrink: 0; }
+        .mini-toggle-btn {
+            border: none; background: transparent; cursor: pointer;
+            padding: 6px 16px; font-size: 12px; font-weight: 700;
+            border-radius: 6px; color: var(--text-secondary);
+            font-family: inherit; transition: all 0.15s ease;
+        }
+        .mini-toggle-btn:hover:not(.active) { background: #e5e7eb; color: var(--text-primary); }
+        .mini-toggle-btn.active { background: var(--bg-header); color: var(--text-on-dark); box-shadow: 0 2px 6px rgba(26,35,126,0.25); }
+
         .tab-pane { display: none; }
         .tab-pane.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -322,8 +333,16 @@
     </section>
 
     <div class="chart-card" style="margin-bottom: var(--gap);">
-        <h3>1 · Volume de Leads por Mês</h3>
-        <p class="chart-sub">Total de leads recebidos por mês (base completa, 17/04–20/07) — barras mais claras (abril e julho) são meses parciais</p>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+            <div>
+                <h3>1 · Volume por Mês</h3>
+                <p class="chart-sub" id="leadsMesSub">Total de leads recebidos por mês (base completa, 17/04–20/07) — barras mais claras (abril e julho) são meses parciais</p>
+            </div>
+            <div class="mini-toggle" id="leadsMesToggle">
+                <button class="mini-toggle-btn active" data-mode="leads">Leads</button>
+                <button class="mini-toggle-btn" data-mode="vidas">Vidas</button>
+            </div>
+        </div>
         <canvas id="leadsMesChart"></canvas>
     </div>
 
@@ -711,6 +730,15 @@ const LEADS_MES = [
     { mes: 'Maio', leads: 104398, dias: 31, parcial: false },
     { mes: 'Junho', leads: 52112, dias: 30, parcial: false },
     { mes: 'Julho', leads: 19318, dias: 20, parcial: true },
+];
+
+// Vidas convertidas por mês (mês de DT_CADASTRAMENTO da venda) — mesma regra oficial de
+// conversão (telefone + data da conversa), soma bate nas 6.968 vidas do topo do dashboard.
+const VIDAS_MES = [
+    { mes: 'Abril', vidas: 436, dias: 14, parcial: true },
+    { mes: 'Maio', vidas: 2385, dias: 31, parcial: false },
+    { mes: 'Junho', vidas: 3109, dias: 30, parcial: false },
+    { mes: 'Julho', vidas: 1038, dias: 20, parcial: true },
 ];
 
 // ─── ABA 2: VENDAS REALIZADAS (6.968 vidas convertidas) ───────────────────────
@@ -1295,16 +1323,33 @@ function buildFunilConvTable() {
     tbody.appendChild(tr);
 }
 
-function buildLeadsMesChart() {
+let leadsMesChartInstance = null;
+const MES_TOGGLE_CFG = {
+    leads: {
+        data: LEADS_MES, key: 'leads', label: 'Leads',
+        color: ACCENT_COLORS[0], colorParcial: 'rgba(57,73,171,0.35)',
+        sub: 'Total de leads recebidos por mês (base completa, 17/04–20/07) — barras mais claras (abril e julho) são meses parciais',
+    },
+    vidas: {
+        data: VIDAS_MES, key: 'vidas', label: 'Vidas',
+        color: ACCENT_COLORS[1], colorParcial: 'rgba(233,30,99,0.35)',
+        sub: 'Vidas convertidas por mês (mês de cadastro da venda) — barras mais claras (abril e julho) são meses parciais',
+    },
+};
+
+function buildLeadsMesChart(mode) {
+    const cfg = MES_TOGGLE_CFG[mode || 'leads'];
+    document.getElementById('leadsMesSub').textContent = cfg.sub;
+    if (leadsMesChartInstance) leadsMesChartInstance.destroy();
     const ctx = document.getElementById('leadsMesChart').getContext('2d');
-    new Chart(ctx, {
+    leadsMesChartInstance = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: LEADS_MES.map(m => m.mes),
+            labels: cfg.data.map(m => m.mes),
             datasets: [{
-                label: 'Leads',
-                data: LEADS_MES.map(m => m.leads),
-                backgroundColor: LEADS_MES.map(m => m.parcial ? 'rgba(57,73,171,0.35)' : ACCENT_COLORS[0]),
+                label: cfg.label,
+                data: cfg.data.map(m => m[cfg.key]),
+                backgroundColor: cfg.data.map(m => m.parcial ? cfg.colorParcial : cfg.color),
                 borderRadius: 6,
             }]
         },
@@ -1316,9 +1361,10 @@ function buildLeadsMesChart() {
                 tooltip: {
                     callbacks: {
                         label: ctx => {
-                            const m = LEADS_MES[ctx.dataIndex];
-                            const media = Math.round(m.leads / m.dias);
-                            return ` ${fmtInt(m.leads)} leads em ${m.dias} dias (média ${fmtInt(media)}/dia)${m.parcial ? ' · mês parcial' : ''}`;
+                            const m = cfg.data[ctx.dataIndex];
+                            const v = m[cfg.key];
+                            const media = Math.round(v / m.dias);
+                            return ` ${fmtInt(v)} ${cfg.label.toLowerCase()} em ${m.dias} dias (média ${fmtInt(media)}/dia)${m.parcial ? ' · mês parcial' : ''}`;
                         }
                     }
                 }
@@ -1330,6 +1376,14 @@ function buildLeadsMesChart() {
         }
     });
 }
+
+document.querySelectorAll('#leadsMesToggle .mini-toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#leadsMesToggle .mini-toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        buildLeadsMesChart(btn.dataset.mode);
+    });
+});
 
 // ─── ABA 2: VENDAS REALIZADAS — helpers ───────────────────────────────────
 const vrCharts = [];   // guarda instâncias p/ resize ao trocar de aba
@@ -1527,7 +1581,7 @@ buildMotivoChart();
 buildMotivoTable();
 buildFunilConvChart();
 buildFunilConvTable();
-buildLeadsMesChart();
+buildLeadsMesChart('leads');
 // Aba 2
 buildVRKpis();
 buildVRPlano();
