@@ -280,7 +280,7 @@
     <header class="dashboard-header">
         <div class="header-left">
             <h1>🤖 EugenIA Full – Analytics de Conversão</h1>
-            <p>Funil de conversão · Vendas realizadas detalhadas · 7.494 vidas convertidas</p>
+            <p>Funil de conversão · Vendas realizadas detalhadas · 9.209 vidas convertidas</p>
         </div>
         <div class="header-badge">Comercial Digital · 2026</div>
     </header>
@@ -289,6 +289,7 @@
     <nav class="tab-nav">
         <button class="tab-btn active" data-tab="tab-geral">📊 Visão Geral · Conversão</button>
         <button class="tab-btn" data-tab="tab-vendas">💰 Vendas Realizadas</button>
+        <button class="tab-btn" data-tab="tab-cmp">📉 Comparativo 3 Meses</button>
     </nav>
 
     <!-- ============================ ABA 1: VISÃO GERAL ============================ -->
@@ -299,35 +300,35 @@
         <div class="kpi-card blue">
             <div class="kpi-icon">📥</div>
             <div class="kpi-label">Leads Totais</div>
-            <div class="kpi-value">196.873</div>
+            <div class="kpi-value">237.958</div>
             <div class="kpi-sub">Base do funil (100%)</div>
         </div>
         <div class="kpi-card pink">
             <div class="kpi-icon">❤️</div>
             <div class="kpi-label">Vidas Convertidas</div>
-            <div class="kpi-value">7.494</div>
-            <div class="kpi-sub">Conversão por vida (abr–jul)</div>
-            <span class="kpi-badge warn">3,81% dos leads</span>
+            <div class="kpi-value">9.209</div>
+            <div class="kpi-sub">Conversão por vida (abr–ago)</div>
+            <span class="kpi-badge warn">3,87% dos leads</span>
         </div>
         <div class="kpi-card green">
             <div class="kpi-icon">⚡</div>
             <div class="kpi-label">Vidas em ≤ 1 dia</div>
-            <div class="kpi-value">43,1%</div>
-            <div class="kpi-sub">3.230 vidas (D+0 e D+1)</div>
+            <div class="kpi-value">40,6%</div>
+            <div class="kpi-sub">3.743 vidas (D+0 e D+1)</div>
             <span class="kpi-badge good">Conversão rápida</span>
         </div>
         <div class="kpi-card cyan">
             <div class="kpi-icon">🤝</div>
             <div class="kpi-label">Handoff</div>
-            <div class="kpi-value">24.716</div>
-            <div class="kpi-sub">12,55% do total de leads</div>
-            <span class="kpi-badge info">Conv.→vidas: 30,3%</span>
+            <div class="kpi-value">47.804</div>
+            <div class="kpi-sub">20,09% do total de leads</div>
+            <span class="kpi-badge info">Conv.→vidas: 19,3%</span>
         </div>
         <div class="kpi-card orange">
             <div class="kpi-icon">⏱️</div>
             <div class="kpi-label">Tempo Médio</div>
-            <div class="kpi-value">8,6d</div>
-            <div class="kpi-sub">31,4% convertem no mesmo dia</div>
+            <div class="kpi-value">11,8d</div>
+            <div class="kpi-sub">29,3% convertem no mesmo dia</div>
             <span class="kpi-badge good">D+0 dominante</span>
         </div>
     </section>
@@ -336,7 +337,7 @@
         <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
             <div>
                 <h3>1 · Volume por Mês</h3>
-                <p class="chart-sub" id="leadsMesSub">Total de leads recebidos por mês (base completa, 17/04–27/07) — barras mais claras (abril e julho) são meses parciais</p>
+                <p class="chart-sub" id="leadsMesSub">Total de leads recebidos por mês (base completa, 17/04–21/08) — barras mais claras (abril e agosto) são parciais; sem export em 14–16/08</p>
             </div>
             <div class="mini-toggle" id="leadsMesToggle">
                 <button class="mini-toggle-btn active" data-mode="leads">Leads</button>
@@ -357,12 +358,12 @@
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>3 · Distribuição de Vidas</h3>
-            <p class="chart-sub">Vidas convertidas por tamanho de contrato — total 7.494</p>
+            <p class="chart-sub">Vidas convertidas por tamanho de contrato — total 9.209</p>
             <canvas id="vidasChart"></canvas>
         </div>
         <div class="table-card">
             <h3>Detalhe — Vidas por Contrato</h3>
-            <p class="chart-sub">Distribuição das 7.494 vidas convertidas</p>
+            <p class="chart-sub">Distribuição das 9.209 vidas convertidas</p>
             <table>
                 <thead>
                     <tr>
@@ -381,7 +382,7 @@
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>4 · Tempo até a Conversão</h3>
-            <p class="chart-sub">Vidas convertidas por faixa de dias — 43,1% em até 1 dia</p>
+            <p class="chart-sub">Vidas convertidas por faixa de dias — 40,6% em até 1 dia</p>
             <canvas id="tempoChart"></canvas>
         </div>
         <div class="chart-card">
@@ -394,7 +395,7 @@
     <!-- TABELA: Tempo de Conversão -->
     <div class="table-card">
         <h3>Detalhe — Tempo até a Conversão</h3>
-        <p class="chart-sub">Distribuição das 7.494 vidas convertidas por janela temporal</p>
+        <p class="chart-sub">Distribuição das 9.209 vidas convertidas por janela temporal</p>
         <table>
             <thead>
                 <tr>
@@ -436,7 +437,7 @@
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>6 · Conversão por Motivo de Handoff</h3>
-            <p class="chart-sub">Taxa de conversão por razão do handoff da IA — base de handoffs da Eugenia (col. Motivo_handoff, 17/04–27/07) × vendas Oracle atualizadas (jan–27/07)</p>
+            <p class="chart-sub">Taxa de conversão por razão do handoff da IA — base de handoffs da Eugenia (col. Motivo_handoff, 17/04–21/08) × vendas Oracle atualizadas (jan–21/08)</p>
             <canvas id="motivoChart"></canvas>
         </div>
         <div class="table-card">
@@ -461,7 +462,7 @@
     <div class="chart-row cols-2">
         <div class="chart-card">
             <h3>7 · Conversão por Etapa do Funil</h3>
-            <p class="chart-sub">Taxa de conversão pelo estágio mais avançado que o lead alcançou — base completa Eugenia × vendas Oracle atualizadas (reconcilia com os 196.873 leads e 7.494 vidas do topo)</p>
+            <p class="chart-sub">Taxa de conversão pelo estágio mais avançado que o lead alcançou — base completa Eugenia × vendas Oracle atualizadas (reconcilia com os 237.958 leads e 9.209 vidas do topo)</p>
             <canvas id="funilConvChart"></canvas>
         </div>
         <div class="table-card">
@@ -488,10 +489,10 @@
     <div class="tab-pane" id="tab-vendas">
 
         <div class="section-note">
-            💰 <strong>Vendas realizadas</strong> — detalhamento das <strong>7.494 vidas convertidas</strong>
-            via Eugenia (cadastro abr–jul/2026). Base: cada linha = 1 vida (beneficiário). Receita = soma das
-            mensalidades contratadas. <em>Churn ainda imaturo (base recente de ~3 meses).</em>
-            <br><small>Inclui <strong>1.109 vidas</strong> (209 PF + 900 PME) recuperadas por cruzamento de
+            💰 <strong>Vendas realizadas</strong> — detalhamento das <strong>9.209 vidas convertidas</strong>
+            via Eugenia (cadastro abr–ago/2026). Base: cada linha = 1 vida (beneficiário). Receita = soma das
+            mensalidades contratadas. <em>Churn ainda imaturo (base recente de ~4 meses).</em>
+            <br><small>Inclui <strong>1.500 vidas</strong> (290 PF + 1.210 PME) recuperadas por cruzamento de
             telefones alternativos do datalake — clientes que falaram com a Eugenia de um número diferente
             do cadastrado na venda.</small>
         </div>
@@ -501,8 +502,8 @@
             <div class="kpi-card pink">
                 <div class="kpi-icon">❤️</div>
                 <div class="kpi-label">Vidas Convertidas</div>
-                <div class="kpi-value">7.494</div>
-                <div class="kpi-sub" id="vrKpiTel">5.648 telefones distintos</div>
+                <div class="kpi-value">9.209</div>
+                <div class="kpi-sub" id="vrKpiTel">6.791 telefones distintos</div>
             </div>
             <div class="kpi-card green">
                 <div class="kpi-icon">💵</div>
@@ -519,15 +520,15 @@
             <div class="kpi-card orange">
                 <div class="kpi-icon">⚠️</div>
                 <div class="kpi-label">Cancelamentos</div>
-                <div class="kpi-value" id="vrKpiChurn">187</div>
-                <div class="kpi-sub" id="vrKpiChurnPct">2,5% (base imatura)</div>
+                <div class="kpi-value" id="vrKpiChurn">283</div>
+                <div class="kpi-sub" id="vrKpiChurnPct">3,1% (base imatura)</div>
             </div>
         </section>
 
         <!-- MIX DE PLANOS (tabela) -->
         <div class="table-card">
             <h3>5 · Mix de Planos (GRUPO_PLANO)</h3>
-            <p class="chart-sub">Vidas, receita mensal e ticket médio por grupo de plano — 96% em Nosso Plano, Smart e Nosso Médico</p>
+            <p class="chart-sub">Vidas, receita mensal e ticket médio por grupo de plano — 94% em Nosso Plano, Nosso Médico e Smart</p>
             <table>
                 <thead>
                     <tr>
@@ -547,12 +548,12 @@
         <div class="chart-row cols-2">
             <div class="chart-card">
                 <h3>6 · Distribuição de Mensalidade</h3>
-                <p class="chart-sub">Vidas por faixa de valor mensal — ticket médio R$ 335,72</p>
+                <p class="chart-sub">Vidas por faixa de valor mensal — ticket médio R$ 329,47</p>
                 <canvas id="vrTicketChart"></canvas>
             </div>
             <div class="table-card">
                 <h3>Detalhe — Faixas de Valor</h3>
-                <p class="chart-sub">Concentração em R$ 150–400 (75% das vidas)</p>
+                <p class="chart-sub">Concentração em R$ 150–400 (73% das vidas)</p>
                 <table>
                     <thead>
                         <tr>
@@ -571,7 +572,7 @@
         <div class="chart-row cols-2">
             <div class="chart-card">
                 <h3>7 · Distribuição por UF</h3>
-                <p class="chart-sub">Vidas convertidas por estado — SP concentra 36%</p>
+                <p class="chart-sub">Vidas convertidas por estado — SP concentra 37%</p>
                 <canvas id="vrUfChart"></canvas>
             </div>
             <div class="table-card">
@@ -614,12 +615,12 @@
         <div class="chart-row cols-2">
             <div class="chart-card">
                 <h3>9 · Vidas por Unidade</h3>
-                <p class="chart-sub">Ribeirão Preto + Fortaleza = 67% do volume</p>
+                <p class="chart-sub">Ribeirão Preto + Fortaleza = 65% do volume</p>
                 <canvas id="vrUnidadeChart"></canvas>
             </div>
             <div class="chart-card">
                 <h3>10 · Vidas por Área</h3>
-                <p class="chart-sub">Inside Sales é o core (72%)</p>
+                <p class="chart-sub">Inside Sales é o core (73%)</p>
                 <canvas id="vrAreaChart"></canvas>
             </div>
         </div>
@@ -650,12 +651,182 @@
             </div>
             <div class="chart-card">
                 <h3>13 · Vidas por Canal</h3>
-                <p class="chart-sub">Individual domina (86%) — PIM responde por 14%</p>
+                <p class="chart-sub">Individual domina (71%) — PIM responde por 28%</p>
                 <canvas id="vrCanalChart"></canvas>
             </div>
         </div>
 
     </div><!-- /tab-vendas -->
+
+    <!-- ======================= ABA 3: COMPARATIVO 3 MESES ======================= -->
+    <div class="tab-pane" id="tab-cmp">
+
+        <div class="section-note">
+            🔬 <strong>Como ler esta aba</strong> — a taxa de conversão de um mês em curso
+            <em>não</em> pode ser comparada direto com a de um mês fechado: a venda leva dias para
+            sair depois da conversa. Por isso todo comparativo de <strong>taxa</strong> aqui usa a
+            mesma régua nos três meses — <strong id="cmpReguaTxt">—</strong>. Já os
+            <strong>volumes</strong> (leads, vidas, receita) são do mês inteiro, e aí agosto é
+            parcial por natureza.
+            <br><small>Coorte = telefone, alocado no mês da <strong>primeira</strong> conversa
+            (mesma regra de conversão do resto do dashboard). Leads/dia usa como denominador só os
+            dias que o export trouxe — agosto não tem 14–16/08.</small>
+        </div>
+
+        <section class="kpi-row" id="cmpKpiRow"></section>
+
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>1 · Conversão por mês — mesma régua</h3>
+                <p class="chart-sub" id="cmpTaxaSub">—</p>
+                <canvas id="cmpTaxaChart"></canvas>
+            </div>
+            <div class="table-card">
+                <h3>O denominador — volume por dia</h3>
+                <p class="chart-sub">Leads recebidos, vendas do digital inteiro e vidas atribuídas à
+                    Eugenia, tudo por dia — para separar &ldquo;caiu a conversão&rdquo; de
+                    &ldquo;entrou mais lead&rdquo;</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mês</th>
+                            <th class="td-right">Leads/dia</th>
+                            <th class="td-right">Vendas digital/dia</th>
+                            <th class="td-right">Vidas Eugenia/dia</th>
+                            <th class="td-right">Share Eugenia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cmpVolumeTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>2 · A queda não é imaturidade</h3>
+                <p class="chart-sub" id="cmpMaturSub">—</p>
+                <canvas id="cmpMaturChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>3 · Decomposição da queda</h3>
+                <p class="chart-sub" id="cmpShiftSub">—</p>
+                <canvas id="cmpShiftChart"></canvas>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <h3>Detalhe — quanto cada canal explica da queda</h3>
+            <p class="chart-sub"><strong>Mix</strong> = o canal mudou de peso no tráfego;
+                <strong>Taxa</strong> = o mesmo canal passou a converter diferente. A soma das duas
+                colunas fecha na variação total de pontos percentuais.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Canal de entrada</th>
+                        <th class="td-right">Share base</th>
+                        <th class="td-right">Share atual</th>
+                        <th class="td-right">Conv. base</th>
+                        <th class="td-right">Conv. atual</th>
+                        <th class="td-right">Efeito mix</th>
+                        <th class="td-right">Efeito taxa</th>
+                        <th class="td-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="cmpShiftTable"></tbody>
+            </table>
+        </div>
+
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>4 · Composição do tráfego</h3>
+                <p class="chart-sub">% dos leads do mês por canal de entrada — é aqui que a base
+                    mudou de cara</p>
+                <canvas id="cmpCanalChart"></canvas>
+            </div>
+            <div class="table-card">
+                <h3>Detalhe — canal × mês</h3>
+                <p class="chart-sub">Leads do mês (share) e conversão na janela comparável.
+                    <em>taxa em cinza = menos de 200 leads na janela, base pequena</em></p>
+                <table>
+                    <thead><tr id="cmpCanalHead"></tr></thead>
+                    <tbody id="cmpCanalTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>5 · Qualidade do lead — profundidade da jornada</h3>
+                <p class="chart-sub">Conversão pelo estágio mais avançado que o lead alcançou
+                    (janela comparável)</p>
+                <canvas id="cmpEtapaChart"></canvas>
+            </div>
+            <div class="table-card">
+                <h3>Detalhe — etapa alcançada</h3>
+                <p class="chart-sub">Share = % dos leads comparáveis do mês naquela etapa</p>
+                <table>
+                    <thead><tr id="cmpEtapaHead"></tr></thead>
+                    <tbody id="cmpEtapaTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-note" style="border-left-color:#dc2626;background:#fef2f2">
+            ⚠️ <strong>Quebra de régua em 13/07 — os dois blocos abaixo (e a etapa
+            &ldquo;Handoff&rdquo; acima) não são comparáveis com junho.</strong> A partir de 13/07 o
+            export da Eugenia passou a marcar <code>Handoff = 1</code> também para
+            <code>Motivo = cotacao</code>, e a coluna <code>Cotacao</code> deixou de existir. Efeito:
+            o handoff salta de 15% para ~50% dos leads sem que nada tenha mudado na operação, e o
+            motivo <strong>Qualificado</strong> quase desaparece. Use estes cortes para ver
+            <em>dentro</em> do mês, não para comparar meses.
+        </div>
+
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>6 · Motivo do handoff</h3>
+                <p class="chart-sub">Conversão por razão do handoff, na janela comparável</p>
+                <canvas id="cmpMotivoChart"></canvas>
+            </div>
+            <div class="table-card">
+                <h3>Detalhe — motivo do handoff</h3>
+                <p class="chart-sub">Share = % dos handoffs do mês</p>
+                <table>
+                    <thead><tr id="cmpMotivoHead"></tr></thead>
+                    <tbody id="cmpMotivoTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="chart-row cols-2">
+            <div class="chart-card">
+                <h3>7 · Funil por mês</h3>
+                <p class="chart-sub">% dos leads do mês que alcançaram cada etapa</p>
+                <canvas id="cmpFunilChart"></canvas>
+            </div>
+            <div class="table-card">
+                <h3>Detalhe — funil por mês</h3>
+                <p class="chart-sub">% dos leads do mês em cada etapa, e a variação do primeiro
+                    para o último mês</p>
+                <table>
+                    <thead><tr id="cmpFunilHead"></tr></thead>
+                    <tbody id="cmpFunilTable"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="table-card">
+            <h3>8 · Geografia — onde caiu</h3>
+            <p class="chart-sub">Top 10 UFs por volume no mês mais recente, com share do tráfego e
+                conversão na janela comparável</p>
+            <table>
+                <thead><tr id="cmpUfHead"></tr></thead>
+                <tbody id="cmpUfTable"></tbody>
+            </table>
+        </div>
+
+        <div class="section-note" id="cmpDiagnostico" style="border-left-color:#15803d;background:#f0fdf4"></div>
+
+    </div><!-- /tab-cmp -->
 
     <footer class="dashboard-footer">
         EugenIA Full · Comercial Digital Hapvida NotreDame · Dados extraídos da análise de conversão 2026
@@ -665,215 +836,218 @@
 <script>
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const FUNIL = [
-    { etapa: 'Leads totais', vol: 196873, pctTotal: 100.00, pctAnterior: null },
-    { etapa: 'Engajou', vol: 122686, pctTotal: 62.32, pctAnterior: 62.32 },
-    { etapa: 'Forneceu dados', vol: 104805, pctTotal: 53.23, pctAnterior: 85.43 },
-    { etapa: 'Viu planos', vol: 73690, pctTotal: 37.43, pctAnterior: 70.31 },
-    { etapa: 'Handoff', vol: 24716, pctTotal: 12.55, pctAnterior: 33.54 },
-    { etapa: 'Vidas convertidas', vol: 7494, pctTotal: 3.81, pctAnterior: 30.32 },
+    { etapa: 'Leads totais', vol: 237958, pctTotal: 100.00, pctAnterior: null },
+    { etapa: 'Engajou', vol: 153473, pctTotal: 64.50, pctAnterior: 64.50 },
+    { etapa: 'Forneceu dados', vol: 133448, pctTotal: 56.08, pctAnterior: 86.95 },
+    { etapa: 'Viu planos', vol: 96620, pctTotal: 40.60, pctAnterior: 72.40 },
+    { etapa: 'Handoff', vol: 47804, pctTotal: 20.09, pctAnterior: 49.48 },
+    { etapa: 'Vidas convertidas', vol: 9209, pctTotal: 3.87, pctAnterior: 19.26 },
 ];
 
-// Distribuição por VIDA (total 7.494) — não por lead
+// Distribuição por VIDA (total 9.209) — não por lead
 const VIDAS = [
-    { faixa: '1 vida', vidas: 4492, pct: 59.9 },
-    { faixa: '2 vidas', vidas: 1528, pct: 20.4 },
-    { faixa: '3 vidas', vidas: 732, pct: 9.8 },
-    { faixa: '4 vidas', vidas: 400, pct: 5.3 },
-    { faixa: '5+ vidas', vidas: 342, pct: 4.6 },
+    { faixa: '1 vida', vidas: 5307, pct: 57.6 },
+    { faixa: '2 vidas', vidas: 1946, pct: 21.1 },
+    { faixa: '3 vidas', vidas: 936, pct: 10.2 },
+    { faixa: '4 vidas', vidas: 508, pct: 5.5 },
+    { faixa: '5+ vidas', vidas: 512, pct: 5.6 },
 ];
 
-// Tempo até conversão por VIDA (total 7.494)
+// Tempo até conversão por VIDA (total 9.209)
 const TEMPO = [
-    { faixa: '0 dias (mesmo dia)', conv: 2352, pct: 31.4 },
-    { faixa: '1 dia', conv: 878, pct: 11.7 },
-    { faixa: '2 dias', conv: 535, pct: 7.1 },
-    { faixa: '3 dias', conv: 401, pct: 5.4 },
-    { faixa: '4 dias', conv: 276, pct: 3.7 },
-    { faixa: '+4 dias', conv: 3052, pct: 40.7 },
+    { faixa: '0 dias (mesmo dia)', conv: 2701, pct: 29.3 },
+    { faixa: '1 dia', conv: 1042, pct: 11.3 },
+    { faixa: '2 dias', conv: 620, pct: 6.7 },
+    { faixa: '3 dias', conv: 452, pct: 4.9 },
+    { faixa: '4 dias', conv: 303, pct: 3.3 },
+    { faixa: '+4 dias', conv: 4091, pct: 44.4 },
 ];
 
 // Conversão por gestão (de-para do vendedor já no BASE_DIGITAL)
 const GESTAO = [
-    { gestao: 'Fabio', vidas: 3804, receita: 1209155.38, ticket: 317.86 },
-    { gestao: 'Josy', vidas: 3272, receita: 1110261.15, ticket: 339.32 },
-    { gestao: 'Administrativo', vidas: 335, receita: 121831.10, ticket: 363.67 },
-    { gestao: 'Actionline', vidas: 34, receita: 10618.47, ticket: 312.31 },
-    { gestao: 'SEM GESTÃO', vidas: 49, receita: 15575.30, ticket: 317.86 },
+    { gestao: 'Fabio', vidas: 4672, receita: 1485753.02, ticket: 318.01 },
+    { gestao: 'Josy', vidas: 4040, receita: 1366651.34, ticket: 338.28 },
+    { gestao: 'Administrativo', vidas: 445, receita: 164159.38, ticket: 368.90 },
+    { gestao: 'Actionline', vidas: 51, receita: 17202.75, ticket: 337.31 },
+    { gestao: 'SEM GESTÃO', vidas: 1, receita: 345.70, ticket: 345.70 },
 ];
 
-// Conversão por Motivo de Handoff (base handoffs da Eugenia col. Motivo_handoff 17/04–27/07 × BASE_DIGITAL Oracle ao vivo, regra DT_CADASTRAMENTO ≥ data da conversa)
+// Conversão por Motivo de Handoff (base handoffs da Eugenia col. Motivo_handoff 17/04–21/08 × BASE_DIGITAL Oracle ao vivo, regra DT_CADASTRAMENTO ≥ data da conversa)
 const MOTIVO = [
-    { motivo: 'Qualificado', leads: 7302, conv: 1519, vidas: 1746, taxa: 20.8 },
-    { motivo: 'Bypass', leads: 3837, conv: 485, vidas: 619, taxa: 12.64 },
-    { motivo: 'Outros', leads: 3860, conv: 341, vidas: 409, taxa: 8.83 },
-    { motivo: 'Knowledge Gap', leads: 7984, conv: 536, vidas: 1131, taxa: 6.71 },
-    { motivo: 'Cotação', leads: 1701, conv: 16, vidas: 20, taxa: 0.94 },
+    { motivo: 'Qualificado', leads: 7381, conv: 1585, vidas: 1844, taxa: 21.47 },
+    { motivo: 'Bypass', leads: 4347, conv: 560, vidas: 732, taxa: 12.88 },
+    { motivo: 'Outros', leads: 7898, conv: 566, vidas: 697, taxa: 7.17 },
+    { motivo: 'Knowledge Gap', leads: 9967, conv: 709, vidas: 1509, taxa: 7.11 },
+    { motivo: 'Cotação', leads: 18140, conv: 255, vidas: 309, taxa: 1.41 },
 ];
 
-// Conversão por etapa do funil (base completa EUGENIA_NOVO_LEADS × BASE_DIGITAL; total reconcilia com 7.494 vidas)
+// Conversão por etapa do funil (base completa EUGENIA_NOVO_LEADS × BASE_DIGITAL; total reconcilia com 9.209 vidas)
 const FUNILCONV = [
-    { etapa: 'Não engajou', leads: 72490, conv: 800, vidas: 1098, taxa: 1.1 },
-    { etapa: 'Engajou', leads: 19535, conv: 385, vidas: 527, taxa: 1.97 },
-    { etapa: 'Forneceu dados', leads: 31084, conv: 886, vidas: 1116, taxa: 2.85 },
-    { etapa: 'Viu planos', leads: 48931, conv: 680, vidas: 828, taxa: 1.39 },
-    { etapa: 'Handoff', leads: 24684, conv: 2897, vidas: 3925, taxa: 11.74 },
+    { etapa: 'Não engajou', leads: 82625, conv: 916, vidas: 1302, taxa: 1.11 },
+    { etapa: 'Engajou', leads: 21830, conv: 427, vidas: 587, taxa: 1.96 },
+    { etapa: 'Forneceu dados', leads: 36794, conv: 1010, vidas: 1294, taxa: 2.75 },
+    { etapa: 'Viu planos', leads: 48772, conv: 763, vidas: 935, taxa: 1.56 },
+    { etapa: 'Handoff', leads: 47733, conv: 3675, vidas: 5091, taxa: 7.70 },
 ];
 // Leads com telefone estrangeiro/malformado (não normaliza p/ 11 díg. BR) — não cruzáveis com vendas.
-// Somados aos 196.724 telefones válidos do FUNILCONV, fecham nos 196.873 leads do topo.
-const FUNILCONV_INVALIDO = 149;
+// Somados aos 237.754 telefones válidos do FUNILCONV, fecham nos 237.958 leads do topo.
+const FUNILCONV_INVALIDO = 204;
 
 // Volume de leads por mês (col. Data da base completa) — abril e julho são meses PARCIAIS
-// (base começa em 17/04; julho cortado em 27/07, data do extract) — sinalizado no gráfico.
+// (base começa em 17/04; agosto cortado em 21/08, data do extract, e sem export em 14–16/08) — sinalizado no gráfico.
 const LEADS_MES = [
     { mes: 'Abril', leads: 16141, dias: 14, parcial: true },
     { mes: 'Maio', leads: 104398, dias: 31, parcial: false },
     { mes: 'Junho', leads: 52112, dias: 30, parcial: false },
-    { mes: 'Julho', leads: 24222, dias: 27, parcial: true },
+    { mes: 'Julho', leads: 29380, dias: 31, parcial: false },
+    { mes: 'Agosto', leads: 35927, dias: 18, parcial: true },
 ];
 
 // Vidas convertidas por mês (mês de DT_CADASTRAMENTO da venda) — mesma regra oficial de
-// conversão (telefone + data da conversa), soma bate nas 7.494 vidas do topo do dashboard.
+// conversão (telefone + data da conversa), soma bate nas 9.209 vidas do topo do dashboard.
 const VIDAS_MES = [
-    { mes: 'Abril', vidas: 436, dias: 14, parcial: true },
-    { mes: 'Maio', vidas: 2387, dias: 31, parcial: false },
-    { mes: 'Junho', vidas: 3110, dias: 30, parcial: false },
-    { mes: 'Julho', vidas: 1561, dias: 27, parcial: true },
+    { mes: 'Abril', vidas: 433, dias: 14, parcial: true },
+    { mes: 'Maio', vidas: 2390, dias: 31, parcial: false },
+    { mes: 'Junho', vidas: 3112, dias: 30, parcial: false },
+    { mes: 'Julho', vidas: 1970, dias: 31, parcial: false },
+    { mes: 'Agosto', vidas: 1304, dias: 18, parcial: true },
 ];
 
-// ─── ABA 2: VENDAS REALIZADAS (7.494 vidas convertidas) ───────────────────────
-const VR_KPIS = { vidas: 7494, telefones: 5648, receita: 2467441.40, arr: 29609296.82, ticket: 329.26, churn: 187, churnPct: 2.5 };
+// ─── ABA 2: VENDAS REALIZADAS (9.209 vidas convertidas) ───────────────────────
+const VR_KPIS = { vidas: 9209, telefones: 6791, receita: 3034112.19, arr: 36409346.33, ticket: 329.47, churn: 283, churnPct: 3.1 };
 
 const VR_PLANO = [
-    { grupo: 'NOSSO PLANO', vidas: 3362, pct: 44.9, receita: 1084534.94, ticket: 322.59 },
-    { grupo: 'NOSSO MEDICO', vidas: 1908, pct: 25.5, receita: 634086.27, ticket: 332.33 },
-    { grupo: 'SMART', vidas: 1851, pct: 24.7, receita: 625376.72, ticket: 337.86 },
-    { grupo: 'INTEGRADO', vidas: 199, pct: 2.7, receita: 60445.74, ticket: 303.75 },
-    { grupo: 'ADVANCE', vidas: 57, pct: 0.8, receita: 32937.87, ticket: 577.86 },
-    { grupo: 'HAP DIGITAL', vidas: 40, pct: 0.5, receita: 11819.04, ticket: 295.48 },
-    { grupo: 'ADAPT', vidas: 30, pct: 0.4, receita: 7430.10, ticket: 247.67 },
-    { grupo: 'PERSONAL', vidas: 25, pct: 0.3, receita: 4759.39, ticket: 190.38 },
-    { grupo: 'PLENO', vidas: 17, pct: 0.2, receita: 4468.92, ticket: 262.88 },
-    { grupo: 'CCG', vidas: 4, pct: 0.1, receita: 971.37, ticket: 242.84 },
-    { grupo: 'PREMIUM', vidas: 1, pct: 0.0, receita: 611.04, ticket: 611.04 },
+    { grupo: 'NOSSO PLANO', vidas: 4019, pct: 43.6, receita: 1293774.89, ticket: 321.91 },
+    { grupo: 'NOSSO MEDICO', vidas: 2444, pct: 26.5, receita: 820015.18, ticket: 335.52 },
+    { grupo: 'SMART', vidas: 2251, pct: 24.4, receita: 751269.29, ticket: 333.75 },
+    { grupo: 'INTEGRADO', vidas: 255, pct: 2.8, receita: 76995.01, ticket: 301.94 },
+    { grupo: 'ADVANCE', vidas: 82, pct: 0.9, receita: 46394.06, ticket: 565.78 },
+    { grupo: 'HAP DIGITAL', vidas: 48, pct: 0.5, receita: 14036.68, ticket: 292.43 },
+    { grupo: 'ADAPT', vidas: 41, pct: 0.4, receita: 9734.24, ticket: 237.42 },
+    { grupo: 'PERSONAL', vidas: 40, pct: 0.4, receita: 8960.93, ticket: 224.02 },
+    { grupo: 'PLENO', vidas: 19, pct: 0.2, receita: 5143.36, ticket: 270.7 },
+    { grupo: 'CCG', vidas: 5, pct: 0.1, receita: 1811.81, ticket: 362.36 },
+    { grupo: 'PREMIUM', vidas: 5, pct: 0.1, receita: 5976.74, ticket: 1195.35 },
 ];
 
 const VR_TICKET = [
-    { faixa: 'até R$150', vidas: 595, pct: 7.9 },
-    { faixa: 'R$150–250', vidas: 2664, pct: 35.5 },
-    { faixa: 'R$250–400', vidas: 2888, pct: 38.5 },
-    { faixa: 'R$400–600', vidas: 744, pct: 9.9 },
-    { faixa: 'R$600–1000', vidas: 370, pct: 4.9 },
-    { faixa: 'acima R$1000', vidas: 233, pct: 3.1 },
+    { faixa: 'ate R$150', vidas: 763, pct: 8.3 },
+    { faixa: 'R$150-250', vidas: 3199, pct: 34.7 },
+    { faixa: 'R$250-400', vidas: 3565, pct: 38.7 },
+    { faixa: 'R$400-600', vidas: 950, pct: 10.3 },
+    { faixa: 'R$600-1000', vidas: 455, pct: 4.9 },
+    { faixa: 'acima R$1000', vidas: 277, pct: 3.0 },
 ];
 
 const VR_UF = [
-    { uf: 'SP', vidas: 2767, pct: 36.9, receita: 916778.95 },
-    { uf: 'MG', vidas: 650, pct: 8.7, receita: 178045.20 },
-    { uf: 'BA', vidas: 588, pct: 7.8, receita: 240554.59 },
-    { uf: 'GO', vidas: 508, pct: 6.8, receita: 163541.42 },
-    { uf: 'PE', vidas: 383, pct: 5.1, receita: 136450.26 },
-    { uf: 'CE', vidas: 338, pct: 4.5, receita: 112309.24 },
-    { uf: 'RJ', vidas: 311, pct: 4.1, receita: 103930.84 },
-    { uf: 'PR', vidas: 302, pct: 4.0, receita: 80605.30 },
-    { uf: 'PA', vidas: 230, pct: 3.1, receita: 79564.28 },
-    { uf: 'DF', vidas: 229, pct: 3.1, receita: 68249.89 },
-    { uf: 'RN', vidas: 211, pct: 2.8, receita: 63662.43 },
-    { uf: 'RS', vidas: 189, pct: 2.5, receita: 56331.44 },
-    { uf: 'AM', vidas: 146, pct: 1.9, receita: 58281.69 },
-    { uf: 'MA', vidas: 127, pct: 1.7, receita: 42192.03 },
-    { uf: 'SC', vidas: 111, pct: 1.5, receita: 44989.90 },
-    { uf: 'Outros', vidas: 404, pct: 5.4, receita: 121953.95 },
+    { uf: 'SP', vidas: 3445, pct: 37.4, receita: 1134091.91 },
+    { uf: 'MG', vidas: 764, pct: 8.3, receita: 209877.62 },
+    { uf: 'BA', vidas: 730, pct: 7.9, receita: 301750.91 },
+    { uf: 'GO', vidas: 608, pct: 6.6, receita: 194304.13 },
+    { uf: 'PE', vidas: 475, pct: 5.2, receita: 171367.35 },
+    { uf: 'CE', vidas: 392, pct: 4.3, receita: 129885.72 },
+    { uf: 'RJ', vidas: 372, pct: 4.0, receita: 123834.04 },
+    { uf: 'PR', vidas: 369, pct: 4.0, receita: 95035.02 },
+    { uf: 'DF', vidas: 283, pct: 3.1, receita: 84266.96 },
+    { uf: 'PA', vidas: 279, pct: 3.0, receita: 99021.26 },
+    { uf: 'RN', vidas: 258, pct: 2.8, receita: 76690.83 },
+    { uf: 'RS', vidas: 231, pct: 2.5, receita: 69875.28 },
+    { uf: 'AM', vidas: 182, pct: 2.0, receita: 72713.8 },
+    { uf: 'SC', vidas: 165, pct: 1.8, receita: 65428.39 },
+    { uf: 'MA', vidas: 160, pct: 1.7, receita: 53161.07 },
+    { uf: 'Outros', vidas: 496, pct: 5.4, receita: 152807.92 },
 ];
 
 const VR_CIDADE = [
-    { cidade: 'SAO PAULO', vidas: 1018, pct: 13.6 },
-    { cidade: 'SALVADOR', vidas: 381, pct: 5.1 },
-    { cidade: 'GOIANIA', vidas: 313, pct: 4.2 },
-    { cidade: 'BELO HORIZONTE', vidas: 273, pct: 3.6 },
-    { cidade: 'FORTALEZA', vidas: 236, pct: 3.1 },
-    { cidade: 'BRASILIA', vidas: 228, pct: 3.0 },
-    { cidade: 'RIO DE JANEIRO', vidas: 180, pct: 2.4 },
-    { cidade: 'CURITIBA', vidas: 162, pct: 2.2 },
-    { cidade: 'RECIFE', vidas: 149, pct: 2.0 },
-    { cidade: 'BELEM', vidas: 149, pct: 2.0 },
+    { cidade: 'SAO PAULO', vidas: 1273, pct: 13.8 },
+    { cidade: 'SALVADOR', vidas: 481, pct: 5.2 },
+    { cidade: 'GOIANIA', vidas: 360, pct: 3.9 },
+    { cidade: 'BELO HORIZONTE', vidas: 317, pct: 3.4 },
+    { cidade: 'BRASILIA', vidas: 282, pct: 3.1 },
+    { cidade: 'FORTALEZA', vidas: 269, pct: 2.9 },
+    { cidade: 'RIO DE JANEIRO', vidas: 215, pct: 2.3 },
+    { cidade: 'CURITIBA', vidas: 206, pct: 2.2 },
+    { cidade: 'RECIFE', vidas: 193, pct: 2.1 },
+    { cidade: 'BELEM', vidas: 181, pct: 2.0 },
 ];
 
 const VR_VENDEDOR = [
-    { vendedor: 'BRUNA CAMPASSI', vidas: 182, receita: 54430.90, ticket: 299.07 },
-    { vendedor: 'PEDRO PAULO FRANCA VILLA', vidas: 149, receita: 49011.35, ticket: 328.94 },
-    { vendedor: 'JULIANA NUNES', vidas: 143, receita: 51988.05, ticket: 363.55 },
-    { vendedor: 'JAQUELINE SILVA', vidas: 133, receita: 41831.98, ticket: 314.53 },
-    { vendedor: 'ANDREZZA MACCHINI', vidas: 122, receita: 35309.57, ticket: 289.42 },
-    { vendedor: 'FELIPE SOARES', vidas: 111, receita: 34769.93, ticket: 313.24 },
-    { vendedor: 'ANA CAROLINA ANTUNES', vidas: 98, receita: 41185.03, ticket: 420.26 },
-    { vendedor: 'ALINE GUNELLO', vidas: 94, receita: 32069.15, ticket: 341.16 },
-    { vendedor: 'MATHEUS ALEIXO SOARES', vidas: 91, receita: 38757.46, ticket: 425.91 },
-    { vendedor: 'MARIANA FELIX', vidas: 87, receita: 29748.15, ticket: 341.93 },
-    { vendedor: 'JULIA SILVA', vidas: 87, receita: 37297.32, ticket: 428.70 },
-    { vendedor: 'ROBSON SOUZA', vidas: 83, receita: 26226.58, ticket: 315.98 },
-    { vendedor: 'DELIANE GOMES', vidas: 81, receita: 26202.24, ticket: 323.48 },
-    { vendedor: 'GUSTAVO BARROS', vidas: 80, receita: 30040.66, ticket: 375.51 },
-    { vendedor: 'ANA THALYTA SAMPAIO PINHEIRO', vidas: 80, receita: 28878.78, ticket: 360.98 },
+    { vendedor: 'BRUNA CAMPASSI', vidas: 206, receita: 62176.22, ticket: 301.83 },
+    { vendedor: 'JAQUELINE SILVA', vidas: 191, receita: 59713.88, ticket: 312.64 },
+    { vendedor: 'JULIANA NUNES', vidas: 189, receita: 72382.94, ticket: 382.98 },
+    { vendedor: 'PEDRO PAULO FRANCA VILLA', vidas: 165, receita: 53993.81, ticket: 327.24 },
+    { vendedor: 'MATHEUS ALEIXO SOARES', vidas: 143, receita: 60307.03, ticket: 421.73 },
+    { vendedor: 'ANDREZZA MACCHINI', vidas: 138, receita: 39939.04, ticket: 289.41 },
+    { vendedor: 'FELIPE SOARES', vidas: 135, receita: 40045.29, ticket: 296.63 },
+    { vendedor: 'ANA CAROLINA ANTUNES', vidas: 124, receita: 48414.43, ticket: 390.44 },
+    { vendedor: 'JULIA SILVA', vidas: 117, receita: 45602.19, ticket: 389.76 },
+    { vendedor: 'ANA THALYTA SAMPAIO PINHEIRO', vidas: 117, receita: 43254.07, ticket: 369.69 },
+    { vendedor: 'ROBSON SOUZA', vidas: 108, receita: 33665.55, ticket: 311.72 },
+    { vendedor: 'ANGELO RIBEIRO', vidas: 108, receita: 29176.8, ticket: 270.16 },
+    { vendedor: 'DELIANE GOMES', vidas: 107, receita: 35337.74, ticket: 330.26 },
+    { vendedor: 'GUSTAVO BARROS', vidas: 103, receita: 36898.18, ticket: 358.23 },
+    { vendedor: 'MARIANA FELIX', vidas: 102, receita: 35215.85, ticket: 345.25 },
 ];
 
 const VR_SUPERVISOR = [
-    { sup: 'HUMBERTO BANQUERI', vidas: 1369, pct: 18.3 },
-    { sup: 'LUIZ ROBERTO', vidas: 1016, pct: 13.6 },
-    { sup: 'ERIKA PAULA', vidas: 657, pct: 8.8 },
-    { sup: 'GONCALO MARTINS', vidas: 618, pct: 8.2 },
-    { sup: 'NEFTALY LEONEL', vidas: 606, pct: 8.1 },
-    { sup: 'PRISCILLA REGIS', vidas: 496, pct: 6.6 },
-    { sup: 'FERNANDA VIZZONI', vidas: 463, pct: 6.2 },
-    { sup: 'REBECA ALVINO', vidas: 449, pct: 6.0 },
-    { sup: 'JUNIO SANTOS', vidas: 427, pct: 5.7 },
-    { sup: 'ADMINISTRATIVO', vidas: 335, pct: 4.5 },
-    { sup: 'MICHELE FERREIRA', vidas: 307, pct: 4.1 },
-    { sup: 'NATANAEL ZAVANELA', vidas: 280, pct: 3.7 },
-    { sup: 'CAROLINE GUERKE', vidas: 216, pct: 2.9 },
-    { sup: 'BENVE', vidas: 145, pct: 1.9 },
-    { sup: 'Sem supervisor', vidas: 49, pct: 0.7 },
-    { sup: 'ACTIONLINE', vidas: 34, pct: 0.5 },
-    { sup: 'REBECA MOURA', vidas: 26, pct: 0.3 },
+    { sup: 'HUMBERTO BANQUERI', vidas: 1669, pct: 18.1 },
+    { sup: 'LUIZ ROBERTO', vidas: 1081, pct: 11.7 },
+    { sup: 'ERIKA PAULA', vidas: 795, pct: 8.6 },
+    { sup: 'NEFTALY LEONEL', vidas: 791, pct: 8.6 },
+    { sup: 'GONCALO MARTINS', vidas: 725, pct: 7.9 },
+    { sup: 'FERNANDA VIZZONI', vidas: 590, pct: 6.4 },
+    { sup: 'JUNIO SANTOS', vidas: 581, pct: 6.3 },
+    { sup: 'PRISCILLA REGIS', vidas: 578, pct: 6.3 },
+    { sup: 'REBECA ALVINO', vidas: 560, pct: 6.1 },
+    { sup: 'ADMINISTRATIVO', vidas: 445, pct: 4.8 },
+    { sup: 'MICHELE FERREIRA', vidas: 375, pct: 4.1 },
+    { sup: 'BENVE', vidas: 356, pct: 3.9 },
+    { sup: 'NATANAEL ZAVANELA', vidas: 331, pct: 3.6 },
+    { sup: 'CAROLINE GUERKE', vidas: 258, pct: 2.8 },
+    { sup: 'ACTIONLINE', vidas: 51, pct: 0.6 },
+    { sup: 'REBECA MOURA', vidas: 21, pct: 0.2 },
     { sup: 'JOSY BOMFIM', vidas: 1, pct: 0.0 },
+    { sup: '(vazio)', vidas: 1, pct: 0.0 },
 ];
 
 const VR_UNIDADE = [
-    { unidade: 'RIBEIRÃO PRETO', vidas: 2966, pct: 39.6 },
-    { unidade: 'FORTALEZA', vidas: 1881, pct: 25.1 },
-    { unidade: 'NACIONAL', vidas: 523, pct: 7.0 },
-    { unidade: 'SÃO PAULO', vidas: 499, pct: 6.7 },
-    { unidade: 'NOVA SEG', vidas: 455, pct: 6.1 },
-    { unidade: 'PIRASSUNUNGA', vidas: 423, pct: 5.6 },
-    { unidade: 'Sem unidade', vidas: 382, pct: 5.1 },
-    { unidade: 'BENVE', vidas: 303, pct: 4.0 },
-    { unidade: 'ACTIONLINE', vidas: 34, pct: 0.5 },
-    { unidade: 'BAURU', vidas: 26, pct: 0.3 },
+    { unidade: 'RIBEIRÃO PRETO', vidas: 3681, pct: 40.0 },
+    { unidade: 'FORTALEZA', vidas: 2311, pct: 25.1 },
+    { unidade: 'NACIONAL', vidas: 633, pct: 6.9 },
+    { unidade: 'NOVA SEG', vidas: 590, pct: 6.4 },
+    { unidade: 'SÃO PAULO', vidas: 581, pct: 6.3 },
+    { unidade: 'PIRASSUNUNGA', vidas: 528, pct: 5.7 },
+    { unidade: '(vazio)', vidas: 444, pct: 4.8 },
+    { unidade: 'BENVE', vidas: 356, pct: 3.9 },
+    { unidade: 'ACTIONLINE', vidas: 51, pct: 0.6 },
+    { unidade: 'BAURU', vidas: 32, pct: 0.3 },
     { unidade: 'ADMINISTRATIVO', vidas: 2, pct: 0.0 },
 ];
 
 const VR_AREA = [
-    { area: 'INSIDE SALES', vidas: 5441, pct: 72.6 },
-    { area: 'NACIONAL', vidas: 523, pct: 7.0 },
-    { area: 'NOVA SEG', vidas: 455, pct: 6.1 },
-    { area: 'PROMOTORES', vidas: 354, pct: 4.7 },
-    { area: 'ADMINISTRATIVO', vidas: 335, pct: 4.5 },
-    { area: 'BENVE', vidas: 303, pct: 4.0 },
-    { area: 'Sem área', vidas: 49, pct: 0.7 },
-    { area: 'ACTIONLINE', vidas: 34, pct: 0.5 },
+    { area: 'INSIDE SALES', vidas: 6738, pct: 73.2 },
+    { area: 'NACIONAL', vidas: 633, pct: 6.9 },
+    { area: 'NOVA SEG', vidas: 590, pct: 6.4 },
+    { area: 'ADMINISTRATIVO', vidas: 445, pct: 4.8 },
+    { area: 'PROMOTORES', vidas: 395, pct: 4.3 },
+    { area: 'BENVE', vidas: 356, pct: 3.9 },
+    { area: 'ACTIONLINE', vidas: 51, pct: 0.6 },
+    { area: '(vazio)', vidas: 1, pct: 0.0 },
 ];
 
 const VR_MENSAL = [
-    { mes: 'Abr/26', contatos: 781, cadastros: 436 },
-    { mes: 'Mai/26', contatos: 3029, cadastros: 2387 },
-    { mes: 'Jun/26', contatos: 2853, cadastros: 3110 },
-    { mes: 'Jul/26', contatos: 831, cadastros: 1561 },
+    { mes: 'Abr/26', contatos: 821, cadastros: 433 },
+    { mes: 'Mai/26', contatos: 3276, cadastros: 2390 },
+    { mes: 'Jun/26', contatos: 3073, cadastros: 3112 },
+    { mes: 'Jul/26', contatos: 1354, cadastros: 1970 },
+    { mes: 'Ago/26', contatos: 685, cadastros: 1304 },
 ];
 
 const VR_CANAL = [
-    { canal: 'Individual', vidas: 5559, pct: 74.2, receita: 1967618.33 },
-    { canal: 'PIM (3–29 vidas)', vidas: 1925, pct: 25.7, receita: 497056.69 },
-    { canal: 'Middle (30–99)', vidas: 4, pct: 0.1, receita: 1056.23 },
-    { canal: 'Adesão (Administradora)', vidas: 6, pct: 0.1, receita: 1710.15 },
+    { canal: '01-INDIVIDUAL', vidas: 6585, pct: 71.5, receita: 2346388.23 },
+    { canal: '02-PIM (IND/3-29 VIDAS)', vidas: 2611, pct: 28.4, receita: 684041.92 },
+    { canal: '07-ADMINISTRADORA', vidas: 9, pct: 0.1, receita: 2625.81 },
+    { canal: '03-MIDDLE I(30-99 VIDAS)', vidas: 4, pct: 0.0, receita: 1056.23 },
 ];
 
 // ─── COLORS ──────────────────────────────────────────────────────────────────
@@ -1019,7 +1193,7 @@ function buildVidasTable() {
     const tr = document.createElement('tr');
     tr.style.fontWeight = '700';
     tr.style.background = '#f9fafb';
-    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">7.494</td><td class="td-right">100%</td><td></td>`;
+    tr.innerHTML = `<td><strong>Total</strong></td><td class="td-right">9.209</td><td class="td-right">100%</td><td></td>`;
     tbody.appendChild(tr);
 }
 
@@ -1135,7 +1309,7 @@ function buildTempoTable() {
     const tr = document.createElement('tr');
     tr.style.fontWeight = '700';
     tr.style.background = '#f9fafb';
-    tr.innerHTML = `<td><strong>Total / Média</strong></td><td class="td-right">7.494</td><td class="td-right">100%</td><td><em style="font-size:12px;color:#6b7280">Tempo médio: 8,6 dias</em></td><td></td>`;
+    tr.innerHTML = `<td><strong>Total / Média</strong></td><td class="td-right">9.209</td><td class="td-right">100%</td><td><em style="font-size:12px;color:#6b7280">Tempo médio: 11,8 dias</em></td><td></td>`;
     tbody.appendChild(tr);
 }
 
@@ -1327,12 +1501,12 @@ const MES_TOGGLE_CFG = {
     leads: {
         data: LEADS_MES, key: 'leads', label: 'Leads',
         color: ACCENT_COLORS[0], colorParcial: 'rgba(57,73,171,0.35)',
-        sub: 'Total de leads recebidos por mês (base completa, 17/04–27/07) — barras mais claras (abril e julho) são meses parciais',
+        sub: 'Total de leads recebidos por mês (base completa, 17/04–21/08) — barras mais claras (abril e agosto) são parciais; sem export em 14–16/08',
     },
     vidas: {
         data: VIDAS_MES, key: 'vidas', label: 'Vidas',
         color: ACCENT_COLORS[1], colorParcial: 'rgba(233,30,99,0.35)',
-        sub: 'Vidas convertidas por mês (mês de cadastro da venda) — barras mais claras (abril e julho) são meses parciais',
+        sub: 'Vidas convertidas por mês (mês de cadastro da venda) — barras mais claras (abril e agosto) são meses parciais',
     },
 };
 
@@ -1555,6 +1729,493 @@ function buildVRCanal() {
     vrCharts.push(c);
 }
 
+
+// ═════════════════ ABA 3: COMPARATIVO 3 MESES ═════════════════════════════
+// ═══ ABA 3: COMPARATIVO 3 MESES — gerado por py\eugenia_comparativo_3m.py
+// Janela comparavel: leads dos dias 1-14 de cada mes, venda contada ate D+7
+// (base de leads ate 2026-08-21; 7 dias de maturacao => corte no dia 14)
+const CMP_META = { matur: 7, diaCorte: 14, hoje: '2026-08-21', meses: ['Junho', 'Julho', 'Agosto'] };
+
+// Resumo por mes. `*Comp` = janela comparavel (mesma maturacao); `*Tot` = coorte completa
+// (volume real do mes, NAO comparavel entre meses porque a maturacao e desigual).
+const CMP_RESUMO = [
+    { mes: 'Junho', leadsTot: 52084, convTot: 2327, vidasTot: 3073, taxaTot: 4.47, vidas1kTot: 59.0, rec1kTot: 19377.99, ticketTot: 328.44, vpcTot: 1.32, leadsComp: 25956, convComp: 824, vidasComp: 1008, taxaComp: 3.17, vidas1kComp: 38.8, rec1kComp: 12803.44, ticketComp: 329.69, vpcComp: 1.22 },
+    { mes: 'Julho', leadsTot: 29346, convTot: 964, vidasTot: 1354, taxaTot: 3.28, vidas1kTot: 46.1, rec1kTot: 14865.5, ticketTot: 322.19, vpcTot: 1.4, leadsComp: 14865, convComp: 388, vidasComp: 506, taxaComp: 2.61, vidas1kComp: 34.0, rec1kComp: 11011.8, ticketComp: 323.5, vpcComp: 1.3 },
+    { mes: 'Agosto', leadsTot: 35880, convTot: 492, vidasTot: 685, taxaTot: 1.37, vidas1kTot: 19.1, rec1kTot: 6280.57, ticketTot: 328.97, vpcTot: 1.39, leadsComp: 19475, convComp: 316, vidasComp: 415, taxaComp: 1.62, vidas1kComp: 21.3, rec1kComp: 6877.4, ticketComp: 322.74, vpcComp: 1.31 },
+];
+
+// VOLUME POR DIA — o corte que explica a queda da taxa. leadsDia usa como denominador
+// so os dias que o export REALMENTE trouxe (agosto nao tem 14-16/08). vendasDia = TODAS
+// as vidas digitais do dia (denominador do share), excluindo o dia corrente (parcial).
+// eugDia = vidas atribuidas a Eugenia por dia de cadastro. shareEug = eugDia / vendasDia.
+const CMP_VOLUME = [
+    { mes: 'Junho', diasLead: 30, leads: 52084, leadsDia: 1736, diasVenda: 30, vendas: 13349, vendasDia: 445, eug: 3112, eugDia: 103.7, shareEug: 23.3 },
+    { mes: 'Julho', diasLead: 31, leads: 29346, leadsDia: 947, diasVenda: 31, vendas: 11873, vendasDia: 383, eug: 1970, eugDia: 63.5, shareEug: 16.6 },
+    { mes: 'Agosto', diasLead: 18, leads: 35880, leadsDia: 1993, diasVenda: 20, vendas: 5973, vendasDia: 299, eug: 1290, eugDia: 64.5, shareEug: 21.6 },
+];
+
+// Curva de maturacao: taxa de conversao acumulada por dias desde a conversa
+// (mesma coorte comparavel de cada mes) — mostra que a queda NAO e imaturidade.
+const CMP_MATUR = [
+    { mes: 'Junho', dias: [1, 2, 3, 4, 5, 6, 7], taxas: [2.03, 2.38, 2.59, 2.77, 2.9, 3.07, 3.17] },
+    { mes: 'Julho', dias: [1, 2, 3, 4, 5, 6, 7], taxas: [1.64, 1.86, 2.06, 2.22, 2.37, 2.52, 2.61] },
+    { mes: 'Agosto', dias: [1, 2, 3, 4, 5, 6, 7], taxas: [1.07, 1.17, 1.25, 1.29, 1.46, 1.56, 1.62] },
+];
+
+// Canal de entrada do lead (1a conversa). share = % dos leads do mes (coorte completa);
+// taxa = conversao na janela comparavel.
+const CMP_CANAL = [
+    { canal: 'Orgânico / espontâneo', m: [{ leads: 42334, share: 81.3, taxa: 3.68, leadsComp: 19741, vidas: 2788 }, { leads: 18665, share: 63.6, taxa: 3.1, leadsComp: 10002, vidas: 1092 }, { leads: 12141, share: 33.8, taxa: 2.9, leadsComp: 6937, vidas: 444 }] },
+    { canal: 'Anúncio #218', m: [{ leads: 3442, share: 6.6, taxa: 0.31, leadsComp: 2561, vidas: 23 }, { leads: 3599, share: 12.3, taxa: 0.36, leadsComp: 1386, vidas: 20 }, { leads: 10587, share: 29.5, taxa: 0.31, leadsComp: 5242, vidas: 23 }] },
+    { canal: 'Anúncio #1052', m: [{ leads: 1646, share: 3.2, taxa: 0.07, leadsComp: 1346, vidas: 7 }, { leads: 2822, share: 9.6, taxa: 0.79, leadsComp: 1271, vidas: 16 }, { leads: 5398, share: 15.0, taxa: 0.17, leadsComp: 2949, vidas: 11 }] },
+    { canal: 'Demais anúncios', m: [{ leads: 2292, share: 4.4, taxa: 4.79, leadsComp: 1127, vidas: 155 }, { leads: 3259, share: 11.1, taxa: 1.81, leadsComp: 1717, vidas: 143 }, { leads: 7049, share: 19.6, taxa: 1.77, leadsComp: 3946, vidas: 175 }] },
+    { canal: 'Mídia (áudio/foto)', m: [{ leads: 905, share: 1.7, taxa: 5.62, leadsComp: 534, vidas: 62 }, { leads: 57, share: 0.2, taxa: 3.77, leadsComp: 53, vidas: 4 }, { leads: 23, share: 0.1, taxa: 0.0, leadsComp: 6, vidas: 0 }] },
+    { canal: 'Spam links', m: [{ leads: 1465, share: 2.8, taxa: 0.77, leadsComp: 647, vidas: 38 }, { leads: 944, share: 3.2, taxa: 6.88, leadsComp: 436, vidas: 79 }, { leads: 682, share: 1.9, taxa: 6.08, leadsComp: 395, vidas: 32 }] },
+];
+
+// Decomposicao da queda Junho -> Agosto (pontos percentuais de conversao).
+// mix  = mudou a COMPOSICAO do trafego (mais lead de canal que converte menos)
+// taxa = o MESMO canal passou a converter menos
+const CMP_SHIFT = { taxaBase: 3.17, taxaAtual: 1.62, delta: -1.55, efeitoMix: -0.78, efeitoTaxa: -0.77, mesBase: 'Junho', mesAtual: 'Agosto',
+    linhas: [
+        { canal: 'Orgânico / espontâneo', mix: -1.487, taxa: -0.278, shareBase: 76.1, shareAtual: 35.6, taxaBase: 3.68, taxaAtual: 2.9 },
+        { canal: 'Anúncio #218', mix: 0.053, taxa: -0.002, shareBase: 9.9, shareAtual: 26.9, taxaBase: 0.31, taxaAtual: 0.31 },
+        { canal: 'Anúncio #1052', mix: 0.007, taxa: 0.014, shareBase: 5.2, shareAtual: 15.1, taxaBase: 0.07, taxaAtual: 0.17 },
+        { canal: 'Demais anúncios', mix: 0.763, taxa: -0.611, shareBase: 4.3, shareAtual: 20.3, taxaBase: 4.79, taxaAtual: 1.77 },
+        { canal: 'Mídia (áudio/foto)', mix: -0.114, taxa: -0.002, shareBase: 2.1, shareAtual: 0.0, taxaBase: 5.62, taxaAtual: 0.0 },
+        { canal: 'Spam links', mix: -0.004, taxa: 0.108, shareBase: 2.5, shareAtual: 2.0, taxaBase: 0.77, taxaAtual: 6.08 },
+    ] };
+
+// Funil por mes (% dos telefones do mes que alcancaram a etapa).
+// ATENCAO: em 13/07 o export passou a marcar Handoff=1 tambem p/ Motivo='cotacao' —
+// a etapa Handoff NAO e comparavel com jun/26. Ver nota no dashboard.
+const CMP_FUNIL = [
+    { mes: 'Junho', leads: 52084, eng: 65.7, dados: 56.8, viu: 37.5, ho: 14.4 },
+    { mes: 'Julho', leads: 29346, eng: 77.8, dados: 71.6, viu: 50.9, ho: 33.9 },
+    { mes: 'Agosto', leads: 35880, eng: 74.6, dados: 69.5, viu: 56.6, ho: 51.5 },
+];
+
+// Conversao por etapa mais avancada alcancada (janela comparavel) — qualidade do lead
+// por profundidade de jornada.
+const CMP_ETAPA = [
+    { etapa: 'Handoff', m: [{ leads: 4307, share: 16.6, taxa: 12.12 }, { leads: 2866, share: 19.3, taxa: 7.99 }, { leads: 10925, share: 56.1, taxa: 2.39 }] },
+    { etapa: 'Viu planos', m: [{ leads: 6376, share: 24.6, taxa: 0.93 }, { leads: 4423, share: 29.8, taxa: 1.15 }, { leads: 567, share: 2.9, taxa: 0.0 }] },
+    { etapa: 'Forneceu dados', m: [{ leads: 5082, share: 19.6, taxa: 2.34 }, { leads: 3157, share: 21.2, taxa: 1.71 }, { leads: 2833, share: 14.5, taxa: 1.13 }] },
+    { etapa: 'Engajou', m: [{ leads: 2214, share: 8.5, taxa: 1.63 }, { leads: 1153, share: 7.8, taxa: 1.65 }, { leads: 1015, share: 5.2, taxa: 0.3 }] },
+    { etapa: 'Não engajou', m: [{ leads: 7977, share: 30.7, taxa: 1.1 }, { leads: 3266, share: 22.0, taxa: 1.07 }, { leads: 4135, share: 21.2, taxa: 0.48 }] },
+];
+
+// Motivo do handoff (janela comparavel) — share dos handoffs do mes e conversao.
+const CMP_MOTIVO = [
+    { motivo: 'Qualificado', m: [{ leads: 1774, share: 41.2, taxa: 20.41 }, { leads: 625, share: 21.8, taxa: 20.96 }, { leads: 35, share: 0.3, taxa: 11.43 }] },
+    { motivo: 'Bypass', m: [{ leads: 716, share: 16.6, taxa: 7.82 }, { leads: 189, share: 6.6, taxa: 8.47 }, { leads: 254, share: 2.3, taxa: 7.48 }] },
+    { motivo: 'Outros', m: [{ leads: 556, share: 12.9, taxa: 6.65 }, { leads: 441, share: 15.4, taxa: 6.58 }, { leads: 2337, share: 21.4, taxa: 4.62 }] },
+    { motivo: 'Knowledge Gap', m: [{ leads: 1261, share: 29.3, taxa: 5.31 }, { leads: 990, share: 34.5, taxa: 4.44 }, { leads: 1011, share: 9.3, taxa: 4.25 }] },
+    { motivo: 'Cotação', m: [{ leads: 0, share: 0.0, taxa: 0.0 }, { leads: 621, share: 21.7, taxa: 1.45 }, { leads: 7288, share: 66.7, taxa: 1.19 }] },
+];
+
+// UF (janela comparavel) — top 10 por volume no mes mais recente.
+const CMP_UF = [
+    { uf: 'SP', m: [{ leads: 7352, share: 28.3, taxa: 3.29 }, { leads: 4436, share: 29.8, taxa: 2.34 }, { leads: 5052, share: 25.9, taxa: 2.26 }] },
+    { uf: 'BA', m: [{ leads: 2321, share: 8.9, taxa: 3.62 }, { leads: 1496, share: 10.1, taxa: 2.14 }, { leads: 2778, share: 14.3, taxa: 1.08 }] },
+    { uf: 'PE', m: [{ leads: 1809, share: 7.0, taxa: 3.26 }, { leads: 1133, share: 7.6, taxa: 1.85 }, { leads: 1794, share: 9.2, taxa: 1.0 }] },
+    { uf: 'MG', m: [{ leads: 1961, share: 7.6, taxa: 3.47 }, { leads: 1140, share: 7.7, taxa: 3.16 }, { leads: 1336, share: 6.9, taxa: 2.02 }] },
+    { uf: 'RJ', m: [{ leads: 1702, share: 6.6, taxa: 1.76 }, { leads: 1026, share: 6.9, taxa: 1.36 }, { leads: 1144, share: 5.9, taxa: 1.05 }] },
+    { uf: 'CE', m: [{ leads: 1604, share: 6.2, taxa: 2.74 }, { leads: 722, share: 4.9, taxa: 3.05 }, { leads: 869, share: 4.5, taxa: 1.5 }] },
+    { uf: 'GO', m: [{ leads: 1282, share: 4.9, taxa: 4.52 }, { leads: 562, share: 3.8, taxa: 4.8 }, { leads: 776, share: 4.0, taxa: 2.96 }] },
+    { uf: 'PA', m: [{ leads: 900, share: 3.5, taxa: 3.11 }, { leads: 446, share: 3.0, taxa: 2.02 }, { leads: 697, share: 3.6, taxa: 1.43 }] },
+    { uf: 'RN', m: [{ leads: 1007, share: 3.9, taxa: 3.28 }, { leads: 602, share: 4.0, taxa: 2.16 }, { leads: 671, share: 3.4, taxa: 1.79 }] },
+    { uf: 'DF', m: [{ leads: 742, share: 2.9, taxa: 4.04 }, { leads: 392, share: 2.6, taxa: 6.12 }, { leads: 465, share: 2.4, taxa: 2.15 }] },
+];
+
+// Cor por mês (rampa cronológica: mais escuro = mais recente)
+const CMP_CORES = ['#c5cae9', '#7986cb', '#283593'];
+const cmpPct = v => (Math.round(v * 100) / 100).toString().replace('.', ',') + '%';
+const cmpPP = v => (v > 0 ? '+' : '') + (Math.round(v * 100) / 100).toString().replace('.', ',') + ' pp';
+const cmpDelta = (a, b) => (b ? Math.round((a / b - 1) * 100) : 0);   // variação % de a vs b
+
+function cmpPill(v, invertido) {
+    // pill verde/vermelha conforme o sinal (invertido = queda é boa)
+    const bom = invertido ? v < 0 : v > 0;
+    if (Math.abs(v) < 0.05) return 'pill';
+    return 'pill ' + (bom ? 'pill-green' : 'pill-red');
+}
+
+function buildCmpRegua() {
+    const M = CMP_META;
+    document.getElementById('cmpReguaTxt').textContent =
+        `leads dos dias 1 a ${M.diaCorte} do mês, com a venda contada até D+${M.matur}`;
+    document.getElementById('cmpTaxaSub').textContent =
+        `Barra escura = janela comparável (dias 1–${M.diaCorte}, venda até D+${M.matur}). ` +
+        `Barra clara = mês inteiro sem corte, que favorece os meses mais antigos.`;
+    document.getElementById('cmpMaturSub').textContent =
+        `Conversão acumulada dia a dia desde a conversa. Se a queda fosse só maturação, as ` +
+        `curvas se encontrariam; elas já nascem separadas no D+1.`;
+}
+
+function buildCmpKpis() {
+    const R = CMP_RESUMO, V = CMP_VOLUME;
+    const b = R[0], a = R[R.length - 1];         // base = mês mais antigo, a = mais recente
+    const vb = V[0], va = V[V.length - 1];
+    const dTaxa = a.taxaComp - b.taxaComp;
+    const cards = [
+        { cls: 'pink', ic: '🎯', lab: 'Conversão comparável', val: cmpPct(a.taxaComp),
+          sub: `${b.mes} era ${cmpPct(b.taxaComp)}`,
+          badge: cmpPP(dTaxa) + ` (${cmpDelta(a.taxaComp, b.taxaComp)}%)`, bcls: dTaxa < 0 ? 'warn' : 'good' },
+        { cls: 'blue', ic: '📥', lab: 'Leads por dia', val: fmtInt(va.leadsDia),
+          sub: `${vb.mes} ${fmtInt(vb.leadsDia)}/dia · ${V[1].mes} ${fmtInt(V[1].leadsDia)}/dia`,
+          badge: (cmpDelta(va.leadsDia, V[1].leadsDia) > 0 ? '+' : '') + cmpDelta(va.leadsDia, V[1].leadsDia) + '% vs ' + V[1].mes,
+          bcls: 'info' },
+        { cls: 'green', ic: '❤️', lab: 'Vidas Eugenia por dia', val: va.eugDia.toString().replace('.', ','),
+          sub: `${vb.mes} ${vb.eugDia.toString().replace('.', ',')}/dia · ${V[1].mes} ${V[1].eugDia.toString().replace('.', ',')}/dia`,
+          badge: (cmpDelta(va.eugDia, V[1].eugDia) > 0 ? '+' : '') + cmpDelta(va.eugDia, V[1].eugDia) + '% vs ' + V[1].mes,
+          bcls: cmpDelta(va.eugDia, V[1].eugDia) >= 0 ? 'good' : 'warn' },
+        { cls: 'cyan', ic: '🧩', lab: 'Share nas vendas digitais', val: cmpPct(va.shareEug),
+          sub: `de cada 100 vidas do digital, ${Math.round(va.shareEug)} passaram pela Eugenia`,
+          badge: cmpPP(va.shareEug - V[1].shareEug) + ' vs ' + V[1].mes,
+          bcls: va.shareEug >= V[1].shareEug ? 'good' : 'warn' },
+        { cls: 'orange', ic: '💵', lab: 'Receita por 1.000 leads', val: 'R$ ' + fmtInt(Math.round(a.rec1kComp)),
+          sub: `${b.mes} era R$ ${fmtInt(Math.round(b.rec1kComp))}`,
+          badge: cmpDelta(a.rec1kComp, b.rec1kComp) + '% vs ' + b.mes, bcls: 'warn' },
+    ];
+    document.getElementById('cmpKpiRow').innerHTML = cards.map(c => `
+        <div class="kpi-card ${c.cls}">
+            <div class="kpi-icon">${c.ic}</div>
+            <div class="kpi-label">${c.lab}</div>
+            <div class="kpi-value">${c.val}</div>
+            <div class="kpi-sub">${c.sub}</div>
+            <span class="kpi-badge ${c.bcls}">${c.badge}</span>
+        </div>`).join('');
+}
+
+function buildCmpTaxaChart() {
+    const ctx = document.getElementById('cmpTaxaChart').getContext('2d');
+    const c = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: CMP_RESUMO.map(r => r.mes),
+            datasets: [
+                { label: 'Mês inteiro (não comparável)', data: CMP_RESUMO.map(r => r.taxaTot),
+                  backgroundColor: '#e0e0e0', borderRadius: 6 },
+                { label: 'Janela comparável', data: CMP_RESUMO.map(r => r.taxaComp),
+                  backgroundColor: CMP_RESUMO.map((_, i) => CMP_CORES[i]), borderRadius: 6 },
+            ]
+        },
+        options: {
+            responsive: true, layout: { padding: { top: 20 } },
+            plugins: {
+                legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
+                tooltip: { callbacks: { label: c => {
+                    const r = CMP_RESUMO[c.dataIndex];
+                    const comp = c.datasetIndex === 1;
+                    return ` ${cmpPct(c.parsed.y)} — ${fmtInt(comp ? r.convComp : r.convTot)} conversões `
+                        + `em ${fmtInt(comp ? r.leadsComp : r.leadsTot)} leads`;
+                } } }
+            },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, ticks: { font: { size: 11 }, callback: v => cmpPct(v) } },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+    vrCharts.push(c);
+}
+
+function buildCmpVolumeTable() {
+    const V = CMP_VOLUME;
+    document.getElementById('cmpVolumeTable').innerHTML = V.map((v, i) => `
+        <tr${i === V.length - 1 ? ' style="font-weight:700;background:#f9fafb"' : ''}>
+            <td><strong>${v.mes}</strong><br><small style="color:#6b7280">${v.diasLead} dias de export</small></td>
+            <td class="td-right">${fmtInt(v.leadsDia)}</td>
+            <td class="td-right">${fmtInt(v.vendasDia)}</td>
+            <td class="td-right">${v.eugDia.toString().replace('.', ',')}</td>
+            <td class="td-right"><span class="pill pill-blue">${cmpPct(v.shareEug)}</span></td>
+        </tr>`).join('');
+}
+
+function buildCmpMaturChart() {
+    const ctx = document.getElementById('cmpMaturChart').getContext('2d');
+    const c = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: CMP_MATUR[0].dias.map(d => 'D+' + d),
+            datasets: CMP_MATUR.map((m, i) => ({
+                label: m.mes, data: m.taxas, borderColor: CMP_CORES[i],
+                backgroundColor: CMP_CORES[i], borderWidth: 2.5, tension: 0.3,
+                pointRadius: 3, fill: false,
+            }))
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
+                tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${cmpPct(c.parsed.y)}` } }
+            },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, beginAtZero: true,
+                     ticks: { font: { size: 11 }, callback: v => cmpPct(v) } },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+    vrCharts.push(c);
+}
+
+function buildCmpShift() {
+    const S = CMP_SHIFT;
+    document.getElementById('cmpShiftSub').innerHTML =
+        `De ${S.mesBase} a ${S.mesAtual} a conversão foi de <strong>${cmpPct(S.taxaBase)}</strong> a `
+        + `<strong>${cmpPct(S.taxaAtual)}</strong> (${cmpPP(S.delta)}). Disso, `
+        + `<strong>${cmpPP(S.efeitoMix)}</strong> é mudança de <em>mix</em> de tráfego e `
+        + `<strong>${cmpPP(S.efeitoTaxa)}</strong> é o mesmo canal convertendo diferente.`;
+
+    const L = S.linhas;
+    const ctx = document.getElementById('cmpShiftChart').getContext('2d');
+    const c = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: L.map(l => l.canal),
+            datasets: [
+                { label: 'Efeito mix', data: L.map(l => l.mix), backgroundColor: '#f57c00', borderRadius: 4 },
+                { label: 'Efeito taxa', data: L.map(l => l.taxa), backgroundColor: '#e91e63', borderRadius: 4 },
+            ]
+        },
+        options: {
+            indexAxis: 'y', responsive: true,
+            scales: {
+                x: { stacked: true, grid: { color: '#f3f4f6' },
+                     ticks: { font: { size: 11 }, callback: v => v + ' pp' } },
+                y: { stacked: true, grid: { display: false }, ticks: { font: { size: 10 } } }
+            },
+            plugins: {
+                legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
+                tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${cmpPP(c.parsed.x)}` } }
+            }
+        }
+    });
+    vrCharts.push(c);
+
+    document.getElementById('cmpShiftTable').innerHTML = L.map(l => {
+        const tot = l.mix + l.taxa;
+        return `<tr>
+            <td><strong>${l.canal}</strong></td>
+            <td class="td-right">${cmpPct(l.shareBase)}</td>
+            <td class="td-right">${cmpPct(l.shareAtual)}</td>
+            <td class="td-right">${cmpPct(l.taxaBase)}</td>
+            <td class="td-right">${cmpPct(l.taxaAtual)}</td>
+            <td class="td-right">${cmpPP(l.mix)}</td>
+            <td class="td-right">${cmpPP(l.taxa)}</td>
+            <td class="td-right"><span class="${cmpPill(tot)}">${cmpPP(tot)}</span></td>
+        </tr>`;
+    }).join('') + `<tr style="font-weight:700;background:#f9fafb">
+            <td><strong>Total</strong></td><td class="td-right">100%</td><td class="td-right">100%</td>
+            <td class="td-right">${cmpPct(S.taxaBase)}</td><td class="td-right">${cmpPct(S.taxaAtual)}</td>
+            <td class="td-right">${cmpPP(S.efeitoMix)}</td><td class="td-right">${cmpPP(S.efeitoTaxa)}</td>
+            <td class="td-right">${cmpPP(S.delta)}</td></tr>`;
+}
+
+function buildCmpCanal() {
+    const meses = CMP_META.meses;
+    const ctx = document.getElementById('cmpCanalChart').getContext('2d');
+    const paleta = ['#43a047', '#dc2626', '#f57c00', '#fbc02d', '#00acc1', '#8e24aa', '#78909c'];
+    const c = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: meses,
+            datasets: CMP_CANAL.map((cc, i) => ({
+                label: cc.canal, data: cc.m.map(x => x.share),
+                backgroundColor: paleta[i % paleta.length], borderRadius: 3,
+            }))
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: { stacked: true, grid: { display: false }, ticks: { font: { size: 11 } } },
+                y: { stacked: true, grid: { color: '#f3f4f6' }, max: 100,
+                     ticks: { font: { size: 11 }, callback: v => v + '%' } }
+            },
+            plugins: {
+                legend: { display: true, position: 'bottom', labels: { font: { size: 10 }, boxWidth: 12 } },
+                tooltip: { callbacks: { label: c =>
+                    ` ${c.dataset.label}: ${cmpPct(c.parsed.y)} dos leads `
+                    + `(${fmtInt(CMP_CANAL[c.datasetIndex].m[c.dataIndex].leads)})` } }
+            }
+        }
+    });
+    vrCharts.push(c);
+
+    // cabecalho dinamico: 1 par de colunas por mes
+    document.getElementById('cmpCanalHead').innerHTML = '<th>Canal de entrada</th>'
+        + meses.map(m => `<th class="td-right">${m}<br><small>leads (share)</small></th>`
+                       + `<th class="td-right">${m}<br><small>conv.</small></th>`).join('');
+    document.getElementById('cmpCanalTable').innerHTML = CMP_CANAL.map(cc => `<tr>
+        <td><strong>${cc.canal}</strong></td>
+        ${cc.m.map(x => `<td class="td-right">${fmtInt(x.leads)}<br><small style="color:#6b7280">${cmpPct(x.share)}</small></td>`
+            + `<td class="td-right"${x.leadsComp < 200 ? ' style="color:#9ca3af"' : ''}>${cmpPct(x.taxa)}</td>`).join('')}
+        </tr>`).join('');
+}
+
+// Tabela generica "rotulo x N meses" com share + taxa
+const CMP_ALERTA_REGUA = new Set(['Handoff']);   // etapa cuja definição mudou em 13/07
+const cmpAlerta = rot => CMP_ALERTA_REGUA.has(rot)
+    ? ' <span style="color:#dc2626" title="definição mudou em 13/07 — não comparável entre meses">⚠</span>' : '';
+
+function cmpTabelaMeses(headId, bodyId, dados, chaveRotulo, rotShare, rotTaxa) {
+    const meses = CMP_META.meses;
+    document.getElementById(headId).innerHTML = `<th>${chaveRotulo.titulo}</th>`
+        + meses.map(m => `<th class="td-right">${m}<br><small>${rotShare}</small></th>`
+                       + `<th class="td-right">${m}<br><small>${rotTaxa}</small></th>`).join('');
+    document.getElementById(bodyId).innerHTML = dados.map(d => `<tr>
+        <td><strong>${d[chaveRotulo.campo]}</strong>${cmpAlerta(d[chaveRotulo.campo])}</td>
+        ${d.m.map(x => `<td class="td-right">${fmtInt(x.leads)}<br><small style="color:#6b7280">${cmpPct(x.share)}</small></td>`
+            + `<td class="td-right"${x.leads < 200 ? ' style="color:#9ca3af"' : ''}>${cmpPct(x.taxa)}</td>`).join('')}
+        </tr>`).join('');
+}
+
+// Barras agrupadas: 1 dataset por mes, 1 grupo por rotulo
+function cmpGrupoChart(canvasId, dados, campoRotulo, pegaValor, sufixo) {
+    const ctx = document.getElementById(canvasId).getContext('2d');
+    const c = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: dados.map(d => d[campoRotulo]),
+            datasets: CMP_META.meses.map((m, i) => ({
+                label: m, data: dados.map(d => pegaValor(d, i)),
+                backgroundColor: CMP_CORES[i], borderRadius: 4,
+            }))
+        },
+        options: {
+            responsive: true, layout: { padding: { top: 16 } },
+            plugins: {
+                legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
+                tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${cmpPct(c.parsed.y)}${sufixo || ''}` } }
+            },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, beginAtZero: true,
+                     ticks: { font: { size: 11 }, callback: v => cmpPct(v) } },
+                x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+            }
+        }
+    });
+    vrCharts.push(c);
+}
+
+function buildCmpEtapa() {
+    cmpGrupoChart('cmpEtapaChart', CMP_ETAPA, 'etapa', (d, i) => d.m[i].taxa);
+    cmpTabelaMeses('cmpEtapaHead', 'cmpEtapaTable', CMP_ETAPA,
+                   { titulo: 'Etapa alcançada', campo: 'etapa' }, 'leads (share)', 'conv.');
+}
+
+function buildCmpMotivo() {
+    cmpGrupoChart('cmpMotivoChart', CMP_MOTIVO, 'motivo', (d, i) => d.m[i].taxa);
+    cmpTabelaMeses('cmpMotivoHead', 'cmpMotivoTable', CMP_MOTIVO,
+                   { titulo: 'Motivo do handoff', campo: 'motivo' }, 'handoffs (share)', 'conv.');
+}
+
+function buildCmpUf() {
+    cmpTabelaMeses('cmpUfHead', 'cmpUfTable', CMP_UF,
+                   { titulo: 'UF', campo: 'uf' }, 'leads (share)', 'conv.');
+}
+
+function buildCmpFunil() {
+    const etapas = [['eng', 'Engajou'], ['dados', 'Forneceu dados'], ['viu', 'Viu planos'], ['ho', 'Handoff']];
+    const ctx = document.getElementById('cmpFunilChart').getContext('2d');
+    const c = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: etapas.map(e => e[1]),
+            datasets: CMP_FUNIL.map((f, i) => ({
+                label: f.mes, data: etapas.map(e => f[e[0]]),
+                backgroundColor: CMP_CORES[i], borderRadius: 4,
+            }))
+        },
+        options: {
+            responsive: true, layout: { padding: { top: 16 } },
+            plugins: {
+                legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
+                tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${cmpPct(c.parsed.y)} dos leads`
+                    + (c.dataIndex === 3 ? ' ⚠ régua mudou em 13/07' : '') } }
+            },
+            scales: {
+                y: { grid: { color: '#f3f4f6' }, beginAtZero: true,
+                     ticks: { font: { size: 11 }, callback: v => cmpPct(v) } },
+                x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+            }
+        }
+    });
+    vrCharts.push(c);
+}
+
+function buildCmpFunilTable() {
+    const meses = CMP_META.meses;
+    const etapas = [['eng', 'Engajou'], ['dados', 'Forneceu dados'], ['viu', 'Viu planos'], ['ho', 'Handoff']];
+    document.getElementById('cmpFunilHead').innerHTML = '<th>Etapa</th>'
+        + meses.map(m => `<th class="td-right">${m}</th>`).join('')
+        + `<th class="td-right">${meses[0]} → ${meses[meses.length - 1]}</th>`;
+    const F = CMP_FUNIL;
+    document.getElementById('cmpFunilTable').innerHTML = etapas.map(([k, rot]) => {
+        const d = F[F.length - 1][k] - F[0][k];
+        // etapa com definição alterada em 13/07 não ganha veredito de alta/queda
+        const cel = CMP_ALERTA_REGUA.has(rot)
+            ? '<span class="pill" title="definição mudou em 13/07">não comparável</span>'
+            : `<span class="${cmpPill(d)}">${cmpPP(d)}</span>`;
+        return `<tr>
+            <td><strong>${rot}</strong>${cmpAlerta(rot)}</td>
+            ${F.map(f => `<td class="td-right">${cmpPct(f[k])}</td>`).join('')}
+            <td class="td-right">${cel}</td>
+        </tr>`;
+    }).join('') + `<tr style="font-weight:700;background:#f9fafb">
+        <td><strong>Leads do mês</strong></td>
+        ${F.map(f => `<td class="td-right">${fmtInt(f.leads)}</td>`).join('')}
+        <td class="td-right">${cmpDelta(F[F.length - 1].leads, F[0].leads)}%</td></tr>`;
+}
+
+function buildCmpDiagnostico() {
+    const S = CMP_SHIFT, V = CMP_VOLUME, R = CMP_RESUMO;
+    const va = V[V.length - 1], vm = V[1], vb = V[0];
+    const a = R[R.length - 1], b = R[0];
+    // canal que mais ganhou peso e o que mais explica a queda
+    const ganhou = [...S.linhas].sort((x, y) => (y.shareAtual - y.shareBase) - (x.shareAtual - x.shareBase))[0];
+    const perdeu = [...S.linhas].sort((x, y) => (y.shareBase - y.shareAtual) - (x.shareBase - x.shareAtual))[0];
+    const pesoMix = Math.abs(S.efeitoMix) / (Math.abs(S.efeitoMix) + Math.abs(S.efeitoTaxa)) * 100;
+    const shareSubiu = va.shareEug >= vm.shareEug;
+
+    document.getElementById('cmpDiagnostico').innerHTML = `
+        🩺 <strong>Diagnóstico</strong> — na mesma régua, a conversão saiu de
+        <strong>${cmpPct(b.taxaComp)}</strong> em ${b.mes} para <strong>${cmpPct(a.taxaComp)}</strong>
+        em ${a.mes} (${cmpPP(S.delta)}, ${cmpDelta(a.taxaComp, b.taxaComp)}%). A decomposição divide a
+        queda quase ao meio: <strong>${Math.round(pesoMix)}%</strong> vem de <em>mix de tráfego</em> e
+        o resto de <em>taxa</em> dentro do mesmo canal.
+        <br><br>
+        <strong>1. Onde caiu — o denominador explodiu.</strong> Os leads foram de
+        ${fmtInt(vm.leadsDia)}/dia em ${vm.mes} para <strong>${fmtInt(va.leadsDia)}/dia</strong> em
+        ${va.mes} (${cmpDelta(va.leadsDia, vm.leadsDia) > 0 ? '+' : ''}${cmpDelta(va.leadsDia, vm.leadsDia)}%),
+        e as vidas atribuídas ficaram praticamente iguais
+        (${vm.eugDia.toString().replace('.', ',')} → <strong>${va.eugDia.toString().replace('.', ',')}</strong>/dia).
+        Lead novo entrou, venda não veio — a taxa caiu por diluição, não porque o time vendeu menos.
+        <br><br>
+        <strong>2. Por que caiu — o tráfego mudou de cara.</strong> O canal
+        <em>${perdeu.canal}</em>, que converte ${cmpPct(perdeu.taxaBase)}, saiu de
+        ${cmpPct(perdeu.shareBase)} para ${cmpPct(perdeu.shareAtual)} da base; no lugar dele entrou
+        <em>${ganhou.canal}</em>, que converte <strong>${cmpPct(ganhou.taxaAtual)}</strong> e agora é
+        ${cmpPct(ganhou.shareAtual)} dos leads. Anúncio traz volume barato que não compra.
+        <br><br>
+        <strong>3. O que NÃO caiu.</strong> O ticket médio segue em
+        R$ ${fmtInt(Math.round(a.ticketComp))} e as vidas por venda em
+        ${a.vpcComp.toString().replace('.', ',')} — quem compra continua comprando igual. E a Eugenia
+        ${shareSubiu ? '<strong>ganhou</strong>' : 'perdeu'} participação nas vendas do digital:
+        ${cmpPct(vm.shareEug)} em ${vm.mes} → <strong>${cmpPct(va.shareEug)}</strong> em ${va.mes}.
+        Vale olhar junto que o digital inteiro caiu de ${fmtInt(vb.vendasDia)} para
+        ${fmtInt(va.vendasDia)} vendas/dia no período — parte da queda de taxa acompanha o canal
+        todo, não só a IA.
+        <br><br>
+        <strong>Onde mexer:</strong> cortar ou requalificar os anúncios de pior conversão
+        (${S.linhas.filter(l => l.taxaAtual < 1 && l.shareAtual > 5).map(l => l.canal).join(', ') || '—'})
+        devolve taxa sem custar venda; a queda do orgânico
+        (${cmpPct(perdeu.taxaBase)} → ${cmpPct(perdeu.taxaAtual)}) é a que merece investigação de
+        atendimento, porque essa sim é venda perdida.`;
+}
+
 // ─── TAB SWITCHING ─────────────────────────────────────────────────────────
 document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1591,6 +2252,20 @@ buildVRUnidadeArea();
 buildVRSupervisor();
 buildVRMensal();
 buildVRCanal();
+// Aba 3 — Comparativo
+buildCmpRegua();
+buildCmpKpis();
+buildCmpTaxaChart();
+buildCmpVolumeTable();
+buildCmpMaturChart();
+buildCmpShift();
+buildCmpCanal();
+buildCmpEtapa();
+buildCmpMotivo();
+buildCmpFunil();
+buildCmpFunilTable();
+buildCmpUf();
+buildCmpDiagnostico();
 </script>
 </body>
 </html>
